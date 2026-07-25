@@ -198,6 +198,7 @@ class MeResponse(BaseModel):
     xp: int
     unverified_xp: int = 0
     streak_days: int
+    is_maintainer: bool = False
     completed_labs: list[str]       # lab IDs (from lab_progress)
     completed_sections: list[str]   # section IDs (from section_progress — reading/questions)
 

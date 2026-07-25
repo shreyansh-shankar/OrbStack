@@ -48,6 +48,11 @@ func Execute() {
 			fmt.Fprintln(os.Stderr, "logout:", err)
 			os.Exit(1)
 		}
+	case "publish":
+		if err := runPublish(os.Args[2:]); err != nil {
+			fmt.Fprintln(os.Stderr, "publish:", err)
+			os.Exit(1)
+		}
 	case "help", "--help", "-h":
 		printUsage()
 	default:
@@ -82,5 +87,6 @@ Commands:
   status                Show auth, synced content, and active lab
   login                 Authenticate with The Last Deploy API
   logout                Remove saved credentials
+  publish <folder-path> Publish a local module directory to the builder API
   help                  Show this help message`)
 }

@@ -342,27 +342,74 @@ async def get_module_summary(
     )
 
 
-# ---------------------------------------------------------------------------
-# PATCH /modules/:id/verify — mark a module as officially verified (admin only)
-# ---------------------------------------------------------------------------
+from pydantic import BaseModel
+
+class VerifyLabXP(BaseModel):
+    id: str
+    xp: int
+
+class VerifySectionXP(BaseModel):
+    id: str
+    xp: int
+    labs: list[VerifyLabXP] = []
+
+class VerifyModulePayload(BaseModel):
+    sections: list[VerifySectionXP] = []
+
 
 @router.patch("/modules/{module_id}/verify", response_model=dict)
 async def verify_module(
     module_id: str,
+    payload: VerifyModulePayload,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    # Only the official account (user id = 1) may verify modules
-    if current_user.id != 1:
+    # Admin (User ID 2) or maintainers may verify modules
+    if current_user.id != 2 and not current_user.is_maintainer:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Only official administrators can verify modules",
+            detail="Only administrators and maintainers can verify modules",
         )
     result = await db.execute(select(Module).where(Module.id == module_id))
     module = result.scalar_one_or_none()
     if not module:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Module not found")
 
+    # 1. Update XP in sections and labs + progress rows
+    from sqlalchemy import update
+
+    total_xp = 0
+    for s_input in payload.sections:
+        total_xp += s_input.xp
+        # Update section XP
+        await db.execute(
+            update(Section)
+            .where(Section.id == s_input.id, Section.module_id == module_id)
+            .values(xp=s_input.xp)
+        )
+        # Update section progress awarded XP
+        await db.execute(
+            update(SectionProgress)
+            .where(SectionProgress.section_id == s_input.id)
+            .values(xp_awarded=s_input.xp)
+        )
+
+        for l_input in s_input.labs:
+            total_xp += l_input.xp
+            # Update lab XP
+            await db.execute(
+                update(Lab)
+                .where(Lab.id == l_input.id, Lab.module_id == module_id)
+                .values(xp=l_input.xp)
+            )
+            # Update lab progress awarded XP
+            await db.execute(
+                update(LabProgress)
+                .where(LabProgress.lab_id == l_input.id)
+                .values(xp_awarded=l_input.xp)
+            )
+
+    module.total_xp = total_xp
     module.is_official_verified = True
     module.status = "verified"
     db.add(module)

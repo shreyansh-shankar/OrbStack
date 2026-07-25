@@ -176,4 +176,24 @@ export const api = {
     request<{ detail: string }>(`/builder/modules/${id}`, {
       method: "DELETE",
     }),
+
+  verifyModule: (id: string, data: any) =>
+    request<{ detail: string }>(`/modules/${id}/verify`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    }),
+
+  adminGetMaintainers: () =>
+    request<any[]>("/admin/maintainers"),
+
+  adminAddMaintainer: (identity: string) =>
+    request<any>("/admin/maintainers", {
+      method: "POST",
+      body: JSON.stringify({ identity }),
+    }),
+
+  adminRemoveMaintainer: (userId: number) =>
+    request<any>(`/admin/maintainers/${userId}`, {
+      method: "DELETE",
+    }),
 };

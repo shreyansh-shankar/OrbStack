@@ -29,15 +29,16 @@ type modulesResponse struct {
 
 // moduleJSON matches the structured object the backend returns per module.
 type moduleJSON struct {
-	ID               string   `json:"id"`
-	Title            string   `json:"title"`
-	Description      string   `json:"description"`
-	Topic            string   `json:"topic"`
-	Difficulty       string   `json:"difficulty"`
-	EstimatedMinutes int      `json:"estimated_minutes"`
-	Tags             []string `json:"tags"`
-	TotalXP          int      `json:"total_xp"`
-	TotalSections    int      `json:"total_sections"`
+	ID                 string   `json:"id"`
+	Title              string   `json:"title"`
+	Description        string   `json:"description"`
+	Topic              string   `json:"topic"`
+	Difficulty         string   `json:"difficulty"`
+	EstimatedMinutes   int      `json:"estimated_minutes"`
+	Tags               []string `json:"tags"`
+	TotalXP            int      `json:"total_xp"`
+	TotalSections      int      `json:"total_sections"`
+	IsOfficialVerified bool     `json:"is_official_verified"`
 }
 
 func runSync(args []string) error {

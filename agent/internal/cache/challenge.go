@@ -499,3 +499,27 @@ func unquote(s string) string {
 	}
 	return s
 }
+
+func IsModuleVerified(baseDir, moduleID string) bool {
+	moduleDir := filepath.Join(baseDir, moduleID)
+	jsonPath := filepath.Join(moduleDir, "module.json")
+	if _, err := os.Stat(jsonPath); os.IsNotExist(err) {
+		yamlPath := filepath.Join(moduleDir, "module.yaml")
+		if _, err := os.Stat(yamlPath); err == nil {
+			return true // local repository code module = verified by default
+		}
+		return false
+	}
+
+	bytes, err := os.ReadFile(jsonPath)
+	if err != nil {
+		return false
+	}
+	var info struct {
+		IsOfficialVerified bool `json:"is_official_verified"`
+	}
+	if err := json.Unmarshal(bytes, &info); err != nil {
+		return false
+	}
+	return info.IsOfficialVerified
+}

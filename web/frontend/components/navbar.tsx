@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter, usePathname } from "next/navigation";
-import { Sun, Moon, Hammer } from "lucide-react";
+import { Sun, Moon, Hammer, Shield } from "lucide-react";
 
 export function Navbar() {
   const { user, loading, logout } = useAuth();
@@ -88,6 +88,7 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           {navLink("/modules", "Modules")}
           {user && navLink("/builder", "Module Builder")}
+          {user && (user.id === 2 || user.is_maintainer) && navLink("/maintainer", "Maintainer Panel")}
         </div>
 
         {/* Auth & Theme Toggler */}
@@ -130,6 +131,12 @@ export function Navbar() {
                   <Hammer className="h-4 w-4 text-[var(--accent-primary)]" />
                   Module Builder
                 </DropdownMenuItem>
+                {user && (user.id === 2 || user.is_maintainer) && (
+                  <DropdownMenuItem onClick={() => router.push("/maintainer")} className="cursor-pointer text-foreground hover:bg-muted flex items-center gap-2 font-bold rounded-lg py-2">
+                    <Shield className="h-4 w-4 text-[var(--accent-primary)]" />
+                    Maintainer Panel
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator className="bg-border my-1" />
                 <DropdownMenuItem onClick={() => router.push("/profile")} className="cursor-pointer text-foreground hover:bg-muted rounded-lg py-2">
                   Profile & Settings

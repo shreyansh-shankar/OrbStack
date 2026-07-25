@@ -58,6 +58,7 @@ export interface User {
   xp: number;
   unverified_xp: number;
   streak_days: number;
+  is_maintainer: boolean;
   completed_labs: string[];      // lab IDs (tld check)
   completed_sections: string[];  // section IDs (reading / future: questions)
 }

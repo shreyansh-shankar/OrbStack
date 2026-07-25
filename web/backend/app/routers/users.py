@@ -79,6 +79,7 @@ async def get_me(
         xp=current_user.xp,
         unverified_xp=current_user.unverified_xp,
         streak_days=current_user.streak_days,
+        is_maintainer=current_user.is_maintainer,
         completed_labs=completed_labs,
         completed_sections=completed_sections,
     )
@@ -146,4 +147,75 @@ async def update_password(
     await db.commit()
 
     return MessageResponse(detail="Password updated successfully.")
+
+
+from pydantic import BaseModel
+
+class MaintainerAddRequest(BaseModel):
+    identity: str
+
+
+@router.get("/admin/maintainers", response_model=list[dict])
+async def list_maintainers(
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    if current_user.id != 2:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only Super Admin (ID 2) can manage maintainers",
+        )
+    result = await db.execute(select(User).where(User.is_maintainer == True).order_by(User.username))
+    maintainers = result.scalars().all()
+    return [{"id": u.id, "username": u.username, "email": u.email} for u in maintainers]
+
+
+@router.post("/admin/maintainers", response_model=dict)
+async def add_maintainer(
+    body: MaintainerAddRequest,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    if current_user.id != 2:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only Super Admin (ID 2) can manage maintainers",
+        )
+    
+    # Try finding user by username or email
+    stmt = select(User).where(
+        (User.username == body.identity) | (User.email == body.identity)
+    )
+    result = await db.execute(stmt)
+    user = result.scalar_one_or_none()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+        
+    user.is_maintainer = True
+    db.add(user)
+    await db.commit()
+    return {"detail": f"User '{user.username}' is now a maintainer."}
+
+
+@router.delete("/admin/maintainers/{user_id}", response_model=dict)
+async def remove_maintainer(
+    user_id: int,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    if current_user.id != 2:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only Super Admin (ID 2) can manage maintainers",
+        )
+    
+    user_res = await db.execute(select(User).where(User.id == user_id))
+    user = user_res.scalar_one_or_none()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+        
+    user.is_maintainer = False
+    db.add(user)
+    await db.commit()
+    return {"detail": f"User '{user.username}' is no longer a maintainer."}
 
