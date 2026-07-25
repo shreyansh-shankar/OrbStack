@@ -1,6 +1,6 @@
 id: lnx-identify-broken-permissions
 title: Identify Broken Permissions
-xp: 0
+xp: 45
 estimated_minutes: 10
 setup:
   type: shell
