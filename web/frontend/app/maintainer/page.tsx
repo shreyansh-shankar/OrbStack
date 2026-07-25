@@ -9,7 +9,8 @@ import { api } from "@/lib/api";
 import { LoadingSpinner } from "@/components/shared/loading-spinner";
 import { 
   ShieldAlert, CheckCircle, Zap, Shield, BookOpen, Clock, 
-  ExternalLink, User, HelpCircle, ChevronRight, Award, Trash2 
+  ExternalLink, User, HelpCircle, ChevronRight, Award, Trash2,
+  Plus, Minus
 } from "lucide-react";
 import Link from "next/link";
 import { ConfirmModal } from "@/components/builder/confirm-modal";
@@ -415,12 +416,28 @@ export default function MaintainerDashboard() {
                         </div>
                         <div className="flex items-center gap-2">
                           <label className="text-xs font-medium text-muted-foreground">Section XP:</label>
-                          <input
-                            type="number"
-                            value={xpState[sec.id] ?? 0}
-                            onChange={(e) => handleXpChange(sec.id, parseInt(e.target.value))}
-                            className="w-16 text-center px-2 py-1 bg-black border border-border rounded-lg text-xs font-bold text-emerald-400 focus:outline-none focus:border-[var(--accent-primary)] font-mono"
-                          />
+                          <div className="flex items-center bg-black/60 border border-border/80 rounded-xl overflow-hidden shadow-inner h-8">
+                            <button
+                              type="button"
+                              onClick={() => handleXpChange(sec.id, Math.max(0, (xpState[sec.id] ?? 0) - 5))}
+                              className="px-2.5 hover:bg-muted/80 text-muted-foreground hover:text-foreground transition-all cursor-pointer select-none border-r border-border/50 h-full flex items-center justify-center outline-none border-0"
+                            >
+                              <Minus className="h-3 w-3" />
+                            </button>
+                            <input
+                              type="number"
+                              value={xpState[sec.id] ?? 0}
+                              onChange={(e) => handleXpChange(sec.id, parseInt(e.target.value) || 0)}
+                              className="w-12 text-center bg-transparent border-0 text-xs font-bold text-emerald-400 focus:outline-none font-mono [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => handleXpChange(sec.id, (xpState[sec.id] ?? 0) + 5)}
+                              className="px-2.5 hover:bg-muted/80 text-muted-foreground hover:text-foreground transition-all cursor-pointer select-none border-l border-border/50 h-full flex items-center justify-center outline-none border-0"
+                            >
+                              <Plus className="h-3 w-3" />
+                            </button>
+                          </div>
                         </div>
                       </div>
 
@@ -444,12 +461,28 @@ export default function MaintainerDashboard() {
                               </div>
                               <div className="flex items-center gap-2">
                                 <label className="text-[11px] font-medium text-muted-foreground">Lab XP:</label>
-                                <input
-                                  type="number"
-                                  value={xpState[lab.id] ?? 0}
-                                  onChange={(e) => handleXpChange(lab.id, parseInt(e.target.value))}
-                                  className="w-16 text-center px-2 py-1 bg-black border border-border rounded-lg text-xs font-bold text-emerald-400 focus:outline-none focus:border-[var(--accent-primary)] font-mono"
-                                />
+                                <div className="flex items-center bg-black/60 border border-border/80 rounded-xl overflow-hidden shadow-inner h-8">
+                                  <button
+                                    type="button"
+                                    onClick={() => handleXpChange(lab.id, Math.max(0, (xpState[lab.id] ?? 0) - 5))}
+                                    className="px-2.5 hover:bg-muted/80 text-muted-foreground hover:text-foreground transition-all cursor-pointer select-none border-r border-border/50 h-full flex items-center justify-center outline-none border-0"
+                                  >
+                                    <Minus className="h-3 w-3" />
+                                  </button>
+                                  <input
+                                    type="number"
+                                    value={xpState[lab.id] ?? 0}
+                                    onChange={(e) => handleXpChange(lab.id, parseInt(e.target.value) || 0)}
+                                    className="w-12 text-center bg-transparent border-0 text-xs font-bold text-emerald-400 focus:outline-none font-mono [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => handleXpChange(lab.id, (xpState[lab.id] ?? 0) + 5)}
+                                    className="px-2.5 hover:bg-muted/80 text-muted-foreground hover:text-foreground transition-all cursor-pointer select-none border-l border-border/50 h-full flex items-center justify-center outline-none border-0"
+                                  >
+                                    <Plus className="h-3 w-3" />
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           ))}
