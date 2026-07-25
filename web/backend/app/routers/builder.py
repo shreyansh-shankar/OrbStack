@@ -1,9 +1,12 @@
 # web/backend/app/routers/builder.py
 
 import json
+import base64
+import httpx
+import yaml
 import hashlib
 from datetime import datetime, timezone
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, delete
 from app.dependencies import get_db, get_current_user
@@ -13,6 +16,7 @@ from app.schemas import (
     BuilderModuleResponse,
     BuilderDraftListItem,
 )
+from app.config import settings
 
 router = APIRouter()
 
@@ -24,12 +28,58 @@ def _calculate_validator_hash(script: str | None) -> str | None:
     return hashlib.sha256(normalized).hexdigest()
 
 
+async def push_to_github_task(module_id: str, files: dict, commit_message: str):
+    """Background task to commit files directly to GitHub using Contents API."""
+    if not settings.GITHUB_TOKEN:
+        print("[GitHub Integration] GITHUB_TOKEN not configured. Skipping GitHub push.")
+        return
+
+    headers = {
+        "Authorization": f"token {settings.GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "DevLab-Backend"
+    }
+
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        for filepath, content in files.items():
+            encoded_content = base64.b64encode(content.encode("utf-8")).decode("utf-8")
+            url = f"https://api.github.com/repos/{settings.CHALLENGES_REPO}/contents/{filepath}"
+            
+            # Check if file exists to retrieve SHA (required for GitHub content updates)
+            sha = None
+            try:
+                get_resp = await client.get(url, headers=headers)
+                if get_resp.status_code == 200:
+                    sha = get_resp.json().get("sha")
+            except Exception as e:
+                print(f"[GitHub Integration] Error fetching SHA for {filepath}: {e}")
+                
+            # Perform PUT request to create or update file
+            body = {
+                "message": commit_message,
+                "content": encoded_content,
+                "branch": settings.CHALLENGES_BRANCH
+            }
+            if sha:
+                body["sha"] = sha
+                
+            try:
+                put_resp = await client.put(url, headers=headers, json=body)
+                if put_resp.status_code not in (200, 201):
+                    print(f"[GitHub Integration] Failed to commit {filepath}: {put_resp.text}")
+                else:
+                    print(f"[GitHub Integration] Successfully committed {filepath} to GitHub (SHA: {sha})")
+            except Exception as e:
+                print(f"[GitHub Integration] Error putting file {filepath}: {e}")
+
+
 # ---------------------------------------------------------------------------
 # POST /builder/modules (Publish/Submit a Module from the CLI)
 # ---------------------------------------------------------------------------
 @router.post("/builder/modules", response_model=BuilderModuleResponse, status_code=status.HTTP_201_CREATED)
 async def publish_module_from_cli(
     body: BuilderModuleInput,
+    background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -128,6 +178,78 @@ async def publish_module_from_cli(
 
     await db.commit()
     await db.refresh(module)
+
+    # 4. Generate the YAML payload and trigger GitHub push in the background
+    github_files = {}
+    base_path = f"challenges/{body.id}"
+
+    # module.yaml
+    module_yaml_data = {
+        "id": body.id,
+        "title": body.title,
+        "description": body.description,
+        "topic": body.topic,
+        "difficulty": body.difficulty,
+        "estimated_minutes": body.estimated_minutes,
+        "tags": body.tags,
+        "version": 1
+    }
+    github_files[f"{base_path}/module.yaml"] = yaml.safe_dump(module_yaml_data, sort_keys=False)
+
+    # Sections & Labs
+    for s_input in body.sections:
+        sec_folder = f"{s_input.order:02d}-{s_input.id}"
+        sec_base = f"{base_path}/sections/{sec_folder}"
+        
+        # section.yaml
+        sec_yaml_data = {
+            "id": s_input.id,
+            "title": s_input.title,
+            "order": s_input.order,
+            "xp": 0  # Force to 0 for unverified
+        }
+        github_files[f"{sec_base}/section.yaml"] = yaml.safe_dump(sec_yaml_data, sort_keys=False)
+
+        # content.md
+        if s_input.content:
+            github_files[f"{sec_base}/content.md"] = s_input.content
+
+        # Labs
+        for l_input in s_input.labs:
+            lab_base = f"{sec_base}/labs/{l_input.id}"
+            
+            # lab.yaml
+            lab_yaml_data = {
+                "id": l_input.id,
+                "title": l_input.title,
+                "xp": 0,
+                "estimated_minutes": l_input.estimated_minutes,
+                "setup": {
+                    "type": l_input.setup_type or "shell",
+                    "seed_commands": l_input.seed_commands
+                },
+                "version": 1
+            }
+            github_files[f"{lab_base}/lab.yaml"] = yaml.safe_dump(lab_yaml_data, sort_keys=False)
+
+            # validator.sh / validator.py
+            if l_input.validator_script:
+                val_ext = "sh"
+                if "import " in l_input.validator_script or "def " in l_input.validator_script:
+                    val_ext = "py"
+                github_files[f"{lab_base}/validator.{val_ext}"] = l_input.validator_script
+
+            # cleanup.sh
+            if l_input.cleanup_script:
+                github_files[f"{lab_base}/cleanup.sh"] = l_input.cleanup_script
+
+    # Enqueue GitHub commit as a background task
+    background_tasks.add_task(
+        push_to_github_task,
+        body.id,
+        github_files,
+        f"Add community challenge: {body.title}"
+    )
 
     return BuilderModuleResponse(
         id=module.id,

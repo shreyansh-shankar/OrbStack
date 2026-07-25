@@ -106,7 +106,41 @@ func runPublish(args []string) error {
 	fmt.Printf("\n\x1b[32m✓ Module '%s' successfully published!\x1b[0m\n", module.ID)
 	fmt.Println("It is now live but unverified (rewards 0 XP).")
 	fmt.Println("You can view it on the syllabus builder page /builder.")
+
+	// Auto-copy to local repository challenges/ directory if running in dev environment
+	if _, err := os.Stat("challenges"); err == nil {
+		destDir := filepath.Join("challenges", module.ID)
+		fmt.Printf("\nDetected local developer repository. Syncing to: %s...\n", destDir)
+		os.RemoveAll(destDir)
+		if err := copyDir(folderPath, destDir); err != nil {
+			fmt.Printf("Warning: failed to copy to codebase challenges folder: %v\n", err)
+		} else {
+			fmt.Println("✓ Copied challenge config to codebase challenges directory successfully.")
+		}
+	}
+
 	return nil
+}
+
+func copyDir(src string, dst string) error {
+	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		relPath, err := filepath.Rel(src, path)
+		if err != nil {
+			return err
+		}
+		targetPath := filepath.Join(dst, relPath)
+		if info.IsDir() {
+			return os.MkdirAll(targetPath, info.Mode())
+		}
+		data, err := os.ReadFile(path)
+		if err != nil {
+			return err
+		}
+		return os.WriteFile(targetPath, data, info.Mode())
+	})
 }
 
 // Simple key-value text lines helper to parse YAML files without import overhead
@@ -160,7 +194,7 @@ func parseModuleDirectory(root string) (*BuilderModuleInput, error) {
 		}
 	}
 
-	var tags []string
+	tags := []string{}
 	if tagsStr, ok := modData["tags"]; ok {
 		for _, tag := range strings.Split(tagsStr, ",") {
 			trimmed := strings.TrimSpace(tag)
@@ -176,7 +210,7 @@ func parseModuleDirectory(root string) (*BuilderModuleInput, error) {
 		return nil, fmt.Errorf("read sections/ directory: %w", err)
 	}
 
-	var sections []BuilderSectionInput
+	sections := []BuilderSectionInput{}
 	orderSec := 1
 
 	for _, secEntry := range secEntries {
@@ -210,7 +244,7 @@ func parseModuleDirectory(root string) (*BuilderModuleInput, error) {
 
 		// Read labs
 		labsDir := filepath.Join(secFolder, "labs")
-		var labs []BuilderLabInput
+		labs := []BuilderLabInput{}
 		if _, err := os.Stat(labsDir); err == nil {
 			labEntries, err := os.ReadDir(labsDir)
 			if err == nil {
@@ -245,7 +279,7 @@ func parseModuleDirectory(root string) (*BuilderModuleInput, error) {
 
 					// Setup commands parsing from raw file (we read it key value or line by line for seed_commands)
 					setupType := "none"
-					var seedCmds []string
+					seedCmds := []string{}
 
 					labRawBytes, err := os.ReadFile(labYamlPath)
 					if err == nil {

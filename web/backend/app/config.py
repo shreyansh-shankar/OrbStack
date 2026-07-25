@@ -17,6 +17,11 @@ class Settings(BaseSettings):
     GITHUB_CLIENT_ID: str | None = None
     GITHUB_CLIENT_SECRET: str | None = None
 
+    # GitHub Commit Integration Settings
+    GITHUB_TOKEN: str | None = None
+    CHALLENGES_REPO: str = "thelastdeploy/thelastdeploy"
+    CHALLENGES_BRANCH: str = "main"
+
     class Config:
         env_file = ".env"
 
