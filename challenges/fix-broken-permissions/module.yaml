@@ -1,0 +1,13 @@
+id: fix-broken-permissions
+title: Fix Broken Permissions
+description: An incident response scenario where you must investigate and fix broken
+  file permissions preventing a service from starting.
+topic: linux
+difficulty: intermediate
+estimated_minutes: 0
+tags:
+- permissions
+- chmod
+- chown
+- systemd
+version: 1
