@@ -1,4 +1,4 @@
 id: incident-alert
 title: 'PagerDuty Alert: Web Server Down'
 order: 1
-xp: 0
+xp: 5
