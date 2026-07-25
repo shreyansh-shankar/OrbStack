@@ -1,0 +1,9 @@
+id: lnx-identify-broken-permissions
+title: Identify Broken Permissions
+xp: 0
+estimated_minutes: 10
+setup:
+  type: shell
+  seed_commands:
+  - echo 'mock
+version: 1
