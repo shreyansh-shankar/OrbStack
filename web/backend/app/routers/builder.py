@@ -10,7 +10,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, delete
 from app.dependencies import get_db, get_current_user
-from app.models import User, Module, Section, Lab
+from app.models import User, Module, Section, Lab, LabProgress, SectionProgress
 from app.schemas import (
     BuilderModuleInput,
     BuilderModuleResponse,
@@ -144,7 +144,10 @@ async def publish_module_from_cli(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Cannot modify or overwrite a verified module."
             )
-        # Delete existing sections and labs to perform clean upsert/overwrite
+        # Delete referencing progress rows first to avoid foreign key violations
+        await db.execute(delete(LabProgress).where(LabProgress.module_id == body.id))
+        await db.execute(delete(SectionProgress).where(SectionProgress.module_id == body.id))
+        # Now delete existing sections and labs to perform clean upsert/overwrite
         await db.execute(delete(Lab).where(Lab.module_id == body.id))
         await db.execute(delete(Section).where(Section.module_id == body.id))
         db.expunge(existing_module)
@@ -360,6 +363,8 @@ async def delete_module(
         )
 
     # CASCADE delete Sections & Labs
+    await db.execute(delete(LabProgress).where(LabProgress.module_id == module_id))
+    await db.execute(delete(SectionProgress).where(SectionProgress.module_id == module_id))
     await db.execute(delete(Lab).where(Lab.module_id == module_id))
     await db.execute(delete(Section).where(Section.module_id == module_id))
     await db.execute(delete(Module).where(Module.id == module_id))
