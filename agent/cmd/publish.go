@@ -107,40 +107,7 @@ func runPublish(args []string) error {
 	fmt.Println("It is now live but unverified (rewards 0 XP).")
 	fmt.Println("You can view it on the syllabus builder page /builder.")
 
-	// Auto-copy to local repository challenges/ directory if running in dev environment
-	if _, err := os.Stat("challenges"); err == nil {
-		destDir := filepath.Join("challenges", module.ID)
-		fmt.Printf("\nDetected local developer repository. Syncing to: %s...\n", destDir)
-		os.RemoveAll(destDir)
-		if err := copyDir(folderPath, destDir); err != nil {
-			fmt.Printf("Warning: failed to copy to codebase challenges folder: %v\n", err)
-		} else {
-			fmt.Println("✓ Copied challenge config to codebase challenges directory successfully.")
-		}
-	}
-
 	return nil
-}
-
-func copyDir(src string, dst string) error {
-	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-		relPath, err := filepath.Rel(src, path)
-		if err != nil {
-			return err
-		}
-		targetPath := filepath.Join(dst, relPath)
-		if info.IsDir() {
-			return os.MkdirAll(targetPath, info.Mode())
-		}
-		data, err := os.ReadFile(path)
-		if err != nil {
-			return err
-		}
-		return os.WriteFile(targetPath, data, info.Mode())
-	})
 }
 
 // Simple key-value text lines helper to parse YAML files without import overhead
