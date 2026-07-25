@@ -1,18 +1,20 @@
 id: docker-fundamentals
-title: "Docker Fundamentals"
-description: "Learn containerization from scratch — understand what Docker is, explore images and containers, run, manage container lifecycle, and host a web server."
+title: Docker Fundamentals
+description: Learn containerization from scratch — understand what Docker is, explore
+  images and containers, run, manage container lifecycle, and host a web server.
 topic: docker
 difficulty: beginner
 estimated_minutes: 60
 sections:
-  - id: 01-what-is-docker
-    order: 1
-  - id: 02-images-vs-containers
-    order: 2
-  - id: 03-your-first-container
-    order: 3
-  - id: 04-container-lifecycle
-    order: 4
-  - id: 05-run-a-web-server
-    order: 5
+- id: 01-what-is-docker
+  order: 1
+- id: 02-images-vs-containers
+  order: 2
+- id: 03-your-first-container
+  order: 3
+- id: 04-container-lifecycle
+  order: 4
+- id: 05-run-a-web-server
+  order: 5
+verified: true
 version: 2

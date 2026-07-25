@@ -1,26 +1,29 @@
 id: linux-users-permissions
-title: "Linux Users & Permissions"
-description: "Master user identities, group structures, permission bits (chmod), ownership controls, special permissions (SUID/Sticky Bit), sudo escalation, and environment variables."
+title: Linux Users & Permissions
+description: Master user identities, group structures, permission bits (chmod), ownership
+  controls, special permissions (SUID/Sticky Bit), sudo escalation, and environment
+  variables.
 topic: linux
 difficulty: beginner
 estimated_minutes: 60
 tags:
-  - security
-  - administration
-  - linux
+- security
+- administration
+- linux
 sections:
-  - id: 01-users-and-groups
-    order: 1
-  - id: 02-ownership
-    order: 2
-  - id: 03-chmod
-    order: 3
-  - id: 04-special-permissions
-    order: 4
-  - id: 05-sudo
-    order: 5
-  - id: 06-environment-variables
-    order: 6
-  - id: 07-user-management
-    order: 7
+- id: 01-users-and-groups
+  order: 1
+- id: 02-ownership
+  order: 2
+- id: 03-chmod
+  order: 3
+- id: 04-special-permissions
+  order: 4
+- id: 05-sudo
+  order: 5
+- id: 06-environment-variables
+  order: 6
+- id: 07-user-management
+  order: 7
+verified: true
 version: 1

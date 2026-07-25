@@ -1,11 +1,13 @@
 id: git-fundamentals
-title: "Git Fundamentals"
-description: "Master the basics of version control with Git: initialize repositories, stage changes, commit, check history, and configure ignore lists."
+title: Git Fundamentals
+description: 'Master the basics of version control with Git: initialize repositories,
+  stage changes, commit, check history, and configure ignore lists.'
 topic: git
 difficulty: beginner
 estimated_minutes: 40
 tags:
-  - git
-  - vcs
-  - devops
+- git
+- vcs
+- devops
+verified: true
 version: 1

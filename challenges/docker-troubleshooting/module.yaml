@@ -1,18 +1,21 @@
 id: docker-troubleshooting
-title: "Docker Troubleshooting"
-description: "Learn to diagnose and repair issues in containerized environments. Master reading crash logs, resolving port collisions, fixing network isolations, restoring volume typo paths, and debugging production incidents."
+title: Docker Troubleshooting
+description: Learn to diagnose and repair issues in containerized environments. Master
+  reading crash logs, resolving port collisions, fixing network isolations, restoring
+  volume typo paths, and debugging production incidents.
 topic: docker
 difficulty: intermediate
 estimated_minutes: 45
 sections:
-  - id: 01-reading-docker-errors
-    order: 1
-  - id: 02-container-wont-start
-    order: 2
-  - id: 03-service-unreachable
-    order: 3
-  - id: 04-data-missing
-    order: 4
-  - id: 05-container-incident-response
-    order: 5
+- id: 01-reading-docker-errors
+  order: 1
+- id: 02-container-wont-start
+  order: 2
+- id: 03-service-unreachable
+  order: 3
+- id: 04-data-missing
+  order: 4
+- id: 05-container-incident-response
+  order: 5
+verified: true
 version: 1

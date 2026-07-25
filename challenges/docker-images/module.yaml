@@ -1,20 +1,22 @@
 id: docker-images
-title: "Docker Images"
-description: "Learn how to manage, pull, inspect, and build Docker images. Master Dockerfiles, build contexts, layer caching, and web server customization."
+title: Docker Images
+description: Learn how to manage, pull, inspect, and build Docker images. Master Dockerfiles,
+  build contexts, layer caching, and web server customization.
 topic: docker
 difficulty: intermediate
 estimated_minutes: 60
 sections:
-  - id: 01-understanding-images
-    order: 1
-  - id: 02-finding-and-pulling-images
-    order: 2
-  - id: 03-inspecting-images
-    order: 3
-  - id: 04-writing-a-dockerfile
-    order: 4
-  - id: 05-building-images
-    order: 5
-  - id: 06-build-custom-web-server
-    order: 6
+- id: 01-understanding-images
+  order: 1
+- id: 02-finding-and-pulling-images
+  order: 2
+- id: 03-inspecting-images
+  order: 3
+- id: 04-writing-a-dockerfile
+  order: 4
+- id: 05-building-images
+  order: 5
+- id: 06-build-custom-web-server
+  order: 6
+verified: true
 version: 1

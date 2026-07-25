@@ -1,26 +1,29 @@
 id: linux-processes-services
-title: "Linux Processes & Services"
-description: "Master process lifecycles, real-time system monitoring, signals management, background/foreground execution, systemd user-level unit controls, journal logs, and debugging failing services."
+title: Linux Processes & Services
+description: Master process lifecycles, real-time system monitoring, signals management,
+  background/foreground execution, systemd user-level unit controls, journal logs,
+  and debugging failing services.
 topic: linux
 difficulty: intermediate
 estimated_minutes: 60
 tags:
-  - administration
-  - systemd
-  - monitoring
+- administration
+- systemd
+- monitoring
 sections:
-  - id: 01-understanding-processes
-    order: 1
-  - id: 02-ps-and-top
-    order: 2
-  - id: 03-signals
-    order: 3
-  - id: 04-background-jobs
-    order: 4
-  - id: 05-systemd-and-services
-    order: 5
-  - id: 06-logs-with-journalctl
-    order: 6
-  - id: 07-debug-failed-service
-    order: 7
+- id: 01-understanding-processes
+  order: 1
+- id: 02-ps-and-top
+  order: 2
+- id: 03-signals
+  order: 3
+- id: 04-background-jobs
+  order: 4
+- id: 05-systemd-and-services
+  order: 5
+- id: 06-logs-with-journalctl
+  order: 6
+- id: 07-debug-failed-service
+  order: 7
+verified: true
 version: 1

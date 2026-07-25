@@ -1,22 +1,25 @@
 id: docker-compose
-title: "Docker Compose"
-description: "Master multi-container orchestration on your local machine using Docker Compose. Define networks, volumes, environment variables, and manage multi-service application stacks."
+title: Docker Compose
+description: Master multi-container orchestration on your local machine using Docker
+  Compose. Define networks, volumes, environment variables, and manage multi-service
+  application stacks.
 topic: docker
 difficulty: intermediate
 estimated_minutes: 45
 sections:
-  - id: 01-why-compose-exists
-    order: 1
-  - id: 02-first-compose-file
-    order: 2
-  - id: 03-multi-service-applications
-    order: 3
-  - id: 04-compose-networks
-    order: 4
-  - id: 05-compose-volumes
-    order: 5
-  - id: 06-compose-environment-variables
-    order: 6
-  - id: 07-deploy-complete-stack
-    order: 7
+- id: 01-why-compose-exists
+  order: 1
+- id: 02-first-compose-file
+  order: 2
+- id: 03-multi-service-applications
+  order: 3
+- id: 04-compose-networks
+  order: 4
+- id: 05-compose-volumes
+  order: 5
+- id: 06-compose-environment-variables
+  order: 6
+- id: 07-deploy-complete-stack
+  order: 7
+verified: true
 version: 1

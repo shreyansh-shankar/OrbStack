@@ -21,4 +21,5 @@ sections:
   order: 6
 - id: 07-refactor-hardcoded-infrastructure
   order: 7
+verified: true
 version: 1

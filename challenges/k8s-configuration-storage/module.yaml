@@ -1,14 +1,17 @@
 id: k8s-configuration-storage
-title: "Kubernetes Configuration and Storage"
-description: "Learn how to decouple application configuration and secrets from container images, configure transient and persistent volumes, claim dynamic storage, understand StatefulSets, and debug storage mounts."
+title: Kubernetes Configuration and Storage
+description: Learn how to decouple application configuration and secrets from container
+  images, configure transient and persistent volumes, claim dynamic storage, understand
+  StatefulSets, and debug storage mounts.
 topic: kubernetes
 difficulty: intermediate
 estimated_minutes: 75
 tags:
-  - kubernetes
-  - k8s
-  - storage
-  - volumes
-  - secrets
-  - configmaps
+- kubernetes
+- k8s
+- storage
+- volumes
+- secrets
+- configmaps
+verified: true
 version: 1

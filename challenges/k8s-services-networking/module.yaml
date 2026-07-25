@@ -1,15 +1,19 @@
 id: k8s-services-networking
-title: "Kubernetes Services & Networking"
-description: "Understand the Kubernetes networking model, expose applications using ClusterIP and NodePort Services, perform service discovery using CoreDNS, route external traffic with Ingress, secure pods using Network Policies, and troubleshoot service connectivity issues."
+title: Kubernetes Services & Networking
+description: Understand the Kubernetes networking model, expose applications using
+  ClusterIP and NodePort Services, perform service discovery using CoreDNS, route
+  external traffic with Ingress, secure pods using Network Policies, and troubleshoot
+  service connectivity issues.
 topic: kubernetes
 difficulty: intermediate
 estimated_minutes: 100
 tags:
-  - kubernetes
-  - k8s
-  - networking
-  - services
-  - ingress
-  - dns
-  - networkpolicy
+- kubernetes
+- k8s
+- networking
+- services
+- ingress
+- dns
+- networkpolicy
+verified: true
 version: 1

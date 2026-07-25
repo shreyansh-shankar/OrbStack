@@ -19,4 +19,5 @@ sections:
   order: 5
 - id: 06-refactor-a-project-into-modules
   order: 6
+verified: true
 version: 1

@@ -1,20 +1,23 @@
 id: nginx-security-and-performance
-title: "Nginx Security & Performance"
-description: "Harden Nginx configurations for security and speed: add security headers, apply rate limiting to prevent abuse, enable gzip compression, configure reverse proxy caching, and optimize system sockets."
+title: Nginx Security & Performance
+description: 'Harden Nginx configurations for security and speed: add security headers,
+  apply rate limiting to prevent abuse, enable gzip compression, configure reverse
+  proxy caching, and optimize system sockets.'
 topic: nginx
 difficulty: intermediate
 estimated_minutes: 90
 sections:
-  - id: 01-tls-and-https
-    order: 1
-  - id: 02-security-headers
-    order: 2
-  - id: 03-rate-limiting
-    order: 3
-  - id: 04-compression
-    order: 4
-  - id: 05-basic-caching
-    order: 5
-  - id: 06-improve-production-performance
-    order: 6
+- id: 01-tls-and-https
+  order: 1
+- id: 02-security-headers
+  order: 2
+- id: 03-rate-limiting
+  order: 3
+- id: 04-compression
+  order: 4
+- id: 05-basic-caching
+  order: 5
+- id: 06-improve-production-performance
+  order: 6
+verified: true
 version: 1

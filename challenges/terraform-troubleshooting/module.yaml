@@ -26,4 +26,5 @@ sections:
   order: 8
 - id: 09-recover-a-broken-infrastructure-project
   order: 9
+verified: true
 version: 1

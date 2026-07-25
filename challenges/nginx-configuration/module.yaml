@@ -1,22 +1,24 @@
 id: nginx-configuration
-title: "Nginx Configuration"
-description: "Learn how to structure, test, reload, and organize Nginx configuration files, set up server blocks (virtual hosts), and debug directive conflicts."
+title: Nginx Configuration
+description: Learn how to structure, test, reload, and organize Nginx configuration
+  files, set up server blocks (virtual hosts), and debug directive conflicts.
 topic: nginx
 difficulty: intermediate
 estimated_minutes: 90
 sections:
-  - id: 01-understanding-nginx-conf
-    order: 1
-  - id: 02-contexts-and-directives
-    order: 2
-  - id: 03-server-blocks
-    order: 3
-  - id: 04-configuration-files
-    order: 4
-  - id: 05-testing-configurations
-    order: 5
-  - id: 06-reloading-configurations
-    order: 6
-  - id: 07-fix-a-broken-configuration
-    order: 7
+- id: 01-understanding-nginx-conf
+  order: 1
+- id: 02-contexts-and-directives
+  order: 2
+- id: 03-server-blocks
+  order: 3
+- id: 04-configuration-files
+  order: 4
+- id: 05-testing-configurations
+  order: 5
+- id: 06-reloading-configurations
+  order: 6
+- id: 07-fix-a-broken-configuration
+  order: 7
+verified: true
 version: 1

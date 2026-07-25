@@ -1,24 +1,26 @@
 id: linux-fundamentals
-title: "Linux Fundamentals"
-description: "Master the foundational skills of the Linux operating system, from open terminal commands to navigation, file editing, searching, and system help utilities."
+title: Linux Fundamentals
+description: Master the foundational skills of the Linux operating system, from open
+  terminal commands to navigation, file editing, searching, and system help utilities.
 topic: linux
 difficulty: beginner
 estimated_minutes: 45
 sections:
-  - id: 01-what-is-linux
-    order: 1
-  - id: 02-terminal-basics
-    order: 2
-  - id: 03-filesystem-overview
-    order: 3
-  - id: 04-navigation
-    order: 4
-  - id: 05-file-operations
-    order: 5
-  - id: 06-viewing-files
-    order: 6
-  - id: 07-file-searching
-    order: 7
-  - id: 08-getting-help
-    order: 8
+- id: 01-what-is-linux
+  order: 1
+- id: 02-terminal-basics
+  order: 2
+- id: 03-filesystem-overview
+  order: 3
+- id: 04-navigation
+  order: 4
+- id: 05-file-operations
+  order: 5
+- id: 06-viewing-files
+  order: 6
+- id: 07-file-searching
+  order: 7
+- id: 08-getting-help
+  order: 8
+verified: true
 version: 1

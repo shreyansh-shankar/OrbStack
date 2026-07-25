@@ -502,6 +502,7 @@ async def verify_module(
         "difficulty": module.difficulty,
         "estimated_minutes": module.estimated_minutes,
         "tags": tags_list,
+        "verified": True,
         "version": module.version or 1
     }
     github_files[f"{base_path}/module.yaml"] = yaml.safe_dump(module_yaml_data, sort_keys=False)

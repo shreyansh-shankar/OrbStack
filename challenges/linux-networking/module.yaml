@@ -1,28 +1,31 @@
 id: linux-networking
-title: "Linux Networking"
-description: "Master IP address structures, network interfaces, port monitoring, connection diagnostics (ping, traceroute), HTTP interactions (curl), DNS hostname queries, SSH configurations, and system network troubleshooting."
+title: Linux Networking
+description: Master IP address structures, network interfaces, port monitoring, connection
+  diagnostics (ping, traceroute), HTTP interactions (curl), DNS hostname queries,
+  SSH configurations, and system network troubleshooting.
 topic: linux
 difficulty: intermediate
 estimated_minutes: 60
 tags:
-  - networking
-  - security
-  - administration
+- networking
+- security
+- administration
 sections:
-  - id: 01-networking-basics
-    order: 1
-  - id: 02-ip-addresses-and-interfaces
-    order: 2
-  - id: 03-ports-and-sockets
-    order: 3
-  - id: 04-testing-connectivity
-    order: 4
-  - id: 05-http-with-curl
-    order: 5
-  - id: 06-dns-basics
-    order: 6
-  - id: 07-ssh
-    order: 7
-  - id: 08-restore-connectivity
-    order: 8
+- id: 01-networking-basics
+  order: 1
+- id: 02-ip-addresses-and-interfaces
+  order: 2
+- id: 03-ports-and-sockets
+  order: 3
+- id: 04-testing-connectivity
+  order: 4
+- id: 05-http-with-curl
+  order: 5
+- id: 06-dns-basics
+  order: 6
+- id: 07-ssh
+  order: 7
+- id: 08-restore-connectivity
+  order: 8
+verified: true
 version: 1

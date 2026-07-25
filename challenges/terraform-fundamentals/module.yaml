@@ -21,4 +21,5 @@ sections:
   order: 6
 - id: 07-first-terraform-workflow
   order: 7
+verified: true
 version: 1

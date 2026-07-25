@@ -1,20 +1,23 @@
 id: nginx-troubleshooting
-title: "Nginx Troubleshooting"
-description: "Learn how to read access and error logs, diagnose HTTP status errors (403, 404, 500, 502), troubleshoot backend upstream ports, and recover from complex multi-error production outages."
+title: Nginx Troubleshooting
+description: Learn how to read access and error logs, diagnose HTTP status errors
+  (403, 404, 500, 502), troubleshoot backend upstream ports, and recover from complex
+  multi-error production outages.
 topic: nginx
 difficulty: advanced
 estimated_minutes: 100
 sections:
-  - id: 01-reading-access-logs
-    order: 1
-  - id: 02-reading-error-logs
-    order: 2
-  - id: 03-common-http-errors
-    order: 3
-  - id: 04-debugging-upstreams
-    order: 4
-  - id: 05-production-debugging-workflow
-    order: 5
-  - id: 06-recover-a-production-nginx-server
-    order: 6
+- id: 01-reading-access-logs
+  order: 1
+- id: 02-reading-error-logs
+  order: 2
+- id: 03-common-http-errors
+  order: 3
+- id: 04-debugging-upstreams
+  order: 4
+- id: 05-production-debugging-workflow
+  order: 5
+- id: 06-recover-a-production-nginx-server
+  order: 6
+verified: true
 version: 1

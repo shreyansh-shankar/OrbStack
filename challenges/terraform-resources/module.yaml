@@ -25,4 +25,5 @@ sections:
   order: 8
 - id: 09-build-your-first-infrastructure
   order: 9
+verified: true
 version: 1

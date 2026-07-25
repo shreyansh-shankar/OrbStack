@@ -1,14 +1,16 @@
 id: git-remotes-collaboration
-title: "Git Remotes & Collaboration"
-description: "Learn how to collaborate using Git. Understand remote repositories, push and pull changes, manage tracking branches, and synchronize changes with team members."
+title: Git Remotes & Collaboration
+description: Learn how to collaborate using Git. Understand remote repositories, push
+  and pull changes, manage tracking branches, and synchronize changes with team members.
 topic: git
 difficulty: intermediate
 estimated_minutes: 80
 tags:
-  - git
-  - remotes
-  - push
-  - pull
-  - fetch
-  - collaboration
+- git
+- remotes
+- push
+- pull
+- fetch
+- collaboration
+verified: true
 version: 1

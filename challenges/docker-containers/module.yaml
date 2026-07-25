@@ -1,22 +1,25 @@
 id: docker-containers
-title: "Docker Containers"
-description: "Master container operations and investigation — manage running containers, inspect internal states, execute commands, configure environment variables, set resource caps, and troubleshoot crashes."
+title: Docker Containers
+description: Master container operations and investigation — manage running containers,
+  inspect internal states, execute commands, configure environment variables, set
+  resource caps, and troubleshoot crashes.
 topic: docker
 difficulty: intermediate
 estimated_minutes: 60
 sections:
-  - id: 01-running-containers
-    order: 1
-  - id: 02-container-logs
-    order: 2
-  - id: 03-container-inspection
-    order: 3
-  - id: 04-exec-into-container
-    order: 4
-  - id: 05-environment-variables
-    order: 5
-  - id: 06-resource-limits
-    order: 6
-  - id: 07-debug-failing-container
-    order: 7
+- id: 01-running-containers
+  order: 1
+- id: 02-container-logs
+  order: 2
+- id: 03-container-inspection
+  order: 3
+- id: 04-exec-into-container
+  order: 4
+- id: 05-environment-variables
+  order: 5
+- id: 06-resource-limits
+  order: 6
+- id: 07-debug-failing-container
+  order: 7
+verified: true
 version: 1

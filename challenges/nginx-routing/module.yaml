@@ -1,20 +1,23 @@
 id: nginx-routing
-title: "Nginx Routing"
-description: "Master Nginx routing mechanisms: configure prefix, exact, and regex location matching, implement internal rewrites and external redirects, use variables, and resolve precedence conflicts."
+title: Nginx Routing
+description: 'Master Nginx routing mechanisms: configure prefix, exact, and regex
+  location matching, implement internal rewrites and external redirects, use variables,
+  and resolve precedence conflicts.'
 topic: nginx
 difficulty: intermediate
 estimated_minutes: 90
 sections:
-  - id: 01-location-blocks
-    order: 1
-  - id: 02-location-matching
-    order: 2
-  - id: 03-rewrites
-    order: 3
-  - id: 04-redirects
-    order: 4
-  - id: 05-request-variables
-    order: 5
-  - id: 06-debug-routing-problems
-    order: 6
+- id: 01-location-blocks
+  order: 1
+- id: 02-location-matching
+  order: 2
+- id: 03-rewrites
+  order: 3
+- id: 04-redirects
+  order: 4
+- id: 05-request-variables
+  order: 5
+- id: 06-debug-routing-problems
+  order: 6
+verified: true
 version: 1

@@ -1,20 +1,22 @@
 id: nginx-serving-content
-title: "Nginx Serving Content"
-description: "Master serving static files, using root and alias directives, custom error pages, configuring directory indexing, and resolving file permissions."
+title: Nginx Serving Content
+description: Master serving static files, using root and alias directives, custom
+  error pages, configuring directory indexing, and resolving file permissions.
 topic: nginx
 difficulty: intermediate
 estimated_minutes: 80
 sections:
-  - id: 01-serving-static-files
-    order: 1
-  - id: 02-root-vs-alias
-    order: 2
-  - id: 03-index-files
-    order: 3
-  - id: 04-custom-error-pages
-    order: 4
-  - id: 05-directory-behaviour
-    order: 5
-  - id: 06-repair-a-static-site
-    order: 6
+- id: 01-serving-static-files
+  order: 1
+- id: 02-root-vs-alias
+  order: 2
+- id: 03-index-files
+  order: 3
+- id: 04-custom-error-pages
+  order: 4
+- id: 05-directory-behaviour
+  order: 5
+- id: 06-repair-a-static-site
+  order: 6
+verified: true
 version: 1

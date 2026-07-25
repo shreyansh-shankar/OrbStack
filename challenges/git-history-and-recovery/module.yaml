@@ -1,14 +1,17 @@
 id: git-history-and-recovery
-title: "Git History & Recovery"
-description: "Master Git history. Understand the detached HEAD state, perform resets (soft, mixed, hard), revert commits, locate lost commits using the reflog, and recover deleted branches."
+title: Git History & Recovery
+description: Master Git history. Understand the detached HEAD state, perform resets
+  (soft, mixed, hard), revert commits, locate lost commits using the reflog, and recover
+  deleted branches.
 topic: git
 difficulty: intermediate
 estimated_minutes: 80
 tags:
-  - git
-  - history
-  - reset
-  - revert
-  - reflog
-  - recovery
+- git
+- history
+- reset
+- revert
+- reflog
+- recovery
+verified: true
 version: 1

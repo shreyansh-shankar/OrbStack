@@ -1,22 +1,25 @@
 id: nginx-fundamentals
-title: "Nginx Fundamentals"
-description: "Master the basics of Nginx, the high-performance web server, reverse proxy, and load balancer. Learn how to install, manage, configure, and troubleshoot Nginx installations."
+title: Nginx Fundamentals
+description: Master the basics of Nginx, the high-performance web server, reverse
+  proxy, and load balancer. Learn how to install, manage, configure, and troubleshoot
+  Nginx installations.
 topic: nginx
 difficulty: beginner
 estimated_minutes: 60
 sections:
-  - id: 01-what-is-nginx
-    order: 1
-  - id: 02-how-the-web-works
-    order: 2
-  - id: 03-request-response-lifecycle
-    order: 3
-  - id: 04-installing-nginx
-    order: 4
-  - id: 05-running-and-managing-nginx
-    order: 5
-  - id: 06-exploring-the-default-site
-    order: 6
-  - id: 07-recover-a-broken-installation
-    order: 7
+- id: 01-what-is-nginx
+  order: 1
+- id: 02-how-the-web-works
+  order: 2
+- id: 03-request-response-lifecycle
+  order: 3
+- id: 04-installing-nginx
+  order: 4
+- id: 05-running-and-managing-nginx
+  order: 5
+- id: 06-exploring-the-default-site
+  order: 6
+- id: 07-recover-a-broken-installation
+  order: 7
+verified: true
 version: 1

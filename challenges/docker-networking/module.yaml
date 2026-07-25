@@ -1,18 +1,21 @@
 id: docker-networking
-title: "Docker Networking"
-description: "Understand how containers communicate — master port publishing, explore container-to-container connections on custom bridge networks, and troubleshoot connectivity errors."
+title: Docker Networking
+description: Understand how containers communicate — master port publishing, explore
+  container-to-container connections on custom bridge networks, and troubleshoot connectivity
+  errors.
 topic: docker
 difficulty: intermediate
 estimated_minutes: 50
 sections:
-  - id: 01-networking-basics
-    order: 1
-  - id: 02-port-publishing
-    order: 2
-  - id: 03-container-to-container
-    order: 3
-  - id: 04-custom-networks
-    order: 4
-  - id: 05-restore-connectivity
-    order: 5
+- id: 01-networking-basics
+  order: 1
+- id: 02-port-publishing
+  order: 2
+- id: 03-container-to-container
+  order: 3
+- id: 04-custom-networks
+  order: 4
+- id: 05-restore-connectivity
+  order: 5
+verified: true
 version: 1

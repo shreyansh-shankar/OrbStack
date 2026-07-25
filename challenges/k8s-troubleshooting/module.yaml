@@ -1,13 +1,16 @@
 id: k8s-troubleshooting
-title: "Kubernetes Troubleshooting"
-description: "Master techniques to diagnose, isolate, and recover from common failure scenarios in Kubernetes environments, including crash loops, image errors, pending pods, service selector mismatches, rollout bugs, and complex production incidents."
+title: Kubernetes Troubleshooting
+description: Master techniques to diagnose, isolate, and recover from common failure
+  scenarios in Kubernetes environments, including crash loops, image errors, pending
+  pods, service selector mismatches, rollout bugs, and complex production incidents.
 topic: kubernetes
 difficulty: intermediate
 estimated_minutes: 90
 tags:
-  - kubernetes
-  - k8s
-  - troubleshooting
-  - debugging
-  - triage
+- kubernetes
+- k8s
+- troubleshooting
+- debugging
+- triage
+verified: true
 version: 1

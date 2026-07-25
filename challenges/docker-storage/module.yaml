@@ -1,20 +1,22 @@
 id: docker-storage
-title: "Docker Storage"
-description: "Understand how to manage data in Docker. Master bind mounts, named volumes, metadata inspection, volume backups, and recovery techniques."
+title: Docker Storage
+description: Understand how to manage data in Docker. Master bind mounts, named volumes,
+  metadata inspection, volume backups, and recovery techniques.
 topic: docker
 difficulty: intermediate
 estimated_minutes: 60
 sections:
-  - id: 01-why-data-disappears
-    order: 1
-  - id: 02-bind-mounts
-    order: 2
-  - id: 03-named-volumes
-    order: 3
-  - id: 04-inspecting-storage
-    order: 4
-  - id: 05-backup-and-restore
-    order: 5
-  - id: 06-recover-lost-data
-    order: 6
+- id: 01-why-data-disappears
+  order: 1
+- id: 02-bind-mounts
+  order: 2
+- id: 03-named-volumes
+  order: 3
+- id: 04-inspecting-storage
+  order: 4
+- id: 05-backup-and-restore
+  order: 5
+- id: 06-recover-lost-data
+  order: 6
+verified: true
 version: 1

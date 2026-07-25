@@ -1,20 +1,23 @@
 id: nginx-reverse-proxy
-title: "Nginx Reverse Proxy"
-description: "Configure Nginx as a reverse proxy: route requests to backends, forward client Host and IP headers, configure upstream pools for load balancing, support WebSockets, and repair proxy configuration bugs."
+title: Nginx Reverse Proxy
+description: 'Configure Nginx as a reverse proxy: route requests to backends, forward
+  client Host and IP headers, configure upstream pools for load balancing, support
+  WebSockets, and repair proxy configuration bugs.'
 topic: nginx
 difficulty: intermediate
 estimated_minutes: 90
 sections:
-  - id: 01-what-is-a-reverse-proxy
-    order: 1
-  - id: 02-proxy-pass
-    order: 2
-  - id: 03-forwarding-headers
-    order: 3
-  - id: 04-upstream-blocks
-    order: 4
-  - id: 05-websocket-support
-    order: 5
-  - id: 06-recover-a-broken-proxy
-    order: 6
+- id: 01-what-is-a-reverse-proxy
+  order: 1
+- id: 02-proxy-pass
+  order: 2
+- id: 03-forwarding-headers
+  order: 3
+- id: 04-upstream-blocks
+  order: 4
+- id: 05-websocket-support
+  order: 5
+- id: 06-recover-a-broken-proxy
+  order: 6
+verified: true
 version: 1

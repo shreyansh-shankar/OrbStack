@@ -1,14 +1,17 @@
 id: git-troubleshooting
-title: "Git Troubleshooting"
-description: "Learn how to diagnose and resolve common Git errors. Fix rejected pushes, abort messy merges, restore uncommitted files, move commits to correct branches, untrack sensitive files, and recover broken repositories."
+title: Git Troubleshooting
+description: Learn how to diagnose and resolve common Git errors. Fix rejected pushes,
+  abort messy merges, restore uncommitted files, move commits to correct branches,
+  untrack sensitive files, and recover broken repositories.
 topic: git
 difficulty: advanced
 estimated_minutes: 90
 tags:
-  - git
-  - troubleshooting
-  - triage
-  - errors
-  - revert
-  - stash
+- git
+- troubleshooting
+- triage
+- errors
+- revert
+- stash
+verified: true
 version: 1

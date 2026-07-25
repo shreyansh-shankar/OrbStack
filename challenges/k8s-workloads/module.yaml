@@ -1,13 +1,16 @@
 id: k8s-workloads
-title: "Kubernetes Workloads"
-description: "Master the key controller concepts in Kubernetes. Learn Deployments, ReplicaSets, horizontal scaling, self-healing pod scheduling, metadata labels and selectors, rolling updates, rollbacks, and debugging broken rollouts."
+title: Kubernetes Workloads
+description: Master the key controller concepts in Kubernetes. Learn Deployments,
+  ReplicaSets, horizontal scaling, self-healing pod scheduling, metadata labels and
+  selectors, rolling updates, rollbacks, and debugging broken rollouts.
 topic: kubernetes
 difficulty: beginner
 estimated_minutes: 75
 tags:
-  - kubernetes
-  - k8s
-  - workloads
-  - deployments
-  - scaling
+- kubernetes
+- k8s
+- workloads
+- deployments
+- scaling
+verified: true
 version: 1
