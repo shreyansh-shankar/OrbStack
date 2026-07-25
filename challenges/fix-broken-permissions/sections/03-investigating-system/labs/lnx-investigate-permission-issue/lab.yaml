@@ -1,6 +1,6 @@
 id: lnx-investigate-permission-issue
 title: Investigate Permission Issue
-xp: 0
+xp: 35
 estimated_minutes: 10
 setup:
   type: shell
