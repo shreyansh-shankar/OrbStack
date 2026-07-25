@@ -1,0 +1,10 @@
+id: lnx-fix-broken-permissions
+title: Fix Broken Permissions
+xp: 0
+estimated_minutes: 10
+setup:
+  type: shell
+  seed_commands:
+  - sudo touch /var/log/app-server.log
+  - sudo chmod 000 /var/log/app-server.log
+version: 1
