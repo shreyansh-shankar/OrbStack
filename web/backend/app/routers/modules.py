@@ -1,7 +1,7 @@
 # web/backend/app/routers/modules.py
 
 from datetime import datetime, timezone
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from app.dependencies import get_db, get_current_user, get_optional_user
@@ -361,6 +361,7 @@ class VerifyModulePayload(BaseModel):
 async def verify_module(
     module_id: str,
     payload: VerifyModulePayload,
+    background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -482,6 +483,93 @@ async def verify_module(
             db.add(target_user)
 
     await db.commit()
+
+    # 2. Serialize and push the newly assigned XP grading and verified files to GitHub
+    import json
+    import yaml
+    from app.routers.builder import push_to_github_task
+
+    github_files = {}
+    base_path = f"challenges/{module_id}"
+
+    # module.yaml
+    tags_list = [t.strip() for t in module.tags.split(",") if t.strip()] if module.tags else []
+    module_yaml_data = {
+        "id": module.id,
+        "title": module.title,
+        "description": module.description,
+        "topic": module.topic,
+        "difficulty": module.difficulty,
+        "estimated_minutes": module.estimated_minutes,
+        "tags": tags_list,
+        "version": module.version or 1
+    }
+    github_files[f"{base_path}/module.yaml"] = yaml.safe_dump(module_yaml_data, sort_keys=False)
+
+    sorted_sections = sorted(sections, key=lambda s: s.order)
+    for sec in sorted_sections:
+        sec_folder = f"{sec.order:02d}-{sec.id}"
+        sec_base = f"{base_path}/sections/{sec_folder}"
+        
+        # section.yaml
+        sec_yaml_data = {
+            "id": sec.id,
+            "title": sec.title,
+            "order": sec.order,
+            "xp": sec.xp
+        }
+        github_files[f"{sec_base}/section.yaml"] = yaml.safe_dump(sec_yaml_data, sort_keys=False)
+
+        # content.md
+        if sec.content:
+            github_files[f"{sec_base}/content.md"] = sec.content
+
+        # Labs
+        sorted_labs = sorted(sec.labs, key=lambda l: l.order)
+        for lab in sorted_labs:
+            lab_base = f"{sec_base}/labs/{lab.id}"
+            
+            # Parse seed commands
+            seed_cmds = None
+            if lab.seed_commands:
+                try:
+                    seed_cmds = json.loads(lab.seed_commands)
+                except Exception:
+                    seed_cmds = lab.seed_commands
+
+            # lab.yaml
+            lab_yaml_data = {
+                "id": lab.id,
+                "title": lab.title,
+                "xp": lab.xp,
+                "estimated_minutes": lab.estimated_minutes,
+                "setup": {
+                    "type": lab.setup_type or "shell",
+                    "seed_commands": seed_cmds
+                },
+                "version": lab.version or 1
+            }
+            github_files[f"{lab_base}/lab.yaml"] = yaml.safe_dump(lab_yaml_data, sort_keys=False)
+
+            # validator.sh / validator.py
+            if lab.validator_script:
+                val_ext = "sh"
+                if "import " in lab.validator_script or "def " in lab.validator_script:
+                    val_ext = "py"
+                github_files[f"{lab_base}/validator.{val_ext}"] = lab.validator_script
+
+            # cleanup.sh
+            if lab.cleanup_script:
+                github_files[f"{lab_base}/cleanup.sh"] = lab.cleanup_script
+
+    # Enqueue GitHub commit as a background task
+    background_tasks.add_task(
+        push_to_github_task,
+        module_id,
+        github_files,
+        f"chore(challenge): verify and update XP grading for {module_id}"
+    )
+
     return {"detail": f"Module '{module_id}' is now officially verified."}
 
 
