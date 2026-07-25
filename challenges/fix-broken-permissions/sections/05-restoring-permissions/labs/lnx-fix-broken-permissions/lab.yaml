@@ -1,6 +1,6 @@
 id: lnx-fix-broken-permissions
 title: Fix Broken Permissions
-xp: 0
+xp: 50
 estimated_minutes: 10
 setup:
   type: shell
