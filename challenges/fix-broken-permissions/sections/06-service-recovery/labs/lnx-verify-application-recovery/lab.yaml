@@ -1,6 +1,6 @@
 id: lnx-verify-application-recovery
 title: Verify Application Recovery
-xp: 0
+xp: 40
 estimated_minutes: 10
 setup:
   type: shell
