@@ -29,7 +29,7 @@ def _calculate_validator_hash(script: str | None) -> str | None:
 
 
 async def push_to_github_task(module_id: str, files: dict, commit_message: str):
-    """Background task to commit files directly to GitHub using Contents API."""
+    """Background task to commit multiple files atomically using Git Data API."""
     if not settings.GITHUB_TOKEN:
         print("[GitHub Integration] GITHUB_TOKEN not configured. Skipping GitHub push.")
         return
@@ -39,38 +39,82 @@ async def push_to_github_task(module_id: str, files: dict, commit_message: str):
         "Accept": "application/vnd.github.v3+json",
         "User-Agent": "DevLab-Backend"
     }
+    repo = settings.CHALLENGES_REPO
+    branch = settings.CHALLENGES_BRANCH
 
-    async with httpx.AsyncClient(timeout=15.0) as client:
-        for filepath, content in files.items():
-            encoded_content = base64.b64encode(content.encode("utf-8")).decode("utf-8")
-            url = f"https://api.github.com/repos/{settings.CHALLENGES_REPO}/contents/{filepath}"
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        try:
+            # 1. Get reference for the target branch
+            ref_url = f"https://api.github.com/repos/{repo}/git/ref/heads/{branch}"
+            ref_resp = await client.get(ref_url, headers=headers)
+            if ref_resp.status_code != 200:
+                print(f"[GitHub Integration] Failed to get branch reference: {ref_resp.text}")
+                return
             
-            # Check if file exists to retrieve SHA (required for GitHub content updates)
-            sha = None
-            try:
-                get_resp = await client.get(url, headers=headers)
-                if get_resp.status_code == 200:
-                    sha = get_resp.json().get("sha")
-            except Exception as e:
-                print(f"[GitHub Integration] Error fetching SHA for {filepath}: {e}")
-                
-            # Perform PUT request to create or update file
-            body = {
-                "message": commit_message,
-                "content": encoded_content,
-                "branch": settings.CHALLENGES_BRANCH
+            ref_data = ref_resp.json()
+            base_commit_sha = ref_data["object"]["sha"]
+
+            # 2. Get the base commit tree SHA
+            commit_url = f"https://api.github.com/repos/{repo}/git/commits/{base_commit_sha}"
+            commit_resp = await client.get(commit_url, headers=headers)
+            if commit_resp.status_code != 200:
+                print(f"[GitHub Integration] Failed to get base commit details: {commit_resp.text}")
+                return
+            
+            commit_data = commit_resp.json()
+            base_tree_sha = commit_data["tree"]["sha"]
+
+            # 3. Create a new Tree containing the updated files
+            tree_entries = []
+            for filepath, content in files.items():
+                tree_entries.append({
+                    "path": filepath,
+                    "mode": "100644",
+                    "type": "blob",
+                    "content": content
+                })
+
+            tree_url = f"https://api.github.com/repos/{repo}/git/trees"
+            tree_payload = {
+                "base_tree": base_tree_sha,
+                "tree": tree_entries
             }
-            if sha:
-                body["sha"] = sha
-                
-            try:
-                put_resp = await client.put(url, headers=headers, json=body)
-                if put_resp.status_code not in (200, 201):
-                    print(f"[GitHub Integration] Failed to commit {filepath}: {put_resp.text}")
-                else:
-                    print(f"[GitHub Integration] Successfully committed {filepath} to GitHub (SHA: {sha})")
-            except Exception as e:
-                print(f"[GitHub Integration] Error putting file {filepath}: {e}")
+            tree_resp = await client.post(tree_url, headers=headers, json=tree_payload)
+            if tree_resp.status_code not in (200, 201):
+                print(f"[GitHub Integration] Failed to create git tree: {tree_resp.text}")
+                return
+            
+            new_tree_sha = tree_resp.json()["sha"]
+
+            # 4. Create the Commit object
+            commits_url = f"https://api.github.com/repos/{repo}/git/commits"
+            commit_payload = {
+                "message": commit_message,
+                "tree": new_tree_sha,
+                "parents": [base_commit_sha]
+            }
+            new_commit_resp = await client.post(commits_url, headers=headers, json=commit_payload)
+            if new_commit_resp.status_code not in (200, 201):
+                print(f"[GitHub Integration] Failed to create commit: {new_commit_resp.text}")
+                return
+            
+            new_commit_sha = new_commit_resp.json()["sha"]
+
+            # 5. Update the Reference for the branch
+            update_ref_url = f"https://api.github.com/repos/{repo}/git/refs/heads/{branch}"
+            update_ref_payload = {
+                "sha": new_commit_sha,
+                "force": False
+            }
+            patch_resp = await client.patch(update_ref_url, headers=headers, json=update_ref_payload)
+            if patch_resp.status_code != 200:
+                print(f"[GitHub Integration] Failed to update reference: {patch_resp.text}")
+                return
+
+            print(f"[GitHub Integration] Successfully committed {len(files)} files to branch {branch} in 1 single atomic commit! (Commit SHA: {new_commit_sha})")
+
+        except Exception as e:
+            print(f"[GitHub Integration] Error performing atomic GitHub commit: {e}")
 
 
 # ---------------------------------------------------------------------------
