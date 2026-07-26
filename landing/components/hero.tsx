@@ -144,7 +144,7 @@ export default function Hero() {
           </span>
         </p>
 
-        {/* CTAs */}
+        {/* Secondary CTAs — no "Start Practicing" (moved to dedicated section) */}
         <div
           className="animate-fade-in-up-3"
           style={{
@@ -157,39 +157,6 @@ export default function Hero() {
             marginBottom: "56px",
           }}
         >
-          <a
-            href="https://app.thelastdeploy.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "8px",
-              padding: "14px 28px",
-              fontSize: "15px",
-              fontWeight: 600,
-              color: "#fff",
-              background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
-              borderRadius: "10px",
-              textDecoration: "none",
-              border: "1px solid rgba(34,197,94,0.35)",
-              boxShadow: "0 0 20px rgba(34,197,94,0.2)",
-              transition: "all 0.3s ease",
-              minWidth: "160px",
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.transform = "translateY(-2px) scale(1.02)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 0 30px rgba(34,197,94,0.4), 0 8px 24px rgba(0,0,0,0.4)";
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.transform = "none";
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(34,197,94,0.2)";
-            }}
-          >
-            Start Practicing
-          </a>
-
           <a
             href="https://docs.thelastdeploy.com"
             target="_blank"
@@ -209,7 +176,6 @@ export default function Hero() {
               border: "1px solid rgba(255,255,255,0.08)",
               backdropFilter: "blur(8px)",
               transition: "all 0.3s ease",
-              minWidth: "160px",
             }}
             onMouseEnter={e => {
               (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
@@ -244,7 +210,6 @@ export default function Hero() {
               border: "1px solid rgba(255,255,255,0.08)",
               backdropFilter: "blur(8px)",
               transition: "all 0.3s ease",
-              minWidth: "160px",
             }}
             onMouseEnter={e => {
               (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
@@ -282,7 +247,6 @@ export default function Hero() {
               border: "1px solid rgba(255,255,255,0.08)",
               backdropFilter: "blur(8px)",
               transition: "all 0.3s ease",
-              minWidth: "160px",
             }}
             onMouseEnter={e => {
               (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
