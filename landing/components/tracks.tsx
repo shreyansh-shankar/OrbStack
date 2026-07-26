@@ -45,6 +45,13 @@ const TRACK_ICONS: Record<string, React.ReactNode> = {
       <line x1="2" y1="12" x2="22" y2="12"/>
     </svg>
   ),
+  Jenkins: (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      <circle cx="12" cy="12" r="7"/>
+    </svg>
+  ),
 };
 
 const TRACK_ACCENT: Record<string, { icon: string; glow: string; text: string; border: string; bg: string }> = {
@@ -53,6 +60,7 @@ const TRACK_ACCENT: Record<string, { icon: string; glow: string; text: string; b
   orange: { icon: "#f97316", glow: "rgba(249,115,22,0.08)",  text: "#fb923c", border: "rgba(249,115,22,0.15)", bg: "rgba(249,115,22,0.04)" },
   red:    { icon: "#ef4444", glow: "rgba(239,68,68,0.08)",   text: "#f87171", border: "rgba(239,68,68,0.15)",  bg: "rgba(239,68,68,0.04)" },
   cyan:   { icon: "#06b6d4", glow: "rgba(6,182,212,0.08)",   text: "#22d3ee", border: "rgba(6,182,212,0.15)",  bg: "rgba(6,182,212,0.04)" },
+  yellow: { icon: "#eab308", glow: "rgba(234,179,8,0.08)",   text: "#facc15", border: "rgba(234,179,8,0.15)",  bg: "rgba(234,179,8,0.04)" },
 };
 
 export default function Tracks() {

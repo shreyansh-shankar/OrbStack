@@ -101,38 +101,6 @@ export default function Navbar() {
               Docs
             </a>
 
-            {/* Open App */}
-            <a
-              href="https://app.thelastdeploy.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "8px 16px",
-                fontSize: "13px",
-                fontWeight: 600,
-                color: "#fff",
-                background: "linear-gradient(135deg, #22c55e, #16a34a)",
-                borderRadius: "8px",
-                textDecoration: "none",
-                border: "1px solid rgba(34,197,94,0.4)",
-                boxShadow: "0 0 12px rgba(34,197,94,0.15)",
-                transition: "all 0.2s ease",
-                marginRight: "4px",
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(34,197,94,0.3)";
-                (e.currentTarget as HTMLElement).style.transform = "translateY(-0.5px)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(34,197,94,0.15)";
-                (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-              }}
-            >
-              Open App
-            </a>
 
             {/* GitHub */}
             <a
