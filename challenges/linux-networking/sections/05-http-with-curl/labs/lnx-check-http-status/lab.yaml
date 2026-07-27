@@ -32,4 +32,4 @@ setup:
       "
     - "setsid python3 /tmp/mock_server.py >/dev/null 2>&1 &"
     - "sleep 1"
-version: 1
+version: 2
