@@ -400,7 +400,7 @@ export default function MaintainerDashboard() {
                   </h3>
                   
                   {selectedModule.sections.map((sec, secIdx) => (
-                    <div key={sec.id} className="p-4 rounded-xl border border-border bg-zinc-950/40 space-y-4">
+                    <div key={sec.id} className="p-4 rounded-xl border border-border bg-muted/20 space-y-4">
                       {/* Section Header */}
                       <div className="flex items-center justify-between gap-4 flex-wrap pb-3 border-b border-border/40">
                         <div className="flex-1">
@@ -416,7 +416,7 @@ export default function MaintainerDashboard() {
                         </div>
                         <div className="flex items-center gap-2">
                           <label className="text-xs font-medium text-muted-foreground">Section XP:</label>
-                          <div className="flex items-center bg-black/60 border border-border/80 rounded-xl overflow-hidden shadow-inner h-8">
+                          <div className="flex items-center bg-card border border-border rounded-xl overflow-hidden shadow-inner h-8">
                             <button
                               type="button"
                               onClick={() => handleXpChange(sec.id, Math.max(0, (xpState[sec.id] ?? 0) - 5))}

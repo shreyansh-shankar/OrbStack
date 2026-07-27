@@ -125,11 +125,11 @@ export default function BuilderDashboard() {
       </div>
 
       {/* CLI Quickstart Card */}
-      <div className="mb-10 rounded-2xl border border-border/80 bg-zinc-950/60 backdrop-blur-md p-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+      <div className="mb-10 rounded-2xl border border-border bg-card shadow-sm p-6 relative overflow-hidden">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none text-foreground">
           <Terminal className="h-32 w-32" />
         </div>
-        <div className="flex gap-4 items-start">
+        <div className="flex gap-4 items-start relative z-10">
           <div className="p-3 rounded-xl bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] hidden sm:block">
             <Terminal className="h-6 w-6" />
           </div>
@@ -138,8 +138,8 @@ export default function BuilderDashboard() {
             <p className="text-sm text-muted-foreground mb-4 max-w-2xl">
               Write challenges in your favorite local text editor following the standard schema format, then publish instantly with a single command.
             </p>
-            <div className="flex items-center gap-2 bg-black/40 border border-border rounded-xl p-3 max-w-xl font-mono text-sm text-emerald-400">
-              <span className="text-zinc-600">$</span>
+            <div className="flex items-center gap-2 bg-slate-950 dark:bg-black/60 border border-slate-800 dark:border-border rounded-xl p-3 max-w-xl font-mono text-sm text-emerald-400 shadow-inner">
+              <span className="text-zinc-500">$</span>
               <span className="flex-1 select-all">tld publish ./path-to-your-module</span>
               <button 
                 onClick={() => copyToClipboard("tld publish ./path-to-your-module")}
@@ -155,16 +155,16 @@ export default function BuilderDashboard() {
 
       {/* Instructions Modal / Drawer */}
       {showInstructions && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="w-full max-w-2xl bg-zinc-950 border border-border rounded-2xl p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-border/60">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="w-full max-w-2xl bg-card border border-border rounded-2xl p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
               <h3 className="text-xl font-black text-foreground flex items-center gap-2">
                 <FolderOpen className="h-5 w-5 text-[var(--accent-primary)]" />
                 How to Build & Publish Challenges
               </h3>
               <button 
                 onClick={() => setShowInstructions(false)}
-                className="text-zinc-400 hover:text-white font-black text-sm px-3 py-1 rounded-lg border border-border"
+                className="text-muted-foreground hover:text-foreground font-black text-sm px-3 py-1 rounded-lg border border-border bg-muted/30 transition-colors"
               >
                 Close
               </button>
@@ -172,12 +172,12 @@ export default function BuilderDashboard() {
 
             <div className="space-y-6 text-sm text-muted-foreground leading-relaxed">
               <div>
-                <h4 className="font-bold text-white mb-2 flex items-center gap-1.5">
+                <h4 className="font-bold text-foreground mb-2 flex items-center gap-1.5">
                   <span className="w-5 h-5 rounded-full bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center text-xs font-mono font-black">1</span>
                   Create Directory Structure
                 </h4>
                 <p className="mb-2">Create a local directory representing your module containing sections and labs:</p>
-                <pre className="bg-black/40 border border-border/60 rounded-xl p-4 font-mono text-xs text-zinc-300">
+                <pre className="bg-slate-950 dark:bg-black/60 border border-slate-800 dark:border-border rounded-xl p-4 font-mono text-xs text-zinc-300">
 {`my-module/
 ├── module.yaml
 └── sections/
@@ -193,12 +193,12 @@ export default function BuilderDashboard() {
               </div>
 
               <div>
-                <h4 className="font-bold text-white mb-2 flex items-center gap-1.5">
+                <h4 className="font-bold text-foreground mb-2 flex items-center gap-1.5">
                   <span className="w-5 h-5 rounded-full bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center text-xs font-mono font-black">2</span>
                   Author Configurations
                 </h4>
                 <p className="mb-2"><strong>module.yaml:</strong></p>
-                <pre className="bg-black/40 border border-border/60 rounded-xl p-3 font-mono text-xs text-zinc-400">
+                <pre className="bg-slate-950 dark:bg-black/60 border border-slate-800 dark:border-border rounded-xl p-3 font-mono text-xs text-zinc-300">
 {`id: my-module-slug
 title: "My Module Title"
 description: "Sleek description of module."
@@ -208,7 +208,7 @@ estimated_minutes: 15
 tags: "linux, bash"`}
                 </pre>
                 <p className="mt-3 mb-2"><strong>lab.yaml:</strong></p>
-                <pre className="bg-black/40 border border-border/60 rounded-xl p-3 font-mono text-xs text-zinc-400">
+                <pre className="bg-slate-950 dark:bg-black/60 border border-slate-800 dark:border-border rounded-xl p-3 font-mono text-xs text-zinc-300">
 {`id: my-first-lab-slug
 title: "Create a File"
 estimated_minutes: 5
@@ -220,12 +220,12 @@ setup:
               </div>
 
               <div>
-                <h4 className="font-bold text-white mb-2 flex items-center gap-1.5">
+                <h4 className="font-bold text-foreground mb-2 flex items-center gap-1.5">
                   <span className="w-5 h-5 rounded-full bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center text-xs font-mono font-black">3</span>
                   Publish Live
                 </h4>
-                <p>Log in using the CLI, then push your folder to the web:</p>
-                <pre className="bg-black/40 border border-border/60 rounded-xl p-3 font-mono text-xs text-emerald-400">
+                <p className="mb-2">Log in using the CLI, then push your folder to the web:</p>
+                <pre className="bg-slate-950 dark:bg-black/60 border border-slate-800 dark:border-border rounded-xl p-3 font-mono text-xs text-emerald-400">
 $ tld login
 $ tld publish ./my-module
                 </pre>
