@@ -8,8 +8,8 @@ setup:
     - "mkdir -p $HOME/network-test"
     - "rm -f $HOME/network-test/http_status.txt"
     - "pkill -f mock_serve[r].py || true"
-    - "echo 'ZnJvbSBodHRwLnNlcnZlciBpbXBvcnQgSFRUUFNlcnZlciwgQmFzZUhUVFBSZXF1ZXN0SGFuZGxlcgoKY2xhc3MgTXlIYW5kbGVyKEJhc2VIVFRQUmVxdWVzdEhhbmRsZXIpOgogICAgZGVmIGRvX0dFVChzZWxmKToKICAgICAgICBzZWxmLnNlbmRfcmVzcG9uc2UoMjAwKQogICAgICAgIHNlbGYuZW5kX2hlYWRlcnMoKQogICAgICAgIHNlbGYud2ZpbGUud3JpdGUoYiJ3ZWxjb21lIHRvIGRldmxhYiIpCiAgICBkZWYgZG9fUE9TVChzZWxmKToKICAgICAgICBzZWxmLnNlbmRfcmVzcG9uc2UoMjAxKQogICAgICAgIHNlbGYuZW5kX2hlYWRlcnMoKQogICAgICAgIHNlbGYud2ZpbGUud3JpdGUoYiJjcmVhdGVkIHN1Y2Nlc3NmdWxseSIpCiAgICBkZWYgbG9nX21lc3NhZ2Uoc2VsZiwgKmFyZ3MpOgogICAgICAgIHBhc3MKCkhUVFBTZXJ2ZXIoKCIxMjcuMC4wLjEiLCA5MDkwKSwgTXlIYW5kbGVyKS5zZXJ2ZV9mb3JldmVyKCkK' | base64 -d > /tmp/mock_server.py"
+    - "echo 'ZnJvbSBodHRwLnNlcnZlciBpbXBvcnQgSFRUUFNlcnZlciwgQmFzZUhUVFBSZXF1ZXN0SGFuZGxlcgoKY2xhc3MgTXlIYW5kbGVyKEJhc2VIVFRQUmVxdWVzdEhhbmRsZXIpOgogICAgZGVmIGRvX0dFVChzZWxmKToKICAgICAgICBzZWxmLnNlbmRfcmVzcG9uc2UoMjAwKQogICAgICAgIHNlbGYuZW5kX2hlYWRlcnMoKQogICAgICAgIHNlbGYud2ZpbGUud3JpdGUoYiJ3ZWxjb21lIHRvIHRoZWxhc3RkZXBsb3kiKQogICAgZGVmIGRvX1BPU1Qoc2VsZik6CiAgICAgICAgc2VsZi5zZW5kX3Jlc3BvbnNlKDIwMSkKICAgICAgICBzZWxmLmVuZF9oZWFkZXJzKCkKICAgICAgICBzZWxmLndmaWxlLndyaXRlKGIiY3JlYXRlZCBzdWNjZXNzZnVsbHkiKQogICAgZGVmIGxvZ19tZXNzYWdlKHNlbGYsICphcmdzKToKICAgICAgICBwYXNzCgpIVFRQU2VydmVyKCgiMTI3LjAuMC4xIiwgOTA5MCksIE15SGFuZGxlcikuc2VydmVfZm9yZXZlcigpCg==' | base64 -d > /tmp/mock_server.py"
     - "setsid python3 /tmp/mock_server.py >/dev/null 2>&1 &"
     - "sleep 1"
-version: 6
+version: 7
 
