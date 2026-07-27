@@ -2,7 +2,7 @@
 # validator.sh — linux-processes-services / 07-debug-failed-service / lnx-recover-broken-web-service
 set -euo pipefail
 
-UNIT_FILE="$HOME/.config/systemd/user/devlab-broken.service"
+UNIT_FILE="$HOME/.config/systemd/user/thelastdeploy-broken.service"
 
 if [ ! -f "$UNIT_FILE" ]; then
   echo "FAIL: Unit file $UNIT_FILE not found."
@@ -16,8 +16,8 @@ if ! grep -q "ExecStart=/bin/sleep 3600" "$UNIT_FILE"; then
 fi
 
 # Check if service is active
-if ! systemctl --user is-active devlab-broken.service &>/dev/null; then
-  echo "FAIL: The user-level service 'devlab-broken.service' is not running."
+if ! systemctl --user is-active thelastdeploy-broken.service &>/dev/null; then
+  echo "FAIL: The user-level service 'thelastdeploy-broken.service' is not running."
   echo "Did you run 'systemctl --user daemon-reload' and start it?"
   exit 1
 fi

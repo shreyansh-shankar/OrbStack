@@ -117,6 +117,88 @@ async def push_to_github_task(module_id: str, files: dict, commit_message: str):
             print(f"[GitHub Integration] Error performing atomic GitHub commit: {e}")
 
 
+def build_github_challenge_files(
+    module_id: str,
+    title: str,
+    description: str | None,
+    topic: str,
+    difficulty: str,
+    estimated_minutes: int | None,
+    tags: list[str],
+    sections: list[dict],
+    is_verified: bool = False,
+    version: int = 1,
+) -> dict[str, str]:
+    github_files = {}
+    base_path = f"challenges/{module_id}"
+
+    module_yaml_data = {
+        "id": module_id,
+        "title": title,
+        "description": description,
+        "topic": topic,
+        "difficulty": difficulty,
+        "estimated_minutes": estimated_minutes,
+        "tags": tags,
+        "version": version,
+    }
+    if is_verified:
+        module_yaml_data["verified"] = True
+
+    github_files[f"{base_path}/module.yaml"] = yaml.safe_dump(module_yaml_data, sort_keys=False)
+
+    for sec in sections:
+        sec_folder = f"{sec['order']:02d}-{sec['id']}"
+        sec_base = f"{base_path}/sections/{sec_folder}"
+
+        sec_yaml_data = {
+            "id": sec["id"],
+            "title": sec["title"],
+            "order": sec["order"],
+            "xp": sec["xp"],
+        }
+        github_files[f"{sec_base}/section.yaml"] = yaml.safe_dump(sec_yaml_data, sort_keys=False)
+
+        if sec.get("content"):
+            github_files[f"{sec_base}/content.md"] = sec["content"]
+
+        for lab in sec.get("labs", []):
+            lab_base = f"{sec_base}/labs/{lab['id']}"
+
+            seed_cmds = lab.get("seed_commands")
+            if isinstance(seed_cmds, str):
+                try:
+                    seed_cmds = json.loads(seed_cmds)
+                except Exception:
+                    pass
+
+            lab_yaml_data = {
+                "id": lab["id"],
+                "title": lab["title"],
+                "xp": lab["xp"],
+                "estimated_minutes": lab.get("estimated_minutes"),
+                "setup": {
+                    "type": lab.get("setup_type") or "shell",
+                    "seed_commands": seed_cmds,
+                },
+                "version": lab.get("version", 1),
+            }
+            github_files[f"{lab_base}/lab.yaml"] = yaml.safe_dump(lab_yaml_data, sort_keys=False)
+
+            val_script = lab.get("validator_script")
+            if val_script:
+                val_ext = "sh"
+                if "import " in val_script or "def " in val_script:
+                    val_ext = "py"
+                github_files[f"{lab_base}/validator.{val_ext}"] = val_script
+
+            clean_script = lab.get("cleanup_script")
+            if clean_script:
+                github_files[f"{lab_base}/cleanup.sh"] = clean_script
+
+    return github_files
+
+
 # ---------------------------------------------------------------------------
 # POST /builder/modules (Publish/Submit a Module from the CLI)
 # ---------------------------------------------------------------------------
@@ -227,68 +309,42 @@ async def publish_module_from_cli(
     await db.refresh(module)
 
     # 4. Generate the YAML payload and trigger GitHub push in the background
-    github_files = {}
-    base_path = f"challenges/{body.id}"
-
-    # module.yaml
-    module_yaml_data = {
-        "id": body.id,
-        "title": body.title,
-        "description": body.description,
-        "topic": body.topic,
-        "difficulty": body.difficulty,
-        "estimated_minutes": body.estimated_minutes,
-        "tags": body.tags,
-        "version": 1
-    }
-    github_files[f"{base_path}/module.yaml"] = yaml.safe_dump(module_yaml_data, sort_keys=False)
-
-    # Sections & Labs
-    for s_input in body.sections:
-        sec_folder = f"{s_input.order:02d}-{s_input.id}"
-        sec_base = f"{base_path}/sections/{sec_folder}"
-        
-        # section.yaml
-        sec_yaml_data = {
-            "id": s_input.id,
-            "title": s_input.title,
-            "order": s_input.order,
-            "xp": 0  # Force to 0 for unverified
+    sections_data = [
+        {
+            "id": s.id,
+            "title": s.title,
+            "order": s.order,
+            "xp": 0,
+            "content": s.content,
+            "labs": [
+                {
+                    "id": l.id,
+                    "title": l.title,
+                    "xp": 0,
+                    "estimated_minutes": l.estimated_minutes,
+                    "setup_type": l.setup_type,
+                    "seed_commands": l.seed_commands,
+                    "validator_script": l.validator_script,
+                    "cleanup_script": l.cleanup_script,
+                    "version": 1,
+                }
+                for l in s.labs
+            ],
         }
-        github_files[f"{sec_base}/section.yaml"] = yaml.safe_dump(sec_yaml_data, sort_keys=False)
-
-        # content.md
-        if s_input.content:
-            github_files[f"{sec_base}/content.md"] = s_input.content
-
-        # Labs
-        for l_input in s_input.labs:
-            lab_base = f"{sec_base}/labs/{l_input.id}"
-            
-            # lab.yaml
-            lab_yaml_data = {
-                "id": l_input.id,
-                "title": l_input.title,
-                "xp": 0,
-                "estimated_minutes": l_input.estimated_minutes,
-                "setup": {
-                    "type": l_input.setup_type or "shell",
-                    "seed_commands": l_input.seed_commands
-                },
-                "version": 1
-            }
-            github_files[f"{lab_base}/lab.yaml"] = yaml.safe_dump(lab_yaml_data, sort_keys=False)
-
-            # validator.sh / validator.py
-            if l_input.validator_script:
-                val_ext = "sh"
-                if "import " in l_input.validator_script or "def " in l_input.validator_script:
-                    val_ext = "py"
-                github_files[f"{lab_base}/validator.{val_ext}"] = l_input.validator_script
-
-            # cleanup.sh
-            if l_input.cleanup_script:
-                github_files[f"{lab_base}/cleanup.sh"] = l_input.cleanup_script
+        for s in body.sections
+    ]
+    github_files = build_github_challenge_files(
+        module_id=body.id,
+        title=body.title,
+        description=body.description,
+        topic=body.topic,
+        difficulty=body.difficulty,
+        estimated_minutes=body.estimated_minutes,
+        tags=body.tags,
+        sections=sections_data,
+        is_verified=False,
+        version=1,
+    )
 
     # Enqueue GitHub commit as a background task
     background_tasks.add_task(

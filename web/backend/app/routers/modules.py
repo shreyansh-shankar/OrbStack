@@ -14,6 +14,7 @@ from app.schemas import (
     ModuleDetail, ModuleSummary,
     SectionSchema,
 )
+from app.services import recalculate_and_update_user_xp
 
 router = APIRouter()
 
@@ -450,118 +451,51 @@ async def verify_module(
         user_res = await db.execute(select(User).where(User.id == u_id))
         target_user = user_res.scalar_one_or_none()
         if target_user:
-            # Recalculate verified XP
-            lab_verified = await db.scalar(
-                select(func.sum(LabProgress.xp_awarded))
-                .join(Lab, Lab.id == LabProgress.lab_id)
-                .join(Module, Module.id == Lab.module_id)
-                .where(LabProgress.user_id == target_user.id, LabProgress.completed == True, Module.status == 'verified')
-            ) or 0
-            sec_verified = await db.scalar(
-                select(func.sum(SectionProgress.xp_awarded))
-                .join(Section, Section.id == SectionProgress.section_id)
-                .join(Module, Module.id == Section.module_id)
-                .where(SectionProgress.user_id == target_user.id, SectionProgress.completed == True, Module.status == 'verified')
-            ) or 0
-            
-            # Recalculate unverified XP
-            lab_unverified = await db.scalar(
-                select(func.sum(LabProgress.xp_awarded))
-                .join(Lab, Lab.id == LabProgress.lab_id)
-                .join(Module, Module.id == Lab.module_id)
-                .where(LabProgress.user_id == target_user.id, LabProgress.completed == True, Module.status != 'verified')
-            ) or 0
-            sec_unverified = await db.scalar(
-                select(func.sum(SectionProgress.xp_awarded))
-                .join(Section, Section.id == SectionProgress.section_id)
-                .join(Module, Module.id == Section.module_id)
-                .where(SectionProgress.user_id == target_user.id, SectionProgress.completed == True, Module.status != 'verified')
-            ) or 0
-            
-            target_user.xp = lab_verified + sec_verified
-            target_user.unverified_xp = lab_unverified + sec_unverified
-            db.add(target_user)
+            await recalculate_and_update_user_xp(target_user, db)
 
     await db.commit()
 
     # 2. Serialize and push the newly assigned XP grading and verified files to GitHub
-    import json
-    import yaml
-    from app.routers.builder import push_to_github_task
-
-    github_files = {}
-    base_path = f"challenges/{module_id}"
-
-    # module.yaml
-    tags_list = [t.strip() for t in module.tags.split(",") if t.strip()] if module.tags else []
-    module_yaml_data = {
-        "id": module.id,
-        "title": module.title,
-        "description": module.description,
-        "topic": module.topic,
-        "difficulty": module.difficulty,
-        "estimated_minutes": module.estimated_minutes,
-        "tags": tags_list,
-        "verified": True,
-        "version": module.version or 1
-    }
-    github_files[f"{base_path}/module.yaml"] = yaml.safe_dump(module_yaml_data, sort_keys=False)
+    from app.routers.builder import push_to_github_task, build_github_challenge_files
 
     sorted_sections = sorted(sections, key=lambda s: s.order)
-    for sec in sorted_sections:
-        sec_folder = f"{sec.order:02d}-{sec.id}"
-        sec_base = f"{base_path}/sections/{sec_folder}"
-        
-        # section.yaml
-        sec_yaml_data = {
+    sections_data = [
+        {
             "id": sec.id,
             "title": sec.title,
             "order": sec.order,
-            "xp": sec.xp
+            "xp": sec.xp,
+            "content": sec.content,
+            "labs": [
+                {
+                    "id": lab.id,
+                    "title": lab.title,
+                    "xp": lab.xp,
+                    "estimated_minutes": lab.estimated_minutes,
+                    "setup_type": lab.setup_type,
+                    "seed_commands": lab.seed_commands,
+                    "validator_script": lab.validator_script,
+                    "cleanup_script": lab.cleanup_script,
+                    "version": lab.version or 1,
+                }
+                for lab in sorted(sec.labs, key=lambda l: l.order)
+            ],
         }
-        github_files[f"{sec_base}/section.yaml"] = yaml.safe_dump(sec_yaml_data, sort_keys=False)
-
-        # content.md
-        if sec.content:
-            github_files[f"{sec_base}/content.md"] = sec.content
-
-        # Labs
-        sorted_labs = sorted(sec.labs, key=lambda l: l.order)
-        for lab in sorted_labs:
-            lab_base = f"{sec_base}/labs/{lab.id}"
-            
-            # Parse seed commands
-            seed_cmds = None
-            if lab.seed_commands:
-                try:
-                    seed_cmds = json.loads(lab.seed_commands)
-                except Exception:
-                    seed_cmds = lab.seed_commands
-
-            # lab.yaml
-            lab_yaml_data = {
-                "id": lab.id,
-                "title": lab.title,
-                "xp": lab.xp,
-                "estimated_minutes": lab.estimated_minutes,
-                "setup": {
-                    "type": lab.setup_type or "shell",
-                    "seed_commands": seed_cmds
-                },
-                "version": lab.version or 1
-            }
-            github_files[f"{lab_base}/lab.yaml"] = yaml.safe_dump(lab_yaml_data, sort_keys=False)
-
-            # validator.sh / validator.py
-            if lab.validator_script:
-                val_ext = "sh"
-                if "import " in lab.validator_script or "def " in lab.validator_script:
-                    val_ext = "py"
-                github_files[f"{lab_base}/validator.{val_ext}"] = lab.validator_script
-
-            # cleanup.sh
-            if lab.cleanup_script:
-                github_files[f"{lab_base}/cleanup.sh"] = lab.cleanup_script
+        for sec in sorted_sections
+    ]
+    tags_list = [t.strip() for t in module.tags.split(",") if t.strip()] if module.tags else []
+    github_files = build_github_challenge_files(
+        module_id=module.id,
+        title=module.title,
+        description=module.description,
+        topic=module.topic,
+        difficulty=module.difficulty,
+        estimated_minutes=module.estimated_minutes,
+        tags=tags_list,
+        sections=sections_data,
+        is_verified=True,
+        version=module.version or 1,
+    )
 
     # Enqueue GitHub commit as a background task
     background_tasks.add_task(
@@ -649,51 +583,7 @@ async def complete_reading_section(
     await db.flush()
 
     # Recalculate true total XP by summing database entries to prevent and heal drift
-    lab_xp_sum = await db.scalar(
-        select(func.sum(LabProgress.xp_awarded))
-        .join(Lab, Lab.id == LabProgress.lab_id)
-        .join(Module, Module.id == Lab.module_id)
-        .where(
-            LabProgress.user_id == current_user.id,
-            LabProgress.completed == True,
-            Module.status == 'verified'
-        )
-    ) or 0
-    sec_xp_sum = await db.scalar(
-        select(func.sum(SectionProgress.xp_awarded))
-        .join(Section, Section.id == SectionProgress.section_id)
-        .join(Module, Module.id == Section.module_id)
-        .where(
-            SectionProgress.user_id == current_user.id,
-            SectionProgress.completed == True,
-            Module.status == 'verified'
-        )
-    ) or 0
-    
-    lab_unverified_xp = await db.scalar(
-        select(func.sum(LabProgress.xp_awarded))
-        .join(Lab, Lab.id == LabProgress.lab_id)
-        .join(Module, Module.id == Lab.module_id)
-        .where(
-            LabProgress.user_id == current_user.id,
-            LabProgress.completed == True,
-            Module.status != 'verified'
-        )
-    ) or 0
-    sec_unverified_xp = await db.scalar(
-        select(func.sum(SectionProgress.xp_awarded))
-        .join(Section, Section.id == SectionProgress.section_id)
-        .join(Module, Module.id == Section.module_id)
-        .where(
-            SectionProgress.user_id == current_user.id,
-            SectionProgress.completed == True,
-            Module.status != 'verified'
-        )
-    ) or 0
-
-    current_user.xp = lab_xp_sum + sec_xp_sum
-    current_user.unverified_xp = lab_unverified_xp + sec_unverified_xp
-    db.add(current_user)
+    await recalculate_and_update_user_xp(current_user, db)
 
     await db.commit()
     return CompleteSectionResponse(xp_awarded=xp, total_xp=current_user.xp)

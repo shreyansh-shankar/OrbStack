@@ -10,6 +10,7 @@ from sqlalchemy import select, func
 from app.dependencies import get_db, get_optional_user
 from app.models import Lab, LabProgress, User, SectionProgress, Module, Section
 from app.schemas import ResultRequest, ResultResponse
+from app.services import recalculate_and_update_user_xp
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -119,51 +120,7 @@ async def submit_result(
     await db.flush()
 
     # Recalculate true total XP by summing database entries to prevent and heal drift
-    lab_xp_sum = await db.scalar(
-        select(func.sum(LabProgress.xp_awarded))
-        .join(Lab, Lab.id == LabProgress.lab_id)
-        .join(Module, Module.id == Lab.module_id)
-        .where(
-            LabProgress.user_id == current_user.id,
-            LabProgress.completed == True,
-            Module.status == 'verified'
-        )
-    ) or 0
-    sec_xp_sum = await db.scalar(
-        select(func.sum(SectionProgress.xp_awarded))
-        .join(Section, Section.id == SectionProgress.section_id)
-        .join(Module, Module.id == Section.module_id)
-        .where(
-            SectionProgress.user_id == current_user.id,
-            SectionProgress.completed == True,
-            Module.status == 'verified'
-        )
-    ) or 0
-
-    lab_unverified_xp = await db.scalar(
-        select(func.sum(LabProgress.xp_awarded))
-        .join(Lab, Lab.id == LabProgress.lab_id)
-        .join(Module, Module.id == Lab.module_id)
-        .where(
-            LabProgress.user_id == current_user.id,
-            LabProgress.completed == True,
-            Module.status != 'verified'
-        )
-    ) or 0
-    sec_unverified_xp = await db.scalar(
-        select(func.sum(SectionProgress.xp_awarded))
-        .join(Section, Section.id == SectionProgress.section_id)
-        .join(Module, Module.id == Section.module_id)
-        .where(
-            SectionProgress.user_id == current_user.id,
-            SectionProgress.completed == True,
-            Module.status != 'verified'
-        )
-    ) or 0
-
-    current_user.xp = lab_xp_sum + sec_xp_sum
-    current_user.unverified_xp = lab_unverified_xp + sec_unverified_xp
-    db.add(current_user)
+    await recalculate_and_update_user_xp(current_user, db)
 
     await db.commit()
     logger.info("Lab completed: user=%s lab=%s xp=%d", current_user.id, body.lab_id, lab.xp)

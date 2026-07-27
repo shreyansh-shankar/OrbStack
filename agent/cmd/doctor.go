@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/thelastdeploy/agent/internal/cache"
@@ -139,10 +140,9 @@ func dockerVersion() string {
 	if err != nil || len(out) == 0 {
 		return ""
 	}
-	v := string(out)
-	// trim trailing newline
-	if v[len(v)-1] == '\n' {
-		v = v[:len(v)-1]
+	v := strings.TrimSpace(string(out))
+	if v == "" {
+		return ""
 	}
 	return fmt.Sprintf(" (v%s)", v)
 }
@@ -171,14 +171,9 @@ func pythonVersion() string {
 	if err != nil {
 		return ""
 	}
-	v := string(out)
-	// "Python 3.11.4\n" → " (3.11.4)"
-	if len(v) > 7 {
-		ver := v[7:]
-		if len(ver) > 0 && ver[len(ver)-1] == '\n' {
-			ver = ver[:len(ver)-1]
-		}
-		return fmt.Sprintf(" (%s)", ver)
+	v := strings.TrimSpace(string(out))
+	if strings.HasPrefix(v, "Python ") {
+		return fmt.Sprintf(" (%s)", strings.TrimPrefix(v, "Python "))
 	}
 	return ""
 }

@@ -6,10 +6,10 @@ setup:
   type: shell
   seed_commands:
     - "mkdir -p $HOME/.config/systemd/user"
-    - "echo '[Unit]' > $HOME/.config/systemd/user/devlab-broken.service"
-    - "echo 'Description=DevLab Broken Service' >> $HOME/.config/systemd/user/devlab-broken.service"
-    - "echo '[Service]' >> $HOME/.config/systemd/user/devlab-broken.service"
-    - "echo 'ExecStart=/bin/sleepy 3600' >> $HOME/.config/systemd/user/devlab-broken.service"
+    - "echo '[Unit]' > $HOME/.config/systemd/user/thelastdeploy-broken.service"
+    - "echo 'Description=DevLab Broken Service' >> $HOME/.config/systemd/user/thelastdeploy-broken.service"
+    - "echo '[Service]' >> $HOME/.config/systemd/user/thelastdeploy-broken.service"
+    - "echo 'ExecStart=/bin/sleepy 3600' >> $HOME/.config/systemd/user/thelastdeploy-broken.service"
     - "systemctl --user daemon-reload"
-    - "systemctl --user stop devlab-broken.service || true"
+    - "systemctl --user stop thelastdeploy-broken.service || true"
 version: 1

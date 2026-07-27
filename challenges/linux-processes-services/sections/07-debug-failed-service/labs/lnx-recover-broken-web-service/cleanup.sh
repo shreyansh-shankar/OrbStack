@@ -1,10 +1,10 @@
 #!/bin/bash
 # Auto-generated cleanup script
 
-echo "Stopping and disabling user service devlab-broken..."
-systemctl --user stop devlab-broken.service || true
-systemctl --user disable devlab-broken.service || true
-rm -f "$HOME/.config/systemd/user/devlab-broken.service"
+echo "Stopping and disabling user service thelastdeploy-broken..."
+systemctl --user stop thelastdeploy-broken.service || true
+systemctl --user disable thelastdeploy-broken.service || true
+rm -f "$HOME/.config/systemd/user/thelastdeploy-broken.service"
 systemctl --user daemon-reload
 
 echo "Cleanup completed!"

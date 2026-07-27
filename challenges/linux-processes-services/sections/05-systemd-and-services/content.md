@@ -53,7 +53,7 @@ While standard services run system-wide with root privileges, systemd also manag
    ```bash
    tld start lnx-enable-service
    ```
-2. Configure the user-level service `devlab-user.service` so that it is enabled to start automatically whenever your user session logs in.
+2. Configure the user-level service `thelastdeploy-user.service` so that it is enabled to start automatically whenever your user session logs in.
 3. Verify the task:
    ```bash
    tld check
@@ -76,7 +76,7 @@ While standard services run system-wide with root privileges, systemd also manag
    ```bash
    tld start lnx-start-service
    ```
-2. The setup script created a user-level systemd service named `devlab-user.service`.
+2. The setup script created a user-level systemd service named `thelastdeploy-user.service`.
 3. Start this user-level service.
 4. Verify the task:
    ```bash

@@ -47,8 +47,8 @@ systemctl start my-service
    ```bash
    tld start lnx-recover-broken-web-service
    ```
-2. The setup script created a user-level service named `devlab-broken.service` which is failing to start.
-3. Troubleshoot why it is failing. Identify the syntax/configuration error in its unit file located at `~/.config/systemd/user/devlab-broken.service`.
+2. The setup script created a user-level service named `thelastdeploy-broken.service` which is failing to start.
+3. Troubleshoot why it is failing. Identify the syntax/configuration error in its unit file located at `~/.config/systemd/user/thelastdeploy-broken.service`.
 4. Fix the unit file (the correct executable path to sleep should be `/bin/sleep 3600`).
 5. Reload the user systemd manager daemon and start the service successfully.
 6. Verify the task:

@@ -137,33 +137,8 @@ func drainQueue(apiBaseURL, authToken, tldDir string) bool {
 }
 
 func postQueuedEntry(apiBaseURL, authToken string, entry *queue.Entry) (error, bool) {
-	data, err := json.MarshalIndent(entry, "", "  ")
-	if err != nil {
-		return err, false
-	}
-
-	client := &http.Client{Timeout: 10 * time.Second}
-	req, err := http.NewRequest(http.MethodPost, apiBaseURL+"/results", bytes.NewReader(data))
-	if err != nil {
-		return err, false
-	}
-	req.Header.Set("Content-Type", "application/json")
-	if authToken != "" {
-		req.Header.Set("Authorization", "Bearer "+authToken)
-	}
-
-	resp, err := client.Do(req)
-	if err != nil {
-		return err, true
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
-		body, _ := io.ReadAll(resp.Body)
-		retry := resp.StatusCode >= 500 || resp.StatusCode == http.StatusRequestTimeout || resp.StatusCode == http.StatusTooManyRequests
-		return fmt.Errorf("API returned %d: %s", resp.StatusCode, strings.TrimSpace(string(body))), retry
-	}
-	return nil, false
+	err, retry, _ := postJSONRequest(apiBaseURL, "/results", authToken, entry, 10*time.Second)
+	return err, retry
 }
 
 func syncFromGitHub(repo string, challengesDir string, targetModule string, targetLab string) error {

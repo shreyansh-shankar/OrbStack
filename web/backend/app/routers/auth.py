@@ -11,7 +11,7 @@ from sqlalchemy import select
 from app.config import settings
 from app.dependencies import get_db, get_current_user
 from app.models import User, CLIDeviceAuth
-from app.auth import hash_password, verify_password, create_access_token
+from app.auth import hash_password, verify_password, create_access_token, ensure_utc
 from app.schemas import (
     RegisterRequest,
     LoginRequest,
@@ -163,9 +163,7 @@ async def reset_password(body: ResetPasswordRequest, db: AsyncSession = Depends(
             detail="Invalid or expired reset token.",
         )
 
-    expires_at = user.reset_token_expires_at
-    if expires_at.tzinfo is None:
-        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    expires_at = ensure_utc(user.reset_token_expires_at)
 
     now_compare = datetime.now(timezone.utc)
 
@@ -260,9 +258,7 @@ async def cli_authorize(
             detail="Invalid user authorization code.",
         )
         
-    expires_at = device_auth.expires_at
-    if expires_at.tzinfo is None:
-        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    expires_at = ensure_utc(device_auth.expires_at)
         
     if expires_at < datetime.now(timezone.utc):
         device_auth.status = "expired"
@@ -302,9 +298,7 @@ async def cli_token(body: CLITokenRequest, db: AsyncSession = Depends(get_db)):
             content={"error": "invalid_grant", "error_description": "Device code not found."}
         )
         
-    expires_at = device_auth.expires_at
-    if expires_at.tzinfo is None:
-        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    expires_at = ensure_utc(device_auth.expires_at)
         
     if expires_at < datetime.now(timezone.utc):
         if device_auth.status == "pending":

@@ -9,6 +9,7 @@ from app.models import User, LabProgress, SectionProgress, Lab, Section, Module
 from app.schemas import MeResponse, ProfileUpdateRequest, PasswordUpdateRequest, MessageResponse
 from app.auth import verify_password, hash_password
 from app.email import send_verification_email
+from app.services import recalculate_and_update_user_xp
 
 router = APIRouter()
 
@@ -36,41 +37,9 @@ async def get_me(
     )).scalars().all()
     completed_sections = [p.section_id for p in section_progress_list]
 
-    # Recalculate verified XP
-    lab_verified_xp = await db.scalar(
-        select(func.sum(LabProgress.xp_awarded))
-        .join(Lab, Lab.id == LabProgress.lab_id)
-        .join(Module, Module.id == Lab.module_id)
-        .where(LabProgress.user_id == current_user.id, LabProgress.completed == True, Module.status == 'verified')
-    ) or 0
-    sec_verified_xp = await db.scalar(
-        select(func.sum(SectionProgress.xp_awarded))
-        .join(Section, Section.id == SectionProgress.section_id)
-        .join(Module, Module.id == Section.module_id)
-        .where(SectionProgress.user_id == current_user.id, SectionProgress.completed == True, Module.status == 'verified')
-    ) or 0
-    actual_xp = lab_verified_xp + sec_verified_xp
-
-    # Recalculate unverified XP
-    lab_unverified_xp = await db.scalar(
-        select(func.sum(LabProgress.xp_awarded))
-        .join(Lab, Lab.id == LabProgress.lab_id)
-        .join(Module, Module.id == Lab.module_id)
-        .where(LabProgress.user_id == current_user.id, LabProgress.completed == True, Module.status != 'verified')
-    ) or 0
-    sec_unverified_xp = await db.scalar(
-        select(func.sum(SectionProgress.xp_awarded))
-        .join(Section, Section.id == SectionProgress.section_id)
-        .join(Module, Module.id == Section.module_id)
-        .where(SectionProgress.user_id == current_user.id, SectionProgress.completed == True, Module.status != 'verified')
-    ) or 0
-    actual_unverified_xp = lab_unverified_xp + sec_unverified_xp
-
-    if current_user.xp != actual_xp or current_user.unverified_xp != actual_unverified_xp:
-        current_user.xp = actual_xp
-        current_user.unverified_xp = actual_unverified_xp
-        db.add(current_user)
-        await db.commit()
+    # Recalculate XP to heal any drift
+    await recalculate_and_update_user_xp(current_user, db)
+    await db.commit()
 
     return MeResponse(
         id=current_user.id,

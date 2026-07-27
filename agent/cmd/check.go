@@ -2,11 +2,7 @@
 package cmd
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
@@ -101,34 +97,16 @@ func postResult(apiBaseURL, authToken, labID, sectionID string, r *validator.Res
 		Signature:     r.Signature,
 		ValidatorHash: r.ValidatorHash,
 	}
-	data, err := json.MarshalIndent(payload, "", "  ")
+
+	err, retry, respBody := postJSONRequest(apiBaseURL, "/results", authToken, payload, 30*time.Second)
 	if err != nil {
-		return err, false
+		return err, retry
 	}
-	client := &http.Client{Timeout: 30 * time.Second}
-	req, err := http.NewRequest(http.MethodPost, apiBaseURL+"/results", bytes.NewReader(data))
-	if err != nil {
-		return err, false
-	}
-	req.Header.Set("Content-Type", "application/json")
-	if authToken != "" {
-		req.Header.Set("Authorization", "Bearer "+authToken)
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		return err, true
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
-		body, _ := io.ReadAll(resp.Body)
-		retry := resp.StatusCode >= 500 || resp.StatusCode == http.StatusRequestTimeout || resp.StatusCode == http.StatusTooManyRequests
-		return fmt.Errorf("API returned %d: %s", resp.StatusCode, strings.TrimSpace(string(body))), retry
-	}
-	var respBody map[string]interface{}
-	if err := json.NewDecoder(resp.Body).Decode(&respBody); err == nil {
+
+	if respBody != nil {
 		if xp, ok := respBody["xp_awarded"]; ok {
-			if xp.(float64) > 0 {
-				fmt.Printf("\n🎉 +%.0f XP awarded!\n", xp.(float64))
+			if xpVal, isFloat := xp.(float64); isFloat && xpVal > 0 {
+				fmt.Printf("\n🎉 +%.0f XP awarded!\n", xpVal)
 			} else {
 				fmt.Println("\n✅ Already completed — no new XP awarded.")
 			}

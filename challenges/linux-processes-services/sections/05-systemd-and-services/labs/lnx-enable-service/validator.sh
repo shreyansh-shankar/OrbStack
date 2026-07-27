@@ -3,8 +3,8 @@
 set -euo pipefail
 
 # Check if service is enabled
-if ! systemctl --user is-enabled devlab-user.service &>/dev/null; then
-  echo "FAIL: The user-level service 'devlab-user.service' is not enabled."
+if ! systemctl --user is-enabled thelastdeploy-user.service &>/dev/null; then
+  echo "FAIL: The user-level service 'thelastdeploy-user.service' is not enabled."
   exit 1
 fi
 

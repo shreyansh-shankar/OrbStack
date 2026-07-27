@@ -33,3 +33,9 @@ def decode_access_token(token: str) -> int | None:
         return int(user_id)
     except JWTError:
         return None
+
+
+def ensure_utc(dt: datetime) -> datetime:
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt

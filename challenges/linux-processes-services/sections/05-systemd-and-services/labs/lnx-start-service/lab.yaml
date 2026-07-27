@@ -6,12 +6,12 @@ setup:
   type: shell
   seed_commands:
     - "mkdir -p $HOME/.config/systemd/user"
-    - "echo '[Unit]' > $HOME/.config/systemd/user/devlab-user.service"
-    - "echo 'Description=DevLab User Service' >> $HOME/.config/systemd/user/devlab-user.service"
-    - "echo '[Service]' >> $HOME/.config/systemd/user/devlab-user.service"
-    - "echo 'ExecStart=/bin/sleep 3600' >> $HOME/.config/systemd/user/devlab-user.service"
-    - "echo '[Install]' >> $HOME/.config/systemd/user/devlab-user.service"
-    - "echo 'WantedBy=default.target' >> $HOME/.config/systemd/user/devlab-user.service"
+    - "echo '[Unit]' > $HOME/.config/systemd/user/thelastdeploy-user.service"
+    - "echo 'Description=DevLab User Service' >> $HOME/.config/systemd/user/thelastdeploy-user.service"
+    - "echo '[Service]' >> $HOME/.config/systemd/user/thelastdeploy-user.service"
+    - "echo 'ExecStart=/bin/sleep 3600' >> $HOME/.config/systemd/user/thelastdeploy-user.service"
+    - "echo '[Install]' >> $HOME/.config/systemd/user/thelastdeploy-user.service"
+    - "echo 'WantedBy=default.target' >> $HOME/.config/systemd/user/thelastdeploy-user.service"
     - "systemctl --user daemon-reload"
-    - "systemctl --user stop devlab-user.service || true"
+    - "systemctl --user stop thelastdeploy-user.service || true"
 version: 1

@@ -54,9 +54,9 @@ Because the journal logs are stored in a binary format, you cannot read them usi
    ```bash
    tld start lnx-find-service-error
    ```
-2. The setup script created and ran a user-level service named `devlab-logger.service` which logged a secret key to the journal.
-3. Inspect the user-level systemd journal logs specifically for `devlab-logger.service`.
-4. Locate the logged line containing `SECRET_LOG_KEY=...` and save the exact key value (e.g. `SEC_PROC_99`) on a single line to a file named `secret_key.txt` inside a new directory named `logs-test` in your home directory.
+2. The setup script created and ran a user-level service named `thelastdeploy-logger.service` which logged a secret key to the journal.
+3. Inspect the user-level systemd journal logs specifically for `thelastdeploy-logger.service`.
+4. Locate the logged line containing `SECRET_LOG_KEY=...` and save the exact key value on a single line to a file named `secret_key.txt` inside a new directory named `logs-test` in your home directory.
 5. Verify the task:
    ```bash
    tld check

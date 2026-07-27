@@ -1,10 +1,10 @@
 #!/bin/bash
 # Auto-generated cleanup script
 
-echo "Stopping and disabling user service devlab-logger..."
-systemctl --user stop devlab-logger.service || true
-systemctl --user disable devlab-logger.service || true
-rm -f "$HOME/.config/systemd/user/devlab-logger.service"
+echo "Stopping and disabling user service thelastdeploy-logger..."
+systemctl --user stop thelastdeploy-logger.service || true
+systemctl --user disable thelastdeploy-logger.service || true
+rm -f "$HOME/.config/systemd/user/thelastdeploy-logger.service"
 systemctl --user daemon-reload
 
 echo "Removing directory $HOME/logs-test..."
