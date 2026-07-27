@@ -53,6 +53,11 @@ func Execute() {
 			fmt.Fprintln(os.Stderr, "publish:", err)
 			os.Exit(1)
 		}
+	case "doctor":
+		if err := runDoctor(os.Args[2:]); err != nil {
+			fmt.Fprintln(os.Stderr, "doctor:", err)
+			os.Exit(1)
+		}
 	case "help", "--help", "-h":
 		printUsage()
 	default:
@@ -88,5 +93,6 @@ Commands:
   login                 Authenticate with The Last Deploy API
   logout                Remove saved credentials
   publish <folder-path> Publish a local module directory to the builder API
+  doctor                Check if your system is ready to run TLD labs
   help                  Show this help message`)
 }

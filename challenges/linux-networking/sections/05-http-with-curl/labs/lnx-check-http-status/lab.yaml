@@ -7,18 +7,29 @@ setup:
   seed_commands:
     - "mkdir -p $HOME/network-test"
     - "rm -f $HOME/network-test/http_status.txt"
-    - "pkill -f mock_serve[r].py || true"
-    - "echo 'from http.server import HTTPServer, BaseHTTPRequestHandler' > /tmp/mock_server.py"
-    - "echo 'class MyHandler(BaseHTTPRequestHandler):' >> /tmp/mock_server.py"
-    - "echo '    def do_GET(self):' >> /tmp/mock_server.py"
-    - "echo '        self.send_response(200)' >> /tmp/mock_server.py"
-    - "echo '        self.end_headers()' >> /tmp/mock_server.py"
-    - "echo '        self.wfile.write(b\"welcome to devlab\")' >> /tmp/mock_server.py"
-    - "echo '    def do_POST(self):' >> /tmp/mock_server.py"
-    - "echo '        self.send_response(201)' >> /tmp/mock_server.py"
-    - "echo '        self.end_headers()' >> /tmp/mock_server.py"
-    - "echo '        self.wfile.write(b\"created successfully\")' >> /tmp/mock_server.py"
-    - "echo 'HTTPServer((\"127.0.0.1\", 9090), MyHandler).serve_forever()' >> /tmp/mock_server.py"
-    - "nohup python3 /tmp/mock_server.py >/dev/null 2>&1 &"
-    - "sleep 0.5"
+    - "pkill -f mock_server.py || true"
+    - |
+      python3 -c "
+      import textwrap
+      code = textwrap.dedent('''
+          from http.server import HTTPServer, BaseHTTPRequestHandler
+
+          class MyHandler(BaseHTTPRequestHandler):
+              def do_GET(self):
+                  self.send_response(200)
+                  self.end_headers()
+                  self.wfile.write(b\"welcome to devlab\")
+              def do_POST(self):
+                  self.send_response(201)
+                  self.end_headers()
+                  self.wfile.write(b\"created successfully\")
+              def log_message(self, *args):
+                  pass
+
+          HTTPServer((\"127.0.0.1\", 9090), MyHandler).serve_forever()
+      ''').strip()
+      open('/tmp/mock_server.py', 'w').write(code)
+      "
+    - "setsid python3 /tmp/mock_server.py >/dev/null 2>&1 &"
+    - "sleep 1"
 version: 1
