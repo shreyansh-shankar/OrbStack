@@ -1,8 +1,0 @@
-id: lnx-verify-application-recovery
-title: "Verify Application Recovery"
-xp: 30
-estimated_minutes: 10
-setup:
-  type: shell
-  seed_commands:
-    - "echo 'mock'"

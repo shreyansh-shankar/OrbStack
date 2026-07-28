@@ -56,4 +56,4 @@ As the on-call DevOps engineer, you will follow a standard 5-step incident respo
 2. **Investigate the System**: Inspect system logs and check file permission modes (`03-investigating-system`).
 3. **Find the Root Cause**: Identify why the log file permissions broke (`04-finding-root-cause`).
 4. **Restore Permissions**: Apply correct permission bits (`chmod 644`) to `/var/log/app-server.log` (`05-restoring-permissions`).
-5. **Verify Recovery**: Confirm the backend daemon restarts cleanly and NGINX responds with `200 OK` (`06-service-recovery`).
+5. **Verify Recovery**: Confirm the backend daemon restarts cleanly and NGINX responds with `200 OK` (`06-service-recovery`)
