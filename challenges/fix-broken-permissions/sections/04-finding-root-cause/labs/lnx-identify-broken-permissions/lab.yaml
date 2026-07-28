@@ -5,5 +5,7 @@ estimated_minutes: 10
 setup:
   type: shell
   seed_commands:
-  - echo 'mock
+    - "sudo rm -f /var/log/app-server.log"
+    - "sudo touch /var/log/app-server.log"
+    - "sudo chmod 000 /var/log/app-server.log"
 version: 1

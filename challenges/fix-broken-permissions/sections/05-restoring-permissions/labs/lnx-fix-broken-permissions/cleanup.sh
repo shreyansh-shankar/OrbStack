@@ -1,2 +1,4 @@
 #!/bin/bash
-sudo rm -f /var/log/app-server.log
+rm -f /tmp/fixed_permissions
+sudo rm -f /var/log/app-server.log 2>/dev/null || true
+exit 0
