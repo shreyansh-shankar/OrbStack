@@ -1,17 +1,17 @@
 id: git-restore-file
-title: "Restore a Tracked File"
+title: Restore a Tracked File
 xp: 20
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo 'console.log(\"stable code\");' > $HOME/git-challenge/app.js"
-    - "git -C $HOME/git-challenge add app.js"
-    - "git -C $HOME/git-challenge commit -m 'Add app.js'"
-    - "echo 'console.log(\"broken code\");' > $HOME/git-challenge/app.js"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo 'console.log("stable code");' > $HOME/git-challenge/app.js
+    - git -C $HOME/git-challenge add app.js
+    - git -C $HOME/git-challenge commit -m 'Add app.js'
+    - echo 'console.log("broken code");' > $HOME/git-challenge/app.js
 version: 1

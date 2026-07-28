@@ -5,8 +5,8 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-resources-challenge
-  - mkdir -p $HOME/terraform-resources-challenge
-  - "echo 'resource \"local_file\" \"app\" { content = \"v1\" \n filename = \"/tmp/app.txt\"\
+    - rm -rf $HOME/terraform-resources-challenge
+    - mkdir -p $HOME/terraform-resources-challenge
+    - "echo 'resource \"local_file\" \"app\" { content = \"v1\" \n filename = \"/tmp/app.txt\"\
     \ }' > $HOME/terraform-resources-challenge/main.tf"
 version: 1

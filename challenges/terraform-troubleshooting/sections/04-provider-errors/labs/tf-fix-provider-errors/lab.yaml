@@ -5,7 +5,7 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-troubleshoot-challenge
-  - mkdir -p $HOME/terraform-troubleshoot-challenge
-  - echo 'resource "random_id" "pid" { byte_length = 4 }' > $HOME/terraform-troubleshoot-challenge/main.tf
+    - rm -rf $HOME/terraform-troubleshoot-challenge
+    - mkdir -p $HOME/terraform-troubleshoot-challenge
+    - echo 'resource "random_id" "pid" { byte_length = 4 }' > $HOME/terraform-troubleshoot-challenge/main.tf
 version: 1

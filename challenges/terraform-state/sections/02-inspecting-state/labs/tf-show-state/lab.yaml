@@ -5,9 +5,9 @@ estimated_minutes: 4
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-state-challenge
-  - mkdir -p $HOME/terraform-state-challenge
-  - echo 'resource "local_file" "secret" { content = "hidden_value" \n filename =
+    - rm -rf $HOME/terraform-state-challenge
+    - mkdir -p $HOME/terraform-state-challenge
+    - echo 'resource "local_file" "secret" { content = "hidden_value" \n filename =
     "/tmp/secret.txt" }' > $HOME/terraform-state-challenge/main.tf
   - cd $HOME/terraform-state-challenge && terraform init && terraform apply -auto-approve
 version: 1

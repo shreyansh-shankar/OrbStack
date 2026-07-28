@@ -5,8 +5,8 @@ estimated_minutes: 10
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-troubleshoot-challenge
-  - mkdir -p $HOME/terraform-troubleshoot-challenge
-  - echo 'resource "local_file" "prod" {\n  content = "Production system"\n  filename
+    - rm -rf $HOME/terraform-troubleshoot-challenge
+    - mkdir -p $HOME/terraform-troubleshoot-challenge
+    - echo 'resource "local_file" "prod" {\n  content = "Production system"\n  filename
     = "/tmp/prod_rec.txt"\n  bad_attr = 123\n}' > $HOME/terraform-troubleshoot-challenge/main.tf
 version: 1

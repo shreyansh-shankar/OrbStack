@@ -5,6 +5,6 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-hcl-challenge
-  - mkdir -p $HOME/terraform-hcl-challenge
+    - rm -rf $HOME/terraform-hcl-challenge
+    - mkdir -p $HOME/terraform-hcl-challenge
 version: 1

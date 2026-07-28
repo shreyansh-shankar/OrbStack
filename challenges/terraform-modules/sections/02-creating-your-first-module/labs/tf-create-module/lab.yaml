@@ -5,6 +5,6 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-modules-challenge
-  - mkdir -p $HOME/terraform-modules-challenge
+    - rm -rf $HOME/terraform-modules-challenge
+    - mkdir -p $HOME/terraform-modules-challenge
 version: 1

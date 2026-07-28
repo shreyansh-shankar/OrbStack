@@ -5,8 +5,8 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-resources-challenge
-  - mkdir -p $HOME/terraform-resources-challenge
-  - "echo 'resource \"local_file\" \"example\" { content = \"Lifecycle test\" \n filename\
+    - rm -rf $HOME/terraform-resources-challenge
+    - mkdir -p $HOME/terraform-resources-challenge
+    - "echo 'resource \"local_file\" \"example\" { content = \"Lifecycle test\" \n filename\
     \ = \"/tmp/lifecycle.txt\" }' > $HOME/terraform-resources-challenge/main.tf"
 version: 1

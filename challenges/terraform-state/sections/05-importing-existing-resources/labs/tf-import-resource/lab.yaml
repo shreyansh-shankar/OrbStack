@@ -5,11 +5,11 @@ estimated_minutes: 6
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-state-challenge
-  - mkdir -p $HOME/terraform-state-challenge
-  - echo 'existing file content' > /tmp/existing.txt
-  - echo 'provider "local" {}' > $HOME/terraform-state-challenge/main.tf
-  - echo 'resource "local_file" "existing" {\n  filename = "/tmp/existing.txt"\n}'
+    - rm -rf $HOME/terraform-state-challenge
+    - mkdir -p $HOME/terraform-state-challenge
+    - echo 'existing file content' > /tmp/existing.txt
+    - echo 'provider "local" {}' > $HOME/terraform-state-challenge/main.tf
+    - echo 'resource "local_file" "existing" {\n  filename = "/tmp/existing.txt"\n}'
     >> $HOME/terraform-state-challenge/main.tf
   - cd $HOME/terraform-state-challenge && terraform init
 version: 1

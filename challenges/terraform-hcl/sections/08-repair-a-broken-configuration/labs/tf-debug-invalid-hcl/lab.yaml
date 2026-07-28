@@ -5,11 +5,11 @@ estimated_minutes: 8
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-hcl-challenge
-  - mkdir -p $HOME/terraform-hcl-challenge
-  - echo 'provider "local" {}' > $HOME/terraform-hcl-challenge/main.tf
-  - echo 'resource "local_file" "broken" {' >> $HOME/terraform-hcl-challenge/main.tf
-  - echo '  content = "Debugging exercise"' >> $HOME/terraform-hcl-challenge/main.tf
-  - echo '  filename /tmp/broken.txt' >> $HOME/terraform-hcl-challenge/main.tf
-  - echo '}' >> $HOME/terraform-hcl-challenge/main.tf
+    - rm -rf $HOME/terraform-hcl-challenge
+    - mkdir -p $HOME/terraform-hcl-challenge
+    - echo 'provider "local" {}' > $HOME/terraform-hcl-challenge/main.tf
+    - echo 'resource "local_file" "broken" {' >> $HOME/terraform-hcl-challenge/main.tf
+    - echo '  content = "Debugging exercise"' >> $HOME/terraform-hcl-challenge/main.tf
+    - echo '  filename /tmp/broken.txt' >> $HOME/terraform-hcl-challenge/main.tf
+    - echo '}' >> $HOME/terraform-hcl-challenge/main.tf
 version: 1

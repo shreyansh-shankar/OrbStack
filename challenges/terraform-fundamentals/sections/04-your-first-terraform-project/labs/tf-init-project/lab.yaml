@@ -5,7 +5,7 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-challenge
-  - mkdir -p $HOME/terraform-challenge
-  - echo 'provider "local" {}' > $HOME/terraform-challenge/main.tf
+    - rm -rf $HOME/terraform-challenge
+    - mkdir -p $HOME/terraform-challenge
+    - echo 'provider "local" {}' > $HOME/terraform-challenge/main.tf
 version: 1

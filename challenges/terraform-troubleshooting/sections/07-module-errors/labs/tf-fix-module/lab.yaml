@@ -5,10 +5,10 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-troubleshoot-challenge
-  - mkdir -p $HOME/terraform-troubleshoot-challenge/modules/sub
-  - echo 'variable "val" { type = string }' > $HOME/terraform-troubleshoot-challenge/modules/sub/variables.tf
-  - echo 'resource "local_file" "m" { content = var.val \n filename = "/tmp/sub.txt"
+    - rm -rf $HOME/terraform-troubleshoot-challenge
+    - mkdir -p $HOME/terraform-troubleshoot-challenge/modules/sub
+    - echo 'variable "val" { type = string }' > $HOME/terraform-troubleshoot-challenge/modules/sub/variables.tf
+    - echo 'resource "local_file" "m" { content = var.val \n filename = "/tmp/sub.txt"
     }' > $HOME/terraform-troubleshoot-challenge/modules/sub/main.tf
   - echo 'module "sub_call" {\n  source = "./modules/sub"\n}' > $HOME/terraform-troubleshoot-challenge/main.tf
   - cd $HOME/terraform-troubleshoot-challenge && terraform init

@@ -1,16 +1,16 @@
 id: git-complete-feature-workflow
-title: "Complete Feature Workflow"
+title: Complete Feature Workflow
 xp: 30
 estimated_minutes: 10
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo 'hello' > $HOME/git-challenge/file.txt"
-    - "git -C $HOME/git-challenge add file.txt"
-    - "git -C $HOME/git-challenge commit -m 'Initial commit'"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo 'hello' > $HOME/git-challenge/file.txt
+    - git -C $HOME/git-challenge add file.txt
+    - git -C $HOME/git-challenge commit -m 'Initial commit'
 version: 1

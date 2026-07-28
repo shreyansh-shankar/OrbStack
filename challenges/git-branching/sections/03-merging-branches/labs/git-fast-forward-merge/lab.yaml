@@ -1,21 +1,21 @@
 id: git-fast-forward-merge
-title: "Fast-Forward Merge"
+title: Fast-Forward Merge
 xp: 25
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo 'initial' > $HOME/git-challenge/file.txt"
-    - "git -C $HOME/git-challenge add file.txt"
-    - "git -C $HOME/git-challenge commit -m 'Initial commit'"
-    - "git -C $HOME/git-challenge checkout -b feature-ff"
-    - "echo 'ff changes' > $HOME/git-challenge/ff.txt"
-    - "git -C $HOME/git-challenge add ff.txt"
-    - "git -C $HOME/git-challenge commit -m 'Add ff change'"
-    - "git -C $HOME/git-challenge checkout main"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo 'init -b mainial' > $HOME/git-challenge/file.txt
+    - git -C $HOME/git-challenge add file.txt
+    - git -C $HOME/git-challenge commit -m 'Initial commit'
+    - git -C $HOME/git-challenge checkout -b feature-ff
+    - echo 'ff changes' > $HOME/git-challenge/ff.txt
+    - git -C $HOME/git-challenge add ff.txt
+    - git -C $HOME/git-challenge commit -m 'Add ff change'
+    - git -C $HOME/git-challenge checkout main
 version: 1

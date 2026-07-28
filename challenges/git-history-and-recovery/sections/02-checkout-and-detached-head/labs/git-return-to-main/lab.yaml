@@ -1,23 +1,23 @@
 id: git-return-to-main
-title: "Return to Main Branch"
+title: Return to Main Branch
 xp: 20
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo 'first' > $HOME/git-challenge/one.txt"
-    - "git -C $HOME/git-challenge add one.txt"
-    - "git -C $HOME/git-challenge commit -m 'Initial commit'"
-    - "echo 'second' > $HOME/git-challenge/two.txt"
-    - "git -C $HOME/git-challenge add two.txt"
-    - "git -C $HOME/git-challenge commit -m 'Second commit'"
-    - "echo 'third' > $HOME/git-challenge/three.txt"
-    - "git -C $HOME/git-challenge add three.txt"
-    - "git -C $HOME/git-challenge commit -m 'Third commit'"
-    - "git -C $HOME/git-challenge checkout HEAD~2"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo 'first' > $HOME/git-challenge/one.txt
+    - git -C $HOME/git-challenge add one.txt
+    - git -C $HOME/git-challenge commit -m 'Initial commit'
+    - echo 'second' > $HOME/git-challenge/two.txt
+    - git -C $HOME/git-challenge add two.txt
+    - git -C $HOME/git-challenge commit -m 'Second commit'
+    - echo 'third' > $HOME/git-challenge/three.txt
+    - git -C $HOME/git-challenge add three.txt
+    - git -C $HOME/git-challenge commit -m 'Third commit'
+    - git -C $HOME/git-challenge checkout HEAD~2
 version: 1

@@ -5,8 +5,8 @@ estimated_minutes: 10
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-challenge
-  - mkdir -p $HOME/terraform-challenge
-  - "echo 'resource \"local_file\" \"pet\" { content = \"We love pets!\" \n filename\
+    - rm -rf $HOME/terraform-challenge
+    - mkdir -p $HOME/terraform-challenge
+    - "echo 'resource \"local_file\" \"pet\" { content = \"We love pets!\" \n filename\
     \ = \"/tmp/pet.txt\" }' > $HOME/terraform-challenge/main.tf"
 version: 1

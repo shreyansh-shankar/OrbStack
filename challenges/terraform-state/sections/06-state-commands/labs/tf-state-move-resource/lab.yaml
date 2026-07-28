@@ -5,9 +5,9 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-state-challenge
-  - mkdir -p $HOME/terraform-state-challenge
-  - echo 'resource "local_file" "old_name" { content = "data" \n filename = "/tmp/mv.txt"
+    - rm -rf $HOME/terraform-state-challenge
+    - mkdir -p $HOME/terraform-state-challenge
+    - echo 'resource "local_file" "old_name" { content = "data" \n filename = "/tmp/mv.txt"
     }' > $HOME/terraform-state-challenge/main.tf
   - cd $HOME/terraform-state-challenge && terraform init && terraform apply -auto-approve
   - echo 'resource "local_file" "new_name" { content = "data" \n filename = "/tmp/mv.txt"

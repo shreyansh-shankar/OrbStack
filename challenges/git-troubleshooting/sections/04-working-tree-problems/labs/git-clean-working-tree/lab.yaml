@@ -1,19 +1,19 @@
 id: git-clean-working-tree
-title: "Clean Working Tree"
+title: Clean Working Tree
 xp: 20
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge/build"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo 'hello' > $HOME/git-challenge/hello.txt"
-    - "git -C $HOME/git-challenge add hello.txt"
-    - "git -C $HOME/git-challenge commit -m 'Initial commit'"
-    - "echo 'log data' > $HOME/git-challenge/debug.log"
-    - "echo 'temp data' > $HOME/git-challenge/temp.tmp"
-    - "echo 'binary' > $HOME/git-challenge/build/out.bin"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge/build
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo 'hello' > $HOME/git-challenge/hello.txt
+    - git -C $HOME/git-challenge add hello.txt
+    - git -C $HOME/git-challenge commit -m 'Initial commit'
+    - echo 'log data' > $HOME/git-challenge/debug.log
+    - echo 'temp data' > $HOME/git-challenge/temp.tmp
+    - echo 'binary' > $HOME/git-challenge/build/out.bin
 version: 1

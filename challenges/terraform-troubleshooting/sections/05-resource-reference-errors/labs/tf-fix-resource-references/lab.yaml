@@ -5,9 +5,9 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-troubleshoot-challenge
-  - mkdir -p $HOME/terraform-troubleshoot-challenge
-  - echo 'resource "local_file" "target_file" { content = "target" \n filename = "/tmp/target.txt"
+    - rm -rf $HOME/terraform-troubleshoot-challenge
+    - mkdir -p $HOME/terraform-troubleshoot-challenge
+    - echo 'resource "local_file" "target_file" { content = "target" \n filename = "/tmp/target.txt"
     }' > $HOME/terraform-troubleshoot-challenge/main.tf
   - echo 'resource "local_file" "reader" { content = local_file.wrong_name.filename
     \n filename = "/tmp/reader.txt" }' >> $HOME/terraform-troubleshoot-challenge/main.tf

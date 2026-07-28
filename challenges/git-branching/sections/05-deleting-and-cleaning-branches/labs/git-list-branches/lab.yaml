@@ -1,19 +1,19 @@
 id: git-list-branches
-title: "List Branches"
+title: List Branches
 xp: 20
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo 'initial' > $HOME/git-challenge/file.txt"
-    - "git -C $HOME/git-challenge add file.txt"
-    - "git -C $HOME/git-challenge commit -m 'Initial commit'"
-    - "git -C $HOME/git-challenge branch feature-login"
-    - "git -C $HOME/git-challenge branch feature-payment"
-    - "git -C $HOME/git-challenge branch bugfix-header"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo 'init -b mainial' > $HOME/git-challenge/file.txt
+    - git -C $HOME/git-challenge add file.txt
+    - git -C $HOME/git-challenge commit -m 'Initial commit'
+    - git -C $HOME/git-challenge branch feature-login
+    - git -C $HOME/git-challenge branch feature-payment
+    - git -C $HOME/git-challenge branch bugfix-header
 version: 1

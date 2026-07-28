@@ -5,10 +5,10 @@ estimated_minutes: 3
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-hcl-challenge
-  - mkdir -p $HOME/terraform-hcl-challenge
-  - echo 'resource   "local_file"   "welcome"   {' > $HOME/terraform-hcl-challenge/main.tf
-  - echo '  content  = "Welcome to HCL!"' >> $HOME/terraform-hcl-challenge/main.tf
-  - echo '  filename = "/tmp/welcome.txt"' >> $HOME/terraform-hcl-challenge/main.tf
-  - echo '}' >> $HOME/terraform-hcl-challenge/main.tf
+    - rm -rf $HOME/terraform-hcl-challenge
+    - mkdir -p $HOME/terraform-hcl-challenge
+    - echo 'resource   "local_file"   "welcome"   {' > $HOME/terraform-hcl-challenge/main.tf
+    - echo '  content  = "Welcome to HCL!"' >> $HOME/terraform-hcl-challenge/main.tf
+    - echo '  filename = "/tmp/welcome.txt"' >> $HOME/terraform-hcl-challenge/main.tf
+    - echo '}' >> $HOME/terraform-hcl-challenge/main.tf
 version: 1

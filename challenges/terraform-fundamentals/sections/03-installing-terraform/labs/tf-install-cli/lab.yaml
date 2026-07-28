@@ -5,5 +5,5 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - echo 'Please install Terraform on your system.'
+    - echo 'Please install Terraform on your system.'
 version: 1

@@ -1,25 +1,25 @@
 id: git-finish-conflicted-merge
-title: "Finish a Conflicted Merge"
+title: Finish a Conflicted Merge
 xp: 25
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo 'line 1' > $HOME/git-challenge/index.html"
-    - "git -C $HOME/git-challenge add index.html"
-    - "git -C $HOME/git-challenge commit -m 'Initial commit'"
-    - "git -C $HOME/git-challenge checkout -b feature"
-    - "echo 'line 1 feature' > $HOME/git-challenge/index.html"
-    - "git -C $HOME/git-challenge add index.html"
-    - "git -C $HOME/git-challenge commit -m 'Feature edit'"
-    - "git -C $HOME/git-challenge checkout -"
-    - "echo 'line 1 main' > $HOME/git-challenge/index.html"
-    - "git -C $HOME/git-challenge add index.html"
-    - "git -C $HOME/git-challenge commit -m 'Main edit'"
-    - "git -C $HOME/git-challenge merge feature || true"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo 'line 1' > $HOME/git-challenge/index.html
+    - git -C $HOME/git-challenge add index.html
+    - git -C $HOME/git-challenge commit -m 'Initial commit'
+    - git -C $HOME/git-challenge checkout -b feature
+    - echo 'line 1 feature' > $HOME/git-challenge/index.html
+    - git -C $HOME/git-challenge add index.html
+    - git -C $HOME/git-challenge commit -m 'Feature edit'
+    - git -C $HOME/git-challenge checkout -
+    - echo 'line 1 main' > $HOME/git-challenge/index.html
+    - git -C $HOME/git-challenge add index.html
+    - git -C $HOME/git-challenge commit -m 'Main edit'
+    - git -C $HOME/git-challenge merge feature || true
 version: 1

@@ -1,21 +1,21 @@
 id: git-find-lost-commit
-title: "Find a Lost Commit"
+title: Find a Lost Commit
 xp: 20
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo 'hello' > $HOME/git-challenge/file.txt"
-    - "git -C $HOME/git-challenge add file.txt"
-    - "git -C $HOME/git-challenge commit -m 'Initial commit'"
-    - "echo 'lost' > $HOME/git-challenge/lost.txt"
-    - "git -C $HOME/git-challenge add lost.txt"
-    - "git -C $HOME/git-challenge commit -m 'Add critical data'"
-    - "git -C $HOME/git-challenge rev-parse HEAD > $HOME/git-challenge/.correct-hash"
-    - "git -C $HOME/git-challenge reset --hard HEAD~1"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo 'hello' > $HOME/git-challenge/file.txt
+    - git -C $HOME/git-challenge add file.txt
+    - git -C $HOME/git-challenge commit -m 'Initial commit'
+    - echo 'lost' > $HOME/git-challenge/lost.txt
+    - git -C $HOME/git-challenge add lost.txt
+    - git -C $HOME/git-challenge commit -m 'Add critical data'
+    - git -C $HOME/git-challenge rev-parse HEAD > $HOME/git-challenge/.correct-hash
+    - git -C $HOME/git-challenge reset --hard HEAD~1
 version: 1

@@ -1,19 +1,19 @@
 id: git-remove-sensitive-file
-title: "Remove Sensitive File"
+title: Remove Sensitive File
 xp: 25
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo 'hello' > $HOME/git-challenge/one.txt"
-    - "git -C $HOME/git-challenge add one.txt"
-    - "git -C $HOME/git-challenge commit -m 'Initial commit'"
-    - "echo 'my_secret_key' > $HOME/git-challenge/password.txt"
-    - "git -C $HOME/git-challenge add password.txt"
-    - "git -C $HOME/git-challenge commit -m 'Add password file'"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo 'hello' > $HOME/git-challenge/one.txt
+    - git -C $HOME/git-challenge add one.txt
+    - git -C $HOME/git-challenge commit -m 'Initial commit'
+    - echo 'my_secret_key' > $HOME/git-challenge/password.txt
+    - git -C $HOME/git-challenge add password.txt
+    - git -C $HOME/git-challenge commit -m 'Add password file'
 version: 1

@@ -5,5 +5,5 @@ estimated_minutes: 3
 setup:
   type: shell
   seed_commands:
-  - echo 'Verifying that the installed version of Terraform works.'
+    - echo 'Verifying that the installed version of Terraform works.'
 version: 1

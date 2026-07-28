@@ -1,27 +1,27 @@
 id: git-complete-merge
-title: "Complete the Merge Commit"
+title: Complete the Merge Commit
 xp: 25
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "echo '<h1>Default Site</h1>' > $HOME/git-challenge/index.html"
-    - "git -C $HOME/git-challenge add index.html"
-    - "git -C $HOME/git-challenge commit -m 'Initial index'"
-    - "git -C $HOME/git-challenge checkout -b feature-conflict"
-    - "echo '<h1>Feature Site</h1>' > $HOME/git-challenge/index.html"
-    - "git -C $HOME/git-challenge add index.html"
-    - "git -C $HOME/git-challenge commit -m 'Edit on feature'"
-    - "git -C $HOME/git-challenge checkout main"
-    - "echo '<h1>Main Site</h1>' > $HOME/git-challenge/index.html"
-    - "git -C $HOME/git-challenge add index.html"
-    - "git -C $HOME/git-challenge commit -m 'Edit on main'"
-    - "git -C $HOME/git-challenge merge feature-conflict || true"
-    - "echo '<h1>Resolved Site</h1>' > $HOME/git-challenge/index.html"
-    - "git -C $HOME/git-challenge add index.html"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - echo '<h1>Default Site</h1>' > $HOME/git-challenge/index.html
+    - git -C $HOME/git-challenge add index.html
+    - git -C $HOME/git-challenge commit -m 'Initial index'
+    - git -C $HOME/git-challenge checkout -b feature-conflict
+    - echo '<h1>Feature Site</h1>' > $HOME/git-challenge/index.html
+    - git -C $HOME/git-challenge add index.html
+    - git -C $HOME/git-challenge commit -m 'Edit on feature'
+    - git -C $HOME/git-challenge checkout main
+    - echo '<h1>Main Site</h1>' > $HOME/git-challenge/index.html
+    - git -C $HOME/git-challenge add index.html
+    - git -C $HOME/git-challenge commit -m 'Edit on main'
+    - git -C $HOME/git-challenge merge feature-conflict || true
+    - echo '<h1>Resolved Site</h1>' > $HOME/git-challenge/index.html
+    - git -C $HOME/git-challenge add index.html
 version: 1

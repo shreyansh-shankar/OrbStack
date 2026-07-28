@@ -5,9 +5,9 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-hcl-challenge
-  - mkdir -p $HOME/terraform-hcl-challenge
-  - echo 'provider "local" {}' > $HOME/terraform-hcl-challenge/main.tf
-  - "echo 'resource \"local_file\" \"syntax\" { content = \"Fix me!\" \n filename\
+    - rm -rf $HOME/terraform-hcl-challenge
+    - mkdir -p $HOME/terraform-hcl-challenge
+    - echo 'provider "local" {}' > $HOME/terraform-hcl-challenge/main.tf
+    - "echo 'resource \"local_file\" \"syntax\" { content = \"Fix me!\" \n filename\
     \ = \"/tmp/syntax.txt\"' >> $HOME/terraform-hcl-challenge/main.tf"
 version: 1

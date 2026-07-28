@@ -5,9 +5,9 @@ estimated_minutes: 6
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-troubleshoot-challenge
-  - mkdir -p $HOME/terraform-troubleshoot-challenge
-  - echo 'resource "local_file" "app" { content = "data" \n filename = "/tmp/state_rec.txt"
+    - rm -rf $HOME/terraform-troubleshoot-challenge
+    - mkdir -p $HOME/terraform-troubleshoot-challenge
+    - echo 'resource "local_file" "app" { content = "data" \n filename = "/tmp/state_rec.txt"
     }' > $HOME/terraform-troubleshoot-challenge/main.tf
   - echo 'data' > /tmp/state_rec.txt
   - cd $HOME/terraform-troubleshoot-challenge && terraform init

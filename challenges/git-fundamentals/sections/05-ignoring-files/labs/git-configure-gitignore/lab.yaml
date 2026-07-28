@@ -1,12 +1,12 @@
 id: git-configure-gitignore
-title: "Configure Git Ignore List"
+title: Configure Git Ignore List
 xp: 20
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "rm -f $HOME/git-challenge/.gitignore"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - rm -f $HOME/git-challenge/.gitignore
 version: 1

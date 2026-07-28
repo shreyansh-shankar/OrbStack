@@ -5,10 +5,10 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-modules-challenge
-  - mkdir -p $HOME/terraform-modules-challenge/modules/file_writer
-  - echo 'variable "text" { type = string }' > $HOME/terraform-modules-challenge/modules/file_writer/variables.tf
-  - echo 'resource "local_file" "out" { content = var.text \n filename = "/tmp/input_mod.txt"
+    - rm -rf $HOME/terraform-modules-challenge
+    - mkdir -p $HOME/terraform-modules-challenge/modules/file_writer
+    - echo 'variable "text" { type = string }' > $HOME/terraform-modules-challenge/modules/file_writer/variables.tf
+    - echo 'resource "local_file" "out" { content = var.text \n filename = "/tmp/input_mod.txt"
     }' > $HOME/terraform-modules-challenge/modules/file_writer/main.tf
   - echo 'module "writer" {\n  source = "./modules/file_writer"\n}' > $HOME/terraform-modules-challenge/main.tf
 version: 1

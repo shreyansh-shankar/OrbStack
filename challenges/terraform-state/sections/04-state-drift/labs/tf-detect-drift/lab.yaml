@@ -5,9 +5,9 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-state-challenge
-  - mkdir -p $HOME/terraform-state-challenge
-  - echo 'resource "local_file" "drift" { content = "original_content" \n filename
+    - rm -rf $HOME/terraform-state-challenge
+    - mkdir -p $HOME/terraform-state-challenge
+    - echo 'resource "local_file" "drift" { content = "original_content" \n filename
     = "/tmp/drift.txt" }' > $HOME/terraform-state-challenge/main.tf
   - cd $HOME/terraform-state-challenge && terraform init && terraform apply -auto-approve
   - echo 'out_of_band_change' > /tmp/drift.txt

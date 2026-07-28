@@ -1,12 +1,12 @@
 id: git-stage-file
-title: "Stage a Modified File"
+title: Stage a Modified File
 xp: 20
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "echo '# My Project' > $HOME/git-challenge/README.md"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - echo '# My Project' > $HOME/git-challenge/README.md
 version: 1

@@ -5,8 +5,8 @@ estimated_minutes: 10
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-expr-challenge
-  - mkdir -p $HOME/terraform-expr-challenge
-  - echo 'resource "local_file" "f1" { content = "hardcoded_value_123" \n filename
+    - rm -rf $HOME/terraform-expr-challenge
+    - mkdir -p $HOME/terraform-expr-challenge
+    - echo 'resource "local_file" "f1" { content = "hardcoded_value_123" \n filename
     = "/tmp/hardcoded.txt" }' > $HOME/terraform-expr-challenge/main.tf
 version: 1

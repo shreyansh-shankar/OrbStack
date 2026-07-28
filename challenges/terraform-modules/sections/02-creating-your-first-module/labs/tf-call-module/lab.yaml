@@ -5,9 +5,9 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-modules-challenge
-  - mkdir -p $HOME/terraform-modules-challenge/modules/file_writer
-  - echo 'resource "local_file" "mod" { content = "module text" \n filename = "/tmp/module_out.txt"
+    - rm -rf $HOME/terraform-modules-challenge
+    - mkdir -p $HOME/terraform-modules-challenge/modules/file_writer
+    - echo 'resource "local_file" "mod" { content = "module text" \n filename = "/tmp/module_out.txt"
     }' > $HOME/terraform-modules-challenge/modules/file_writer/main.tf
   - touch $HOME/terraform-modules-challenge/main.tf
 version: 1

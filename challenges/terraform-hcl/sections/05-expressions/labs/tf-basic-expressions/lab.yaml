@@ -5,10 +5,10 @@ estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-hcl-challenge
-  - mkdir -p $HOME/terraform-hcl-challenge
-  - echo 'resource "local_file" "expr" {' > $HOME/terraform-hcl-challenge/main.tf
-  - echo '  content = ""' >> $HOME/terraform-hcl-challenge/main.tf
-  - echo '  filename = "/tmp/expr.txt"' >> $HOME/terraform-hcl-challenge/main.tf
-  - echo '}' >> $HOME/terraform-hcl-challenge/main.tf
+    - rm -rf $HOME/terraform-hcl-challenge
+    - mkdir -p $HOME/terraform-hcl-challenge
+    - echo 'resource "local_file" "expr" {' > $HOME/terraform-hcl-challenge/main.tf
+    - echo '  content = ""' >> $HOME/terraform-hcl-challenge/main.tf
+    - echo '  filename = "/tmp/expr.txt"' >> $HOME/terraform-hcl-challenge/main.tf
+    - echo '}' >> $HOME/terraform-hcl-challenge/main.tf
 version: 1

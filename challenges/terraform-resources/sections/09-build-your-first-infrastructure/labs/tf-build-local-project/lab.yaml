@@ -5,6 +5,6 @@ estimated_minutes: 10
 setup:
   type: shell
   seed_commands:
-  - rm -rf $HOME/terraform-resources-challenge
-  - mkdir -p $HOME/terraform-resources-challenge
+    - rm -rf $HOME/terraform-resources-challenge
+    - mkdir -p $HOME/terraform-resources-challenge
 version: 1

@@ -1,34 +1,34 @@
 id: git-track-remote-branch
-title: "Track a Remote Branch"
+title: Track a Remote Branch
 xp: 20
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge $HOME/git-remote-server.git $HOME/temp-git-repo"
-    - "git init --bare $HOME/git-remote-server.git"
-    - "git init $HOME/temp-git-repo"
-    - "git -C $HOME/temp-git-repo config user.name 'Developer'"
-    - "git -C $HOME/temp-git-repo config user.email 'dev@example.com'"
-    - "echo 'hello' > $HOME/temp-git-repo/hello.txt"
-    - "git -C $HOME/temp-git-repo add hello.txt"
-    - "git -C $HOME/temp-git-repo commit -m 'Initial commit'"
-    - "git -C $HOME/temp-git-repo remote add origin $HOME/git-remote-server.git"
-    - "git -C $HOME/temp-git-repo push -u origin HEAD"
-    - "rm -rf $HOME/temp-git-repo"
-    - "git clone $HOME/git-remote-server.git $HOME/git-challenge"
-    - "git -C $HOME/git-challenge config user.name 'Developer'"
-    - "git -C $HOME/git-challenge config user.email 'dev@example.com'"
-    - "git init $HOME/temp-git-repo"
-    - "git -C $HOME/temp-git-repo config user.name 'Other Developer'"
-    - "git -C $HOME/temp-git-repo config user.email 'other@example.com'"
-    - "git -C $HOME/temp-git-repo remote add origin $HOME/git-remote-server.git"
-    - "git -C $HOME/temp-git-repo pull origin HEAD"
-    - "git -C $HOME/temp-git-repo checkout -b feature-team"
-    - "echo 'team code' > $HOME/temp-git-repo/team.txt"
-    - "git -C $HOME/temp-git-repo add team.txt"
-    - "git -C $HOME/temp-git-repo commit -m 'Add team file'"
-    - "git -C $HOME/temp-git-repo push origin feature-team"
-    - "rm -rf $HOME/temp-git-repo"
-    - "git -C $HOME/git-challenge fetch origin"
+    - rm -rf $HOME/git-challenge $HOME/git-remote-server.git $HOME/temp-git-repo
+    - git init -b main --bare $HOME/git-remote-server.git
+    - git init -b main $HOME/temp-git-repo
+    - git -C $HOME/temp-git-repo config user.name 'Developer'
+    - git -C $HOME/temp-git-repo config user.email 'dev@example.com'
+    - echo 'hello' > $HOME/temp-git-repo/hello.txt
+    - git -C $HOME/temp-git-repo add hello.txt
+    - git -C $HOME/temp-git-repo commit -m 'Initial commit'
+    - git -C $HOME/temp-git-repo remote add origin $HOME/git-remote-server.git
+    - git -C $HOME/temp-git-repo push -u origin HEAD
+    - rm -rf $HOME/temp-git-repo
+    - git clone $HOME/git-remote-server.git $HOME/git-challenge
+    - git -C $HOME/git-challenge config user.name 'Developer'
+    - git -C $HOME/git-challenge config user.email 'dev@example.com'
+    - git init -b main $HOME/temp-git-repo
+    - git -C $HOME/temp-git-repo config user.name 'Other Developer'
+    - git -C $HOME/temp-git-repo config user.email 'other@example.com'
+    - git -C $HOME/temp-git-repo remote add origin $HOME/git-remote-server.git
+    - git -C $HOME/temp-git-repo pull origin HEAD
+    - git -C $HOME/temp-git-repo checkout -b feature-team
+    - echo 'team code' > $HOME/temp-git-repo/team.txt
+    - git -C $HOME/temp-git-repo add team.txt
+    - git -C $HOME/temp-git-repo commit -m 'Add team file'
+    - git -C $HOME/temp-git-repo push origin feature-team
+    - rm -rf $HOME/temp-git-repo
+    - git -C $HOME/git-challenge fetch origin
 version: 1

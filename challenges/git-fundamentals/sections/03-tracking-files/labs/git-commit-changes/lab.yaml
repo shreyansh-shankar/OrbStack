@@ -1,15 +1,15 @@
 id: git-commit-changes
-title: "Commit Your Staged Changes"
+title: Commit Your Staged Changes
 xp: 30
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge"
-    - "mkdir -p $HOME/git-challenge"
-    - "git -C $HOME/git-challenge init"
-    - "git config -f $HOME/git-challenge/.git/config user.email 'student@thelastdeploy.com'"
-    - "git config -f $HOME/git-challenge/.git/config user.name 'DevOps Student'"
-    - "echo '# My Project' > $HOME/git-challenge/README.md"
-    - "git -C $HOME/git-challenge add README.md"
+    - rm -rf $HOME/git-challenge
+    - mkdir -p $HOME/git-challenge
+    - git -C $HOME/git-challenge init -b main
+    - git config -f $HOME/git-challenge/.git/config user.email 'student@thelastdeploy.com'
+    - git config -f $HOME/git-challenge/.git/config user.name 'DevOps Student'
+    - echo '# My Project' > $HOME/git-challenge/README.md
+    - git -C $HOME/git-challenge add README.md
 version: 1

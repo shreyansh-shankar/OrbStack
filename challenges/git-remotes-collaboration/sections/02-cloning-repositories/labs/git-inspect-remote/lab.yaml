@@ -1,20 +1,20 @@
 id: git-inspect-remote
-title: "Inspect Remote Properties"
+title: Inspect Remote Properties
 xp: 20
 estimated_minutes: 5
 setup:
   type: shell
   seed_commands:
-    - "rm -rf $HOME/git-challenge $HOME/git-remote-server.git $HOME/temp-git-repo"
-    - "git init --bare $HOME/git-remote-server.git"
-    - "git init $HOME/temp-git-repo"
-    - "git -C $HOME/temp-git-repo config user.name 'Developer'"
-    - "git -C $HOME/temp-git-repo config user.email 'dev@example.com'"
-    - "echo 'hello' > $HOME/temp-git-repo/hello.txt"
-    - "git -C $HOME/temp-git-repo add hello.txt"
-    - "git -C $HOME/temp-git-repo commit -m 'Initial commit'"
-    - "git -C $HOME/temp-git-repo remote add origin $HOME/git-remote-server.git"
-    - "git -C $HOME/temp-git-repo push -u origin HEAD"
-    - "rm -rf $HOME/temp-git-repo"
-    - "git clone $HOME/git-remote-server.git $HOME/git-challenge"
+    - rm -rf $HOME/git-challenge $HOME/git-remote-server.git $HOME/temp-git-repo
+    - git init -b main --bare $HOME/git-remote-server.git
+    - git init -b main $HOME/temp-git-repo
+    - git -C $HOME/temp-git-repo config user.name 'Developer'
+    - git -C $HOME/temp-git-repo config user.email 'dev@example.com'
+    - echo 'hello' > $HOME/temp-git-repo/hello.txt
+    - git -C $HOME/temp-git-repo add hello.txt
+    - git -C $HOME/temp-git-repo commit -m 'Initial commit'
+    - git -C $HOME/temp-git-repo remote add origin $HOME/git-remote-server.git
+    - git -C $HOME/temp-git-repo push -u origin HEAD
+    - rm -rf $HOME/temp-git-repo
+    - git clone $HOME/git-remote-server.git $HOME/git-challenge
 version: 1
