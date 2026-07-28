@@ -11,7 +11,7 @@ At **03:14 UTC**, the monitoring system triggered a high-severity PagerDuty aler
 
 ---
 
-## 🔍 System Architecture Overview
+## System Architecture Overview
 
 The production deployment consists of two primary components:
 
@@ -37,7 +37,7 @@ The production deployment consists of two primary components:
 
 ---
 
-## 🛑 What is an HTTP 502 Bad Gateway?
+## What is an HTTP 502 Bad Gateway?
 
 An **HTTP 502 Bad Gateway** error occurs when NGINX is healthy, but the backend application server it relies on fails to respond or refuses connections.
 
@@ -48,7 +48,7 @@ An **HTTP 502 Bad Gateway** error occurs when NGINX is healthy, but the backend 
 
 ---
 
-## 🎯 Incident Resolution Roadmap
+## Incident Resolution Roadmap
 
 As the on-call DevOps engineer, you will follow a standard 5-step incident response playbook:
 

@@ -4,7 +4,7 @@ Congratulations! You successfully resolved the `HTTP 502 Bad Gateway` incident b
 
 ---
 
-## 📌 Summary of Incident Lifecycle
+## Summary of Incident Lifecycle
 
 | Stage | Activity | Key Command |
 |---|---|---|
@@ -16,7 +16,7 @@ Congratulations! You successfully resolved the `HTTP 502 Bad Gateway` incident b
 
 ---
 
-## 🛡️ Production Best Practices to Prevent Permission Outages
+## Production Best Practices to Prevent Permission Outages
 
 1. **Follow Principle of Least Privilege**: Grant processes only the minimum permissions required (e.g. `644` for logs, `600` for credentials, `755` for executables). Never use `777`.
 2. **Automate Log Rotation Safely**: Configure `/etc/logrotate.d/app-server` with explicit file mode & ownership directives:

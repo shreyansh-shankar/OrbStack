@@ -4,12 +4,12 @@ With the root cause identified, you must now restore appropriate read permission
 
 ---
 
-## 🛠️ Recommended Permission Mode
+## Recommended Permission Mode
 
 Log files should generally be configured with mode `644` (`rw-r--r--`):
-- **User (Owner)**: `rw-` (`6`) — Read and Write
-- **Group**: `r--` (`4`) — Read only
-- **Others**: `r--` (`4`) — Read only
+- **User (Owner)**: `rw-` — Read and Write
+- **Group**: `r--` — Read only
+- **Others**: `r--` — Read only
 
 ### Applying `chmod 644`:
 ```bash
@@ -21,14 +21,7 @@ sudo chmod 644 /var/log/app-server.log
 ls -la /var/log/app-server.log
 ```
 
-Expected output:
-```text
--rw-r--r-- 1 root root 1024 Jul 28 03:14 /var/log/app-server.log
-```
-
----
-
-## 📋 Task 3 Instructions (`lnx-fix-broken-permissions`)
+## Task 3 Instructions (`lnx-fix-broken-permissions`)
 
 To complete the third lab task:
 

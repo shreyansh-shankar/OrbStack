@@ -4,7 +4,7 @@ In this section, you will begin hands-on troubleshooting by checking system logs
 
 ---
 
-## 🛠️ Step-by-Step Troubleshooting Workflow
+## Step-by-Step Troubleshooting Workflow
 
 ### Step 1: Check System File Mode
 Check the permission details of the application log file `/var/log/app-server.log`:
@@ -12,15 +12,9 @@ Check the permission details of the application log file `/var/log/app-server.lo
 ls -la /var/log/app-server.log
 ```
 
-Expected output showing broken permissions:
-```text
----------- 1 root root 1024 Jul 28 03:14 /var/log/app-server.log
-```
-> ⚠️ **Notice:** The mode `----------` (`000`) means **no read or write access** is granted to any user or group!
-
 ---
 
-## 📋 Task 1 Instructions (`lnx-investigate-permission-issue`)
+## Task 1 Instructions (`lnx-investigate-permission-issue`)
 
 To complete the first lab task:
 
@@ -30,7 +24,7 @@ To complete the first lab task:
    ```
 
 2. **Inspect the Log File**:
-   Verify that `/var/log/app-server.log` exists and note its permission status (`----------`).
+   Verify that `/var/log/app-server.log` exists and note its permission status.
 
 3. **Record Log Inspection**:
    Create the required marker file to confirm you investigated the log permissions:

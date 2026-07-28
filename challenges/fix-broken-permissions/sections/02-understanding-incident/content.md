@@ -4,7 +4,7 @@ Before diagnosing the outage, let's review how **Linux File Permissions** work a
 
 ---
 
-## 🔐 1. The Linux Permission Model
+## 1. The Linux Permission Model
 
 Every file and directory in Linux has an owner, a group, and a set of permission bits for three categories of users:
 
@@ -16,7 +16,7 @@ Every file and directory in Linux has an owner, a group, and a set of permission
 
 ---
 
-## 📜 2. Permission Types & Octal Values
+## 2. Permission Types & Octal Values
 
 Permissions are represented using symbolic characters (`r`, `w`, `x`) or 3-digit octal numbers (`644`, `755`, `600`, `000`):
 
@@ -34,7 +34,7 @@ Permissions are represented using symbolic characters (`r`, `w`, `x`) or 3-digit
 
 ---
 
-## ⚙️ 3. How Background Daemons Access Files
+## 3. How Background Daemons Access Files
 
 When system services run under `systemd`, they run under a designated non-root user (e.g. `appuser`):
 
@@ -52,15 +52,3 @@ When `app-server` starts:
    Permission denied (EACCES)
    ```
 3. The application process aborts and crashes on startup.
-
----
-
-## 💡 Essential Inspection Commands
-
-When investigating permission issues, use these commands:
-
-| Command | Purpose |
-|---|---|
-| `ls -la /var/log/app-server.log` | Display file permissions, owner, and group |
-| `stat -c "%a %U:%G" /var/log/app-server.log` | Print octal mode (`644`) and `owner:group` |
-| `id appuser` | Inspect groups and UID of the application user |
