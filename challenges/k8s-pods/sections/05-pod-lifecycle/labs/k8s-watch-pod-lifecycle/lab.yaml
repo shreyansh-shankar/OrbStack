@@ -10,6 +10,6 @@ setup:
     - "mkdir -p $HOME/k8s-pods"
     - "rm -f $HOME/k8s-pods/init-status.txt"
     - 'until kubectl get serviceaccount default --context=kind-tld-k8s-watch-pod-lifecycle &>/dev/null; do sleep 1; done'
-    - 'echo -e "apiVersion: v1\nkind: Pod\nmetadata:\n  name: init-pod\nspec:\n  initContainers:\n  - name: init-service\n    image: busybox:1.28\n    command: [\"sh\", \"-c\", \"sleep 3600\"]\n  containers:\n  - name: myapp-container\n    image: busybox:1.28\n    command: [\"sh\", \"-c\", \"echo The app is running! && sleep 3600\"]" > $HOME/k8s-pods/pod-init.yaml'
+    - 'echo -e "apiVersion: v1\nkind: Pod\nmetadata:\n  name: init-pod\nspec:\n  initContainers:\n  - name: init-service\n    image: busybox:1.28\n    command: [\"sh\", \"-c\", \"sleep 5\"]\n  containers:\n  - name: myapp-container\n    image: busybox:1.28\n    command: [\"sh\", \"-c\", \"echo The app is running! && sleep 3600\"]" > $HOME/k8s-pods/pod-init.yaml'
     - 'kubectl apply -f $HOME/k8s-pods/pod-init.yaml --context=kind-tld-k8s-watch-pod-lifecycle'
 version: 1

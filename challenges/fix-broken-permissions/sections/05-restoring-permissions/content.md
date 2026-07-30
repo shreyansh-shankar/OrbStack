@@ -1,48 +1,47 @@
 # Restoring Correct Linux Permissions
 
-With the root cause identified, you must now restore appropriate read permissions so `appuser` (and system logging utilities) can access `/var/log/app-server.log`.
+With the root cause identified, you must now restore appropriate read permissions so  (and system logging utilities) can access .
 
 ---
 
-## Recommended Permission Mode
+## 🛠️ Recommended Permission Mode
 
-Log files should generally be configured with mode `644` (`rw-r--r--`):
-- **User (Owner)**: `rw-` — Read and Write
-- **Group**: `r--` — Read only
-- **Others**: `r--` — Read only
+Log files should generally be configured with mode  ():
+- **User (Owner)**:  () — Read and Write
+- **Group**:  () — Read only
+- **Others**:  () — Read only
 
-### Applying `chmod 644`:
-```bash
-sudo chmod 644 /var/log/app-server.log
-```
+### Applying :
+
 
 ### Verifying the Change:
-```bash
-ls -la /var/log/app-server.log
-```
+---------- 1 root root 0 Jul 28 21:24 /var/log/app-server.log
 
-## Task 3 Instructions (`lnx-fix-broken-permissions`)
+Expected output:
+
+
+---
+
+## 📋 Task 3 Instructions ()
 
 To complete the third lab task:
 
 1. **Start the Lab Session**:
-   ```bash
-   tld start lnx-fix-broken-permissions
-   ```
+   
+╔══════════════════════════════════════════════╗
+║  The Last Deploy — Starting: Fix Broken Perm…║
+╚══════════════════════════════════════════════╝
+
+⚙  Running setup commands...
+  $ sudo rm -f /var/log/app-server.log
 
 2. **Restore Permissions**:
-   Apply read permissions (`644`) to `/var/log/app-server.log`:
-   ```bash
-   sudo chmod 644 /var/log/app-server.log
-   ```
+   Apply read permissions () to :
+   
 
 3. **Validate and Complete**:
-   Run `tld check` to verify that `/var/log/app-server.log` is readable (`-r` mode):
-   ```bash
-   tld check
-   ```
+   Run  to verify that  is readable ( mode):
+   
 
 4. **Stop the Session**:
-   ```bash
-   tld stop
-   ```
+   

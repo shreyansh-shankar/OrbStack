@@ -1,39 +1,44 @@
 # Finding the Root Cause of Permission Failures
 
-## Root Cause Analysis
-
-### Why Did `app-server.service` Fail?
-1. **Service User Context**: The daemon runs under the `appuser` system account.
-2. **Access Denial**: When `appuser` attempts to read or write to `/var/log/app-server.log`, Linux kernel permission checking evaluates:
-   - Is `appuser` the owner?
-   - Is `appuser` in the group?
-   - Is `appuser` in others?
-3. **Result**: The kernel returns `EACCES (Permission denied)`. The daemon cannot open its log file and immediately crashes.
+Now that you have verified  has mode  (), let's analyze why this causes the  daemon to fail.
 
 ---
 
-## Task 2 Instructions (`lnx-identify-broken-permissions`)
+## 🔬 Root Cause Analysis
+
+### Why Did  Fail?
+1. **Service User Context**: The daemon runs under the  system account.
+2. **Access Denial**: When  attempts to read or write to , Linux kernel permission checking evaluates:
+   - Is  the owner? Owner bits are  (no access).
+   - Is  in the group? Group bits are  (no access).
+   - Is  in others? Other bits are  (no access).
+3. **Result**: The kernel returns . The daemon cannot open its log file and immediately crashes.
+
+---
+
+## 📋 Task 2 Instructions ()
 
 To complete the second lab task:
 
 1. **Start the Lab Session**:
-   ```bash
-   tld start lnx-identify-broken-permissions
-   ```
+   
+╔══════════════════════════════════════════════╗
+║  The Last Deploy — Starting: Identify Broken…║
+╚══════════════════════════════════════════════╝
 
-2. **Mark Root Cause Confirmation**:
+⚙  Running setup commands...
+  $ sudo rm -f /var/log/app-server.log
+
+2. **Verify Root Cause**:
+   Confirm that  permissions are , blocking access for .
+
+3. **Mark Root Cause Confirmation**:
    Create the required marker file indicating root cause identification:
-   ```bash
-   touch /tmp/found_root_cause
-   ```
+   
 
-3. **Validate and Complete**:
+4. **Validate and Complete**:
    Run the validator check:
-   ```bash
-   tld check
-   ```
+   
 
 5. **Stop the Session**:
-   ```bash
-   tld stop
-   ```
+   
