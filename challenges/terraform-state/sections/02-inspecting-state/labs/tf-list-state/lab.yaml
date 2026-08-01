@@ -7,9 +7,7 @@ setup:
   seed_commands:
     - rm -rf $HOME/terraform-state-challenge
     - mkdir -p $HOME/terraform-state-challenge
-    - echo 'resource "local_file" "f1" { content = "1" \n filename = "/tmp/1.txt" }'
-    > $HOME/terraform-state-challenge/main.tf
-  - echo 'resource "local_file" "f2" { content = "2" \n filename = "/tmp/2.txt" }'
-    >> $HOME/terraform-state-challenge/main.tf
-  - cd $HOME/terraform-state-challenge && terraform init && terraform apply -auto-approve
+    - echo 'resource "local_file" "f1" { content = "1" \n filename = "/tmp/1.txt" }' > $HOME/terraform-state-challenge/main.tf
+    - echo 'resource "local_file" "f2" { content = "2" \n filename = "/tmp/2.txt" }' >> $HOME/terraform-state-challenge/main.tf
+    - cd $HOME/terraform-state-challenge && terraform init && terraform apply -auto-approve
 version: 1

@@ -7,8 +7,7 @@ setup:
   seed_commands:
     - rm -rf $HOME/terraform-state-challenge
     - mkdir -p $HOME/terraform-state-challenge
-    - echo 'resource "local_file" "recovery" { content = "expected_state" \n filename
-    = "/tmp/recovery.txt" }' > $HOME/terraform-state-challenge/main.tf
-  - cd $HOME/terraform-state-challenge && terraform init && terraform apply -auto-approve
-  - rm -f /tmp/recovery.txt
+    - echo 'resource "local_file" "recovery" { content = "expected_state" \n filename = "/tmp/recovery.txt" }' > $HOME/terraform-state-challenge/main.tf
+    - cd $HOME/terraform-state-challenge && terraform init && terraform apply -auto-approve
+    - rm -f /tmp/recovery.txt
 version: 1

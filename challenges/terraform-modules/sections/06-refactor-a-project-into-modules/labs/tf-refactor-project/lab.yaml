@@ -7,8 +7,6 @@ setup:
   seed_commands:
     - rm -rf $HOME/terraform-modules-challenge
     - mkdir -p $HOME/terraform-modules-challenge
-    - echo 'resource "local_file" "f1" { content = "1" \n filename = "/tmp/f1.txt" }'
-    > $HOME/terraform-modules-challenge/main.tf
-  - echo 'resource "local_file" "f2" { content = "2" \n filename = "/tmp/f2.txt" }'
-    >> $HOME/terraform-modules-challenge/main.tf
+    - echo 'resource "local_file" "f1" { content = "1" \n filename = "/tmp/f1.txt" }' > $HOME/terraform-modules-challenge/main.tf
+    - echo 'resource "local_file" "f2" { content = "2" \n filename = "/tmp/f2.txt" }' >> $HOME/terraform-modules-challenge/main.tf
 version: 1

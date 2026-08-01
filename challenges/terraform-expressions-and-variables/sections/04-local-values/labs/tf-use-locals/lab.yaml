@@ -7,6 +7,5 @@ setup:
   seed_commands:
     - rm -rf $HOME/terraform-expr-challenge
     - mkdir -p $HOME/terraform-expr-challenge
-    - echo 'resource "local_file" "f1" { content = "production" \n filename = "/tmp/prod_1.txt"
-    }' > $HOME/terraform-expr-challenge/main.tf
+    - echo 'resource "local_file" "f1" { content = "production" \n filename = "/tmp/prod_1.txt" }' > $HOME/terraform-expr-challenge/main.tf
 version: 1

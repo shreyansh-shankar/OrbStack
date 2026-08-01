@@ -7,7 +7,6 @@ setup:
   seed_commands:
     - rm -rf $HOME/terraform-resources-challenge
     - mkdir -p $HOME/terraform-resources-challenge
-    - "echo 'resource \"local_file\" \"temp\" { content = \"delete me\" \n filename\
-    \ = \"/tmp/temp.txt\" }' > $HOME/terraform-resources-challenge/main.tf"
-  - cd $HOME/terraform-resources-challenge && terraform init && terraform apply -auto-approve
+    - "echo 'resource \"local_file\" \"temp\" { content = \"delete me\" \n filename\ \ = \"/tmp/temp.txt\" }' > $HOME/terraform-resources-challenge/main.tf"
+    - cd $HOME/terraform-resources-challenge && terraform init && terraform apply -auto-approve
 version: 1

@@ -8,6 +8,5 @@ setup:
     - rm -rf $HOME/terraform-challenge
     - mkdir -p $HOME/terraform-challenge
     - echo 'provider   "local"   {}' > $HOME/terraform-challenge/main.tf
-    - echo 'resource "local_file" "example" {content = "hello" filename = "out.txt"}'
-    >> $HOME/terraform-challenge/main.tf
+    - echo 'resource "local_file" "example" {content = "hello" filename = "out.txt"}' >> $HOME/terraform-challenge/main.tf
 version: 1

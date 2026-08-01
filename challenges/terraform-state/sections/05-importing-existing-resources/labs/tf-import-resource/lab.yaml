@@ -9,7 +9,6 @@ setup:
     - mkdir -p $HOME/terraform-state-challenge
     - echo 'existing file content' > /tmp/existing.txt
     - echo 'provider "local" {}' > $HOME/terraform-state-challenge/main.tf
-    - echo 'resource "local_file" "existing" {\n  filename = "/tmp/existing.txt"\n}'
-    >> $HOME/terraform-state-challenge/main.tf
-  - cd $HOME/terraform-state-challenge && terraform init
+    - echo 'resource "local_file" "existing" {\n  filename = "/tmp/existing.txt"\n}' >> $HOME/terraform-state-challenge/main.tf
+    - cd $HOME/terraform-state-challenge && terraform init
 version: 1

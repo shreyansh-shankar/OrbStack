@@ -8,6 +8,5 @@ setup:
     - rm -rf $HOME/terraform-expr-challenge
     - mkdir -p $HOME/terraform-expr-challenge
     - echo 'variable "filename" { type = string }' > $HOME/terraform-expr-challenge/main.tf
-    - echo 'resource "local_file" "out" { content = "hello" \n filename = var.filename
-    }' >> $HOME/terraform-expr-challenge/main.tf
+    - echo 'resource "local_file" "out" { content = "hello" \n filename = var.filename }' >> $HOME/terraform-expr-challenge/main.tf
 version: 1

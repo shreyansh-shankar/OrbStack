@@ -7,8 +7,7 @@ setup:
   seed_commands:
     - rm -rf $HOME/terraform-modules-challenge
     - mkdir -p $HOME/terraform-modules-challenge/modules/file_writer
-    - echo 'resource "local_file" "out" { content = "hello" \n filename = "/tmp/out.txt"
-    }' > $HOME/terraform-modules-challenge/modules/file_writer/main.tf
-  - echo 'output "file_path" {\n  value = local_file.out.filename\n}' > $HOME/terraform-modules-challenge/modules/file_writer/outputs.tf
-  - echo 'module "writer" {\n  source = "./modules/file_writer"\n}' > $HOME/terraform-modules-challenge/main.tf
+    - echo 'resource "local_file" "out" { content = "hello" \n filename = "/tmp/out.txt" }' > $HOME/terraform-modules-challenge/modules/file_writer/main.tf
+    - echo 'output "file_path" {\n  value = local_file.out.filename\n}' > $HOME/terraform-modules-challenge/modules/file_writer/outputs.tf
+    - echo 'module "writer" {\n  source = "./modules/file_writer"\n}' > $HOME/terraform-modules-challenge/main.tf
 version: 1
