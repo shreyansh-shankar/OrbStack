@@ -44,3 +44,29 @@ By default, `kubectl` directs requests to the `default` namespace. To change the
 kubectl config set-context --current --namespace=development
 ```
 After running this, running `kubectl get pods` will list pods in `development` namespace automatically.
+
+---
+
+## Lab Tasks
+
+### Task 1: Create a Namespace
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-create-namespace
+   ```
+2. Complete the task requirements: Namespace 'production' created successfully.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Switch Default Namespace
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-switch-namespace
+   ```
+2. Complete the task requirements: Successfully switched default context namespace to development.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

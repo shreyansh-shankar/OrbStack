@@ -33,3 +33,31 @@ git push -u origin <branch-name>
 ### Benefits of Tracking Branches:
 - Once set, you no longer need to type the remote name and branch name. You can simply run `git push` or `git pull` while on that branch.
 - Git will be able to show you status information like: "Your branch is ahead of 'origin/main' by 2 commits."
+
+---
+
+## Lab Tasks
+
+### Task 1: Push Changes to Remote
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-first-push
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Changes successfully pushed to the remote repository.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Push a New Local Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-push-new-branch
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: New local branch pushed and tracking configured successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

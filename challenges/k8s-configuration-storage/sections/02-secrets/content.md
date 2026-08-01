@@ -42,3 +42,29 @@ spec:
 In this example:
 - The secret `db-secret` is mounted as a volume at `/etc/db`.
 - Kubernetes creates a file for each key in the secret under that directory (e.g. `/etc/db/password` will contain the decoded value `supersecret`).
+
+---
+
+## Lab Tasks
+
+### Task 1: Create a Secret
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-create-secret
+   ```
+2. Complete the task requirements: Secret 'db-secret' successfully verified.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Mount Secret as Volume
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-use-secret
+   ```
+2. Complete the task requirements: Secret volume mount verified successfully.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

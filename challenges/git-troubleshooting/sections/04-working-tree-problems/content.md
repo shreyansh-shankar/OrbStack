@@ -48,3 +48,43 @@ To view all active stashes:
 ```bash
 git stash list
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Clean Working Tree
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-clean-working-tree
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Working tree cleaned successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Restore a Tracked File
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-restore-file
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Tracked file restored successfully to stable commit.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 3: Stash Local Modifications
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-stash-changes
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Changes stashed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

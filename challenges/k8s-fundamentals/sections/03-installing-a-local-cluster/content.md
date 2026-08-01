@@ -35,3 +35,30 @@ To delete a cluster:
 ```bash
 kind delete cluster --name my-cluster
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Install Kind and Kubectl
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-install-kind
+   ```
+2. Complete the task requirements: Kind and Kubectl are successfully installed.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Verify Cluster Access
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-verify-cluster
+   ```
+2. Navigate to `~/k8s-fundamentals`.
+3. Complete the task requirements: Successfully verified cluster access and retrieved the control-plane node name.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

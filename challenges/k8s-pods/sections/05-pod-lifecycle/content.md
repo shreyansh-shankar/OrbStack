@@ -29,3 +29,31 @@ The `restartPolicy` specifies how Kubernetes responds when a container exits:
 - `Always` (default): Restarts the container whenever it terminates (useful for web servers, long-running services).
 - `OnFailure`: Restarts the container only if it exits with a non-zero status (useful for batch jobs).
 - `Never`: Never restarts the container.
+
+---
+
+## Lab Tasks
+
+### Task 1: Observe Pod Restarts
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-pod-restarts
+   ```
+2. Navigate to `~/k8s-pods`.
+3. Complete the task requirements: Pod restarts successfully verified! (recorded: $USER_RESTARTS, actual: $ACTUAL_RESTARTS)
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Inspect Pod Phases
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-watch-pod-lifecycle
+   ```
+2. Navigate to `~/k8s-pods`.
+3. Complete the task requirements: Successfully verified pod lifecycle pending status.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

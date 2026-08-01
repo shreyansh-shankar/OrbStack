@@ -20,3 +20,19 @@ resource "local_file" "config" {
 ```
 
 Formatting configurations with `terraform fmt` keeps key-value pairs aligned, making code review and collaboration significantly easier.
+
+---
+
+## Lab Tasks
+
+### Task 1: Comment and Format Configuration
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-format-configuration
+   ```
+2. Navigate to `~/terraform-hcl-challenge`.
+3. Complete the task requirements: Configuration commented and formatted successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

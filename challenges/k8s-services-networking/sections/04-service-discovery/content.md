@@ -41,3 +41,19 @@ This will output the Service's ClusterIP and confirm CoreDNS is successfully res
 
 > [!TIP]
 > Sometimes, `nslookup` inside certain containers (like Busybox) will print search path domain lookup errors and exit with status `1` even though it successfully resolves the service IP. You can safely ignore these warnings or append `|| true` if your shell scripts require an exit code of `0`.
+
+---
+
+## Lab Tasks
+
+### Task 1: Resolve Service DNS
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-service-dns
+   ```
+2. Navigate to `~/k8s-services-networking`.
+3. Complete the task requirements: Service DNS successfully resolved and verified.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

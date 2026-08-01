@@ -34,3 +34,31 @@ kubectl get events --sort-by='.metadata.creationTimestamp'
 kubectl get events --field-selector type=Warning
 ```
 Warning events often highlight immediately why a pod fails to start (e.g. scheduling failure reasons, mount errors, or authentication issues).
+
+---
+
+## Lab Tasks
+
+### Task 1: Investigate Cluster Pods
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-investigate-resources
+   ```
+2. Navigate to `~/k8s-troubleshooting`.
+3. Complete the task requirements: Successfully queried and matched system pods.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Read Warning Events
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-read-events
+   ```
+2. Navigate to `~/k8s-troubleshooting`.
+3. Complete the task requirements: Successfully retrieved and matched the warning reason.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

@@ -45,3 +45,31 @@ If you want to discard an experimental or abandoned branch without merging it, y
 git branch -D <branch-name>
 ```
 This skips the safety checks and permanently deletes the branch.
+
+---
+
+## Lab Tasks
+
+### Task 1: Delete a Merged Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-delete-merged-branch
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Merged branch 'feature-old' deleted successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: List Branches
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-list-branches
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Branch list saved and verified successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

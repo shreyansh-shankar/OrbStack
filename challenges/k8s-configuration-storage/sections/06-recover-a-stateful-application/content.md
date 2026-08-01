@@ -25,3 +25,18 @@ To diagnose storage and mount errors:
 ## Resolving Missing Claim Failures
 
 If a Pod references a non-existent claim name, you must create a PersistentVolumeClaim with the exact matching metadata name in that namespace. Once the claim is created, the control plane binds it to a PersistentVolume, and the node's kubelet immediately mounts it, allowing the container to start.
+
+---
+
+## Lab Tasks
+
+### Task 1: Fix Pod Storage Mount
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-fix-storage-configuration
+   ```
+2. Complete the task requirements: Storage configuration fixed and db-pod successfully mounted and running.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

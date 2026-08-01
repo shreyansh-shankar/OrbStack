@@ -36,3 +36,31 @@ To see detailed configuration properties of a remote:
 git remote show origin
 ```
 This shows tracking branch status, pull/push rules, and endpoints.
+
+---
+
+## Lab Tasks
+
+### Task 1: Clone a Remote Repository
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-clone-repository
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Remote repository cloned successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Inspect Remote Properties
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-inspect-remote
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Remote repository details inspected and recorded successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

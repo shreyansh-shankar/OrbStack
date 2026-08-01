@@ -34,3 +34,30 @@ To immediately restore service while debugging the configuration issue, undo the
 kubectl rollout undo deployment/<deployment-name>
 ```
 This stops the current rollout and reverts back to the last known working ReplicaSet configuration.
+
+---
+
+## Lab Tasks
+
+### Task 1: Identify Stuck Rollout Cause
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-debug-rollout
+   ```
+2. Navigate to `~/k8s-troubleshooting`.
+3. Complete the task requirements: Successfully identified the stuck rollout image tag.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Recover Stuck Rollout
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-recover-failed-update
+   ```
+2. Complete the task requirements: Stuck deployment rollout successfully resolved and updated.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

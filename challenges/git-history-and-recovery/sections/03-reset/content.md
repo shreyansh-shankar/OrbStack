@@ -34,3 +34,43 @@ git reset --hard HEAD~1
 
 > [!WARNING]
 > A `git reset --hard` will permanently overwrite uncommitted changes in your working directory. Use it with extreme caution!
+
+---
+
+## Lab Tasks
+
+### Task 1: Perform a Hard Reset
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-hard-reset
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Hard reset completed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Perform a Mixed Reset
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-mixed-reset
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Mixed reset completed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 3: Perform a Soft Reset
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-soft-reset
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Soft reset completed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

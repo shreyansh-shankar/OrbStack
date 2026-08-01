@@ -18,7 +18,6 @@ setup:
     - git -C $HOME/git-challenge add experiment.txt
     - git -C $HOME/git-challenge commit -m 'Add experiment file'
     - git -C $HOME/git-challenge rev-parse HEAD > $HOME/git-challenge/.correct-hash
-    - git -C $HOME/git-challenge checkout master || git -C $HOME/git-challenge checkout
-    main
-  - git -C $HOME/git-challenge branch -D experimental
+    - git -C $HOME/git-challenge checkout master || git -C $HOME/git-challenge checkout main
+    - git -C $HOME/git-challenge branch -D experimental
 version: 1

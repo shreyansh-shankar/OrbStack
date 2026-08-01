@@ -37,3 +37,19 @@ If the pod contains multiple containers, specify the container name:
 ```bash
 kubectl logs failing-pod -c app-container
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Investigate Cluster Failures
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-cluster-investigation
+   ```
+2. Navigate to `~/k8s-fundamentals`.
+3. Complete the task requirements: Successfully investigated cluster failure and retrieved the crash error code.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

@@ -14,3 +14,19 @@ resource "local_file" "copy" {
   filename = "/tmp/copy.txt"
 }
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Read from a Data Source
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-read-data-source
+   ```
+2. Navigate to `~/terraform-resources-challenge`.
+3. Complete the task requirements: Data source read and applied successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

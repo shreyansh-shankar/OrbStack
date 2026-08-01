@@ -20,3 +20,19 @@ To restore this branch:
    ```
 
 Now, checking out `experimental-restored` restores your files and history exactly as they were!
+
+---
+
+## Lab Tasks
+
+### Task 1: Recover Deleted History
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-recover-deleted-history
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Deleted branch successfully recovered and restored.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

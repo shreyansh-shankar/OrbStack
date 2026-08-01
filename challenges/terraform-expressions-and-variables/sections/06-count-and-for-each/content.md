@@ -21,3 +21,19 @@ resource "local_file" "files" {
   filename = "/tmp/${each.key}.conf"
 }
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Repeat Resources with count or for_each
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-repeat-resources
+   ```
+2. Navigate to `~/terraform-expr-challenge`.
+3. Complete the task requirements: Resource repetition validated successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

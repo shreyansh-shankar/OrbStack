@@ -49,3 +49,43 @@ kubectl describe pod nginx-pod
 # Spin up an nginx pod directly
 kubectl run my-nginx --image=nginx
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Get Cluster Information
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-cluster-information
+   ```
+2. Navigate to `~/k8s-fundamentals`.
+3. Complete the task requirements: Successfully verified cluster IP retrieval.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Describe a Resource
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-describe-resource
+   ```
+2. Navigate to `~/k8s-fundamentals`.
+3. Complete the task requirements: Successfully retrieved the tier label of web-server pod.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 3: List Cluster Resources
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-list-resources
+   ```
+2. Navigate to `~/k8s-fundamentals`.
+3. Complete the task requirements: Successfully listed and verified sorted pod list.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

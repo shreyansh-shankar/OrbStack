@@ -32,3 +32,41 @@ This status shows that the container successfully scheduled and started, but the
 A Pod remains in `Pending` state when it cannot be scheduled on any node in the cluster.
 - **Common causes**: Insufficient resources (CPU or Memory requests exceed node capacity), unsatisfiable nodeSelectors or taints.
 - **Diagnose**: Run `kubectl describe pod <pod-name>` and inspect the warning events under the scheduler.
+
+---
+
+## Lab Tasks
+
+### Task 1: Debug CrashLoopBackOff
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-debug-crashloopbackoff
+   ```
+2. Navigate to `~/k8s-troubleshooting`.
+3. Complete the task requirements: Successfully identified the crashed error code from pod logs.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Debug ImagePullBackOff
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-debug-imagepullbackoff
+   ```
+2. Complete the task requirements: ImagePullBackOff resolved successfully! Pod is running.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 3: Debug Pending Pod
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-debug-pending-pod
+   ```
+2. Complete the task requirements: Pending pod scheduling error resolved successfully.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

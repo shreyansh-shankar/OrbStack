@@ -45,3 +45,31 @@ Once you locate the hash of the lost commit in the reflog, you can restore it:
   ```bash
   git cherry-pick <lost-commit-hash>
   ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Find a Lost Commit
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-find-lost-commit
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Correct lost commit hash identified and recorded.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Restore Lost Work
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-restore-lost-work
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Lost commit successfully recovered and branch state restored.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

@@ -29,3 +29,31 @@ resource "local_file" "app" {
   depends_on = [local_file.db]
 }
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Create an Explicit Dependency
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-explicit-dependency
+   ```
+2. Navigate to `~/terraform-resources-challenge`.
+3. Complete the task requirements: Explicit dependency verified.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Create an Implicit Dependency
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-implicit-dependency
+   ```
+2. Navigate to `~/terraform-resources-challenge`.
+3. Complete the task requirements: Implicit dependency verified.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

@@ -37,3 +37,31 @@ or:
 git checkout main
 ```
 (Replace `main` with `master` if that is your default branch name).
+
+---
+
+## Lab Tasks
+
+### Task 1: Checkout an Old Commit
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-checkout-old-commit
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Successfully checked out the second commit and entered detached HEAD state.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Return to Main Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-return-to-main
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Returned to the default branch successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

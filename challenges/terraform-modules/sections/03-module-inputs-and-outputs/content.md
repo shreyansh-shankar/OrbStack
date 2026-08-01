@@ -19,3 +19,31 @@ resource "local_file" "summary" {
   filename = "/tmp/summary.txt"
 }
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Pass Input Arguments to a Module
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-module-inputs
+   ```
+2. Navigate to `~/terraform-modules-challenge`.
+3. Complete the task requirements: Module input arguments configured successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Access Output Values from a Module
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-module-outputs
+   ```
+2. Navigate to `~/terraform-modules-challenge`.
+3. Complete the task requirements: Module output value accessed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

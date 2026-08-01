@@ -42,3 +42,31 @@ git push origin --delete feature-login
 ```
 
 This deletes the pointer on the remote repository and removes the branch from the server.
+
+---
+
+## Lab Tasks
+
+### Task 1: Delete a Remote Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-delete-remote-branch
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Remote branch deleted successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Track a Remote Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-track-remote-branch
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Remote branch tracked and checked out successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

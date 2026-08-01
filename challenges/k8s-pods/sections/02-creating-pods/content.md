@@ -38,3 +38,29 @@ To delete it using the manifest file:
 ```bash
 kubectl delete -f pod-manifest.yaml
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Create Your First Pod
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-create-first-pod
+   ```
+2. Complete the task requirements: Successfully created and running nginx-pod.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Delete a Pod
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-delete-pod
+   ```
+2. Complete the task requirements: Pod 'dynamic-pod' successfully deleted.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

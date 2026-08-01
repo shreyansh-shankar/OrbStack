@@ -33,3 +33,19 @@ To describe a specific service:
 ```bash
 kubectl describe svc my-service -n my-namespace
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Explore Cluster Services
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-explore-cluster
+   ```
+2. Navigate to `~/k8s-fundamentals`.
+3. Complete the task requirements: Service ClusterIP successfully validated.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

@@ -48,3 +48,43 @@ To purge it from the current branch's latest commit entirely:
    git commit --amend --no-edit
    ```
 This overwrites your last commit, replacing it with a new commit that does not contain `password.txt`.
+
+---
+
+## Lab Tasks
+
+### Task 1: Remove Sensitive File
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-remove-sensitive-file
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Sensitive file removed from commit history and ignored successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Undo the Last Commit
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-undo-last-commit
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Last commit undone and changes kept in staging index.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 3: Fix Commit on Wrong Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-wrong-branch-fix
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Accidental commit moved to 'feature-login' and default branch reset successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

@@ -30,3 +30,18 @@ kubectl get pods
 kubectl rollout status deployment/<deployment-name>
 ```
 Confirm all pods transition to `Running` state and the rollout completes successfully.
+
+---
+
+## Lab Tasks
+
+### Task 1: Recover Production Application
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-recover-production-application
+   ```
+2. Complete the task requirements: Production application successfully recovered! ConfigMap created, image fixed, and pod is running.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

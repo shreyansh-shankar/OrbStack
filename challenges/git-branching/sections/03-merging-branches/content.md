@@ -32,3 +32,31 @@ A fast-forward merge occurs when the commit history of the target branch (`main`
 ### 2. Three-Way Merge (Recursive/Merge Commit)
 A three-way merge occurs when both branches have diverged (meaning new commits were made on `main` *and* on the feature branch since they split).
 - Git creates a new **merge commit** that combines the histories, pointing to both parent commits.
+
+---
+
+## Lab Tasks
+
+### Task 1: Fast-Forward Merge
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-fast-forward-merge
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Fast-forward merge completed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Merge a Feature Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-merge-feature
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Branch 'feature-abc' merged into '$ACTIVE_BRANCH' successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

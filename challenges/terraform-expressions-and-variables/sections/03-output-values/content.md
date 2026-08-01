@@ -12,3 +12,19 @@ output "file_id" {
 
 ## Sensitive Outputs
 If an output contains sensitive data (like passwords or API tokens), set `sensitive = true` to prevent Terraform from printing it in plain text during plan/apply output.
+
+---
+
+## Lab Tasks
+
+### Task 1: Create an Output Value
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-create-output
+   ```
+2. Navigate to `~/terraform-expr-challenge`.
+3. Complete the task requirements: Output value created and verified.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

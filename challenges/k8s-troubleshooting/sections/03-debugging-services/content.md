@@ -33,3 +33,30 @@ kubectl get pods --show-labels
 - **`targetPort`**: The port that the container application inside the pod is actually listening on.
 
 If the service `targetPort` is configured incorrectly (e.g. Service targetPort is `80`, but the pod application listens on `8080`), connection attempts through the Service cluster IP will fail despite endpoints showing as active.
+
+---
+
+## Lab Tasks
+
+### Task 1: Debug Service Endpoints
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-debug-network-path
+   ```
+2. Navigate to `~/k8s-troubleshooting`.
+3. Complete the task requirements: Service endpoint network path verified successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Fix Service Selector
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-fix-selector-mismatch
+   ```
+2. Complete the task requirements: Service selector mismatch fixed successfully.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

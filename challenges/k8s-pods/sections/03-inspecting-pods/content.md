@@ -48,3 +48,42 @@ Or execute a single command without opening an interactive shell:
 ```bash
 kubectl exec nginx-pod -- ls -la /usr/share/nginx/html
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Exec Into Container
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-exec-into-pod
+   ```
+2. Complete the task requirements: Successfully validated container execution and hostname entry.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Inspect a Pod IP
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-inspect-pod
+   ```
+2. Navigate to `~/k8s-pods`.
+3. Complete the task requirements: Pod IP successfully verified.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 3: Inspect Pod Logs
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-view-pod-logs
+   ```
+2. Navigate to `~/k8s-pods`.
+3. Complete the task requirements: Pod log message verified successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

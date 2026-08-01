@@ -30,3 +30,18 @@ To recover and fix a stuck deployment:
   ```bash
   kubectl rollout undo deployment/my-deployment
   ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Fix Stuck Rollout
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-fix-broken-deployment
+   ```
+2. Complete the task requirements: Stuck deployment successfully recovered and is running.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

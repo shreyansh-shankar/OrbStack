@@ -34,3 +34,31 @@ You must push and tell Git to remember the relationship (upstream) using the `-u
 git push -u origin new-feature
 ```
 On subsequent pushes, you can simply run `git push`.
+
+---
+
+## Lab Tasks
+
+### Task 1: Fix Non-Fast-Forward Reject
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-fix-non-fast-forward
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Non-fast-forward push reject resolved and pushed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Fix Upstream Tracking Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-fix-upstream-branch
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Upstream tracking branch configured and pushed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

@@ -27,3 +27,31 @@ git revert -n <commit-hash-1> <commit-hash-2>
 ```
 
 This applies the inverse changes of the specified commits to your staging area and working directory, letting you inspect the final state and create a single commit manually.
+
+---
+
+## Lab Tasks
+
+### Task 1: Revert a Bad Commit
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-revert-bad-commit
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Bad commit reverted successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Revert Multiple Commits
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-revert-multiple-commits
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Successfully reverted multiple commits in a single custom commit.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

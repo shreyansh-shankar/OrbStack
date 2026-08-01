@@ -39,3 +39,31 @@ To resolve a conflict, you must manually edit the conflicted files:
    git commit
    ```
    (Alternatively, in modern Git, you can run `git merge --continue`).
+
+---
+
+## Lab Tasks
+
+### Task 1: Complete the Merge Commit
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-complete-merge
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Merge commit completed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Resolve Merge Conflict
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-resolve-merge-conflict
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Merge conflict in index.html resolved and staged successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

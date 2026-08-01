@@ -22,3 +22,18 @@ Kubernetes Pods can fail for various reasons. The most common runtime pod contai
 - **Reason**: The pod cannot be scheduled on any node.
 - **Common causes**: Insufficient CPU/Memory resources on cluster nodes, node selectors or taints/tolerations constraints, or volume mount claims that cannot be resolved.
 - **Triage**: Run `kubectl describe pod <name>` and inspect the scheduler events.
+
+---
+
+## Lab Tasks
+
+### Task 1: Debug Pod Image Typo
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-debug-failed-pod
+   ```
+2. Complete the task requirements: Successfully debugged and running pod with correct image.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

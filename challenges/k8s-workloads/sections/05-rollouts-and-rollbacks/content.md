@@ -40,3 +40,41 @@ To roll back to a specific revision from the history list:
 kubectl rollout undo deployment/nginx-deployment --to-revision=2
 ```
 This creates a new revision copying the configuration of revision 2.
+
+---
+
+## Lab Tasks
+
+### Task 1: Check Rollout Status
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-check-rollout
+   ```
+2. Navigate to `~/k8s-workloads`.
+3. Complete the task requirements: Rollout status message verified successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Rollback a Deployment
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-rollback-deployment
+   ```
+2. Complete the task requirements: Deployment rolled back to nginx:1.14.2 successfully.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 3: Update Container Image
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-update-image
+   ```
+2. Complete the task requirements: Deployment image successfully updated to nginx:1.16.1 and is running.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

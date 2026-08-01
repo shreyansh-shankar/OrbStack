@@ -42,3 +42,29 @@ spec:
           key: app.environment
 ```
 In this example, the container's environment variable `ENVIRONMENT` will be populated with the value associated with key `app.environment` inside ConfigMap `app-config`.
+
+---
+
+## Lab Tasks
+
+### Task 1: Create a ConfigMap
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-create-configmap
+   ```
+2. Complete the task requirements: ConfigMap 'app-config' successfully verified.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Use ConfigMap as Env Var
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-use-configmap
+   ```
+2. Complete the task requirements: ConfigMap environment variable injection verified successfully.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

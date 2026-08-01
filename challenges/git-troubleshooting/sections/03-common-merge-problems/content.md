@@ -40,3 +40,31 @@ If you *do* want to resolve conflicts:
    git commit
    ```
    (This creates a merge commit containing both branch parents).
+
+---
+
+## Lab Tasks
+
+### Task 1: Abort a Conflicted Merge
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-abort-merge
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Conflicted merge aborted successfully and repository clean.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Finish a Conflicted Merge
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-finish-conflicted-merge
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Conflicted merge resolved and committed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

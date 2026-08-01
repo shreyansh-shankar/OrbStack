@@ -48,3 +48,18 @@ spec:
       mountPath: /var/log
 ```
 In this example, both containers mount the `shared-logs` volume at `/var/log`. The `sidecar` container reads the file written by the `app` container.
+
+---
+
+## Lab Tasks
+
+### Task 1: Deploy a Sidecar Pod
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-sidecar-pod
+   ```
+2. Complete the task requirements: Multi-container sidecar pod successfully verified.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

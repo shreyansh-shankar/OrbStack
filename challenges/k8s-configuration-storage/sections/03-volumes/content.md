@@ -35,3 +35,29 @@ spec:
       mountPath: /cache
 ```
 Here, directory `/cache` inside the container is backed by the transient volume named `cache-volume`.
+
+---
+
+## Lab Tasks
+
+### Task 1: Create transient emptyDir Volume
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-emptydir-volume
+   ```
+2. Complete the task requirements: Transient emptyDir volume successfully verified.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Create Shared Volume
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-shared-volume
+   ```
+2. Complete the task requirements: Multi-container emptyDir shared volume successfully verified.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

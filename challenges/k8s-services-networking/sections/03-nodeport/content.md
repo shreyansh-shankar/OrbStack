@@ -34,3 +34,30 @@ spec:
 
 - If you don't specify `nodePort`, Kubernetes will automatically allocate a random port in the default `30000-32767` range.
 - If you specify a static `nodePort`, you must make sure it is not already in use by another Service.
+
+---
+
+## Lab Tasks
+
+### Task 1: Access NodePort Service
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-access-nodeport
+   ```
+2. Navigate to `~/k8s-services-networking`.
+3. Complete the task requirements: NodePort service accessed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Create a NodePort Service
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-create-nodeport
+   ```
+2. Complete the task requirements: NodePort service created successfully on nodePort 30080.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

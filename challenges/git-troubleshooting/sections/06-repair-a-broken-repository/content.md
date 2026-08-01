@@ -22,3 +22,19 @@ To align your local branch `dev` to match `origin/dev` exactly, replacing all lo
    ```
 
 This deletes all local commits on `dev` that are not present on `origin/dev`, and matches the working tree to the server version.
+
+---
+
+## Lab Tasks
+
+### Task 1: Recover Development Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-recover-development-branch
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Local development branch successfully aligned with remote server state.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

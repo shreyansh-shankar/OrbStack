@@ -46,3 +46,18 @@ spec:
 
 NetworkPolicies are implemented by the CNI plugin. If you run a cluster without a CNI plugin that supports NetworkPolicies (like Flannel), applying a NetworkPolicy object will succeed, but it will have **no effect** (traffic will not be blocked). 
 CNIs like **Calico**, **Cilium**, and **Kube-router** fully enforce NetworkPolicies.
+
+---
+
+## Lab Tasks
+
+### Task 1: Restrict Traffic with NetworkPolicy
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-restrict-traffic
+   ```
+2. Complete the task requirements: NetworkPolicy 'db-policy' restricts traffic correctly.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

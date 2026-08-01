@@ -52,3 +52,29 @@ spec:
 - **`ingressClassName`**: Tells the cluster which Ingress Controller should handle this Ingress resource (usually `nginx`).
 - **`host`**: The domain name to map.
 - **`backend.service`**: The destination Service and Port.
+
+---
+
+## Lab Tasks
+
+### Task 1: Create an Ingress Resource
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-create-ingress
+   ```
+2. Complete the task requirements: Ingress resource created and configured correctly.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Install an Ingress Controller
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-install-ingress
+   ```
+2. Complete the task requirements: Ingress controller installed and running successfully.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

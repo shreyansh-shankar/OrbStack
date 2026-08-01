@@ -51,3 +51,31 @@ Using switch:
 git switch -c <branch-name>
 ```
 The `-c` stands for *create*.
+
+---
+
+## Lab Tasks
+
+### Task 1: Create a Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-create-branch
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Branch 'feature-login' created successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Switch to a Branch
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-switch-branch
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Successfully switched to branch 'feature-login'.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

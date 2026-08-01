@@ -52,3 +52,29 @@ spec:
           name: task-pv-storage
 ```
 Data written to `/usr/share/nginx/html` in this container will be persisted to the backing PersistentVolume and remains safe even if the Pod is deleted.
+
+---
+
+## Lab Tasks
+
+### Task 1: Create a Storage Claim
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-create-pvc
+   ```
+2. Complete the task requirements: PersistentVolumeClaim 'task-pv-claim' successfully verified.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Mount PVC in Pod
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-mount-persistent-volume
+   ```
+2. Complete the task requirements: PVC dynamic storage volume mount successfully verified.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

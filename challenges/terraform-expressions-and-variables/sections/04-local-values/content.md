@@ -15,3 +15,19 @@ locals {
 ```
 
 Locals are referenced using `local.local_name`.
+
+---
+
+## Lab Tasks
+
+### Task 1: Use Local Values for DRY Code
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-use-locals
+   ```
+2. Navigate to `~/terraform-expr-challenge`.
+3. Complete the task requirements: Local values utilized successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

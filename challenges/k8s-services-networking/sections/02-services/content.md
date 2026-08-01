@@ -36,3 +36,30 @@ spec:
 - **`spec.selector`**: Identifies the target Pods by matching their labels (in this case, Pods with `app: my-app`).
 - **`spec.ports[].port`**: The port that the Service itself will expose inside the cluster.
 - **`spec.ports[].targetPort`**: The port on the container inside the target Pod that receives the traffic.
+
+---
+
+## Lab Tasks
+
+### Task 1: Access a Service Internal to Cluster
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-access-service
+   ```
+2. Navigate to `~/k8s-services-networking`.
+3. Complete the task requirements: Successfully accessed the internal cluster service from the client pod.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Create a ClusterIP Service
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-create-clusterip-service
+   ```
+2. Complete the task requirements: ClusterIP service created and targets backend pods successfully.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

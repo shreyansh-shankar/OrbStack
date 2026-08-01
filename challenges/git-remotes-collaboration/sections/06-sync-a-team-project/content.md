@@ -26,3 +26,19 @@ In a real development team, synchronizing your code with your colleagues is a da
 5. **Merge (on server/PR)**: Typically, changes are merged on the server via Pull Requests. Once merged, you can delete the branch remote and local.
 
 Always pulling before coding is the best way to prevent merge conflicts.
+
+---
+
+## Lab Tasks
+
+### Task 1: Sync Local and Remote Project
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-sync-local-and-remote
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Local and remote synchronization completed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

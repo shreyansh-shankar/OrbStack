@@ -21,3 +21,31 @@ To download the required providers (like the `local` provider used above), you m
 terraform init
 ```
 This downloads plugins to a hidden `.terraform/` directory.
+
+---
+
+## Lab Tasks
+
+### Task 1: Format Your Terraform Configurations
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-format-project
+   ```
+2. Navigate to `~/terraform-challenge`.
+3. Complete the task requirements: Configurations formatted correctly.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Initialize a Terraform Project
+1. Start the lab in your terminal:
+   ```bash
+   tld start tf-init-project
+   ```
+2. Navigate to `~/terraform-challenge`.
+3. Complete the task requirements: Terraform workspace initialized successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

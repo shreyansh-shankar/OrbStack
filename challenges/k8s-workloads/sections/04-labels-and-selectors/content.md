@@ -43,3 +43,42 @@ kubectl get pods -l environment=production,app=nginx
 # List all pods where tier label is NOT backend
 kubectl get pods -l 'tier!=backend'
 ```
+
+---
+
+## Lab Tasks
+
+### Task 1: Label a Resource
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-add-labels
+   ```
+2. Complete the task requirements: Label environment=production verified successfully on metadata-pod.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: Query by Label Selector
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-query-by-label
+   ```
+2. Navigate to `~/k8s-workloads`.
+3. Complete the task requirements: Successfully queried and verified backend pods list.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 3: Selector Match
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-selector-match
+   ```
+2. Navigate to `~/k8s-workloads`.
+3. Complete the task requirements: Selector match query verified successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

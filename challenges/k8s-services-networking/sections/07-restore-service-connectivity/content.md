@@ -47,3 +47,18 @@ A Service will only route traffic to Pods that are in the **`Ready`** state. If 
 kubectl get pods
 ```
 Check if the `READY` column shows `0/1` or similar. If so, investigate pod conditions or readiness probes using `kubectl describe pod`.
+
+---
+
+## Lab Tasks
+
+### Task 1: Debug Service Connectivity
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-debug-service-connectivity
+   ```
+2. Complete the task requirements: Service connectivity restored successfully.
+3. Verify the task:
+   ```bash
+   tld check
+   ```

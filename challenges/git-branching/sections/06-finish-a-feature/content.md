@@ -30,3 +30,19 @@ Whenever you start working on a new feature or fix:
    ```
 
 Following this workflow ensures that the main branch remains clean and deployable at all times.
+
+---
+
+## Lab Tasks
+
+### Task 1: Complete Feature Workflow
+1. Start the lab in your terminal:
+   ```bash
+   tld start git-complete-feature-workflow
+   ```
+2. Navigate to `~/git-challenge`.
+3. Complete the task requirements: Complete feature branch workflow executed successfully.
+4. Verify the task:
+   ```bash
+   tld check
+   ```

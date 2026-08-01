@@ -60,3 +60,30 @@ kubectl get deploy
 kubectl describe deployment nginx-deployment
 ```
 Describing a deployment displays replicas status, conditions (e.g. `Available`, `Progressing`), and controller events.
+
+---
+
+## Lab Tasks
+
+### Task 1: Create a Deployment
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-create-deployment
+   ```
+2. Complete the task requirements: Deployment 'nginx-deployment' successfully created with 3 running replicas.
+3. Verify the task:
+   ```bash
+   tld check
+   ```
+
+### Task 2: List Deployments
+1. Start the lab in your terminal:
+   ```bash
+   tld start k8s-list-deployments
+   ```
+2. Navigate to `~/k8s-workloads`.
+3. Complete the task requirements: Deployments count successfully verified.
+4. Verify the task:
+   ```bash
+   tld check
+   ```
