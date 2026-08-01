@@ -7,7 +7,7 @@ topic: docker
 difficulty: intermediate
 estimated_minutes: 50
 sections:
-- id: 01-networking-basics
+- id: dkr-networking-basics
   order: 1
 - id: 02-port-publishing
   order: 2

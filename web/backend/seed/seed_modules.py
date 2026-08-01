@@ -129,6 +129,7 @@ async def seed():
                 existing_section = result.scalar_one_or_none()
 
                 if existing_section:
+                    existing_section.module_id = module_id
                     existing_section.title = section_data["title"]
                     existing_section.order = section_data["order"]
                     existing_section.xp = section_data.get("xp", 10)
