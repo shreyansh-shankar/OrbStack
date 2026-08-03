@@ -100,7 +100,7 @@ func IsRunning() bool {
 func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]string{
 		"status":  "ok",
-		"version": "0.1.0",
+		"version": "1.0.0",
 	})
 }
 

@@ -202,7 +202,7 @@ export default function DocsNavbar({
                 fontWeight: 600,
               }}
             >
-              v0.1.0
+              v1.0.0
             </span>
           </div>
         </div>

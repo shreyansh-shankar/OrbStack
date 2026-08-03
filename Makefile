@@ -1,8 +1,22 @@
 # Makefile — The Last Deploy agent
-.PHONY: build run sync start stop check status login logout clean install
+.PHONY: build run sync start stop check status login logout clean install dist
 
 build:
 	cd agent && go get golang.org/x/term && go build -o ../bin/tld .
+
+dist:
+	mkdir -p dist
+	rm -rf dist/*
+	cd agent && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o ../dist/tld-linux-amd64 .
+	cd agent && CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o ../dist/tld-linux-arm64 .
+	cd agent && CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o ../dist/tld-darwin-amd64 .
+	cd agent && CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o ../dist/tld-darwin-arm64 .
+	cd agent && CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o ../dist/tld-windows-amd64.exe .
+	cd agent && CGO_ENABLED=0 GOOS=windows GOARCH=arm64 go build -ldflags="-s -w" -o ../dist/tld-windows-arm64.exe .
+	cp dist/tld-windows-amd64.exe dist/tld-windows-amd64
+	cp dist/tld-windows-arm64.exe dist/tld-windows-arm64
+	cd dist && sha256sum tld-* > checksums.txt
+	@echo "Build complete. Artifacts and checksums created in dist/"
 
 # Install to /usr/local/bin so `tld` works from anywhere.
 # Requires sudo on most systems.
@@ -33,4 +47,4 @@ logout: build
 	./bin/tld logout
 
 clean:
-	rm -rf bin/
+	rm -rf bin/ dist/
