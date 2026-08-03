@@ -7,6 +7,7 @@ const page: DocPage = {
   sectionId: "getting-started",
   toc: [
     { id: "prerequisites", text: "Prerequisites", level: 2 },
+    { id: "quick-install", text: "Quick Install (curl)", level: 2 },
     { id: "npm", text: "Install via npm", level: 2 },
     { id: "brew", text: "Install via Homebrew", level: 2 },
     { id: "source", text: "Build from source", level: 2 },
@@ -33,6 +34,20 @@ const page: DocPage = {
       variant: "warning",
       title: "Docker is required",
       text: "TLD labs run inside Docker containers. Make sure Docker is installed and the daemon is running before you start a lab. Run `docker info` to verify.",
+    },
+    {
+      type: "heading2",
+      text: "Quick Install (curl)",
+      id: "quick-install",
+    },
+    {
+      type: "paragraph",
+      text: "The fastest way to install the TLD CLI on Linux or macOS is via our install script:",
+    },
+    {
+      type: "code",
+      lang: "bash",
+      code: "curl -fsSL https://install.thelastdeploy.com | sh",
     },
     {
       type: "heading2",

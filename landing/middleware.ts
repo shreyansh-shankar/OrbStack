@@ -14,6 +14,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Check if we are accessing via install subdomain (production or local localhost)
+  const isInstallSubdomain = hostname.startsWith("install.") || hostname.includes("install.localhost");
+  if (isInstallSubdomain) {
+    return NextResponse.rewrite(new URL("/install.sh", request.url));
+  }
+
   // Check if we are accessing via docs subdomain (production or local localhost)
   const isDocsSubdomain = hostname.startsWith("docs.") || hostname.includes("docs.localhost");
 
