@@ -54,7 +54,7 @@ const page: DocPage = {
     {
       type: "collapsible",
       trigger: "What are the system requirements?",
-      content: "You need: Docker 24+, Node.js 18+ (for the npm install method), 4GB RAM minimum (8GB recommended), and 10GB free disk space for Docker images. Linux, macOS, and Windows (WSL2) are all supported.",
+      content: "You need: Docker 24+, 4GB RAM minimum (8GB recommended), and 10GB free disk space for Docker images. Linux, macOS, and Windows (WSL2) are all supported.",
     },
     {
       type: "collapsible",

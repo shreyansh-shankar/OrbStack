@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
+import QuickInstall from "@/components/quick-install";
 import StartPracticing from "@/components/start-practicing";
 import Problem from "@/components/problem";
 import HowItWorks from "@/components/how-it-works";
@@ -17,6 +18,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <QuickInstall />
         <StartPracticing />
         <Problem />
         <HowItWorks />

@@ -46,7 +46,7 @@ const page: DocPage = {
         {
           title: "Install the CLI",
           description: "One command to install the tld agent on your machine.",
-          code: "npm install -g @tld/cli",
+          code: "curl -fsSL https://install.thelastdeploy.com | sh",
         },
         {
           title: "Start a lab",

@@ -8,7 +8,6 @@ const page: DocPage = {
   toc: [
     { id: "prerequisites", text: "Prerequisites", level: 2 },
     { id: "quick-install", text: "Quick Install (curl)", level: 2 },
-    { id: "npm", text: "Install via npm", level: 2 },
     { id: "brew", text: "Install via Homebrew", level: 2 },
     { id: "source", text: "Build from source", level: 2 },
     { id: "verify", text: "Verify installation", level: 2 },
@@ -24,7 +23,6 @@ const page: DocPage = {
       headers: ["Tool", "Minimum Version", "Notes"],
       rows: [
         ["Docker", "24.0+", "Required to run labs"],
-        ["Node.js", "18+", "Required for npm install method only"],
         ["Go", "1.21+", "Required for build-from-source only"],
         ["macOS / Linux", "any", "Windows requires WSL2"],
       ],
@@ -42,7 +40,7 @@ const page: DocPage = {
     },
     {
       type: "paragraph",
-      text: "The fastest way to install the TLD CLI on Linux or macOS is via our install script:",
+      text: "The recommended way to install the TLD CLI on Linux, macOS, or Windows (WSL2) is via our official shell script:",
     },
     {
       type: "code",
@@ -51,26 +49,12 @@ const page: DocPage = {
     },
     {
       type: "heading2",
-      text: "Install via npm",
-      id: "npm",
-    },
-    {
-      type: "paragraph",
-      text: "The easiest way to install TLD is via npm. This works on Linux, macOS, and Windows (WSL2).",
-    },
-    {
-      type: "code",
-      lang: "bash",
-      code: "npm install -g @tld/cli",
-    },
-    {
-      type: "heading2",
       text: "Install via Homebrew",
       id: "brew",
     },
     {
       type: "paragraph",
-      text: "macOS and Linux users can install via Homebrew.",
+      text: "macOS and Linux users can also install via Homebrew.",
     },
     {
       type: "code",
@@ -99,7 +83,7 @@ const page: DocPage = {
     {
       type: "code",
       lang: "bash",
-      code: "tld version\n# tld v0.1.0 (linux/amd64)\n\ntld doctor\n# Checking environment...\n# ✓ Docker is running (24.0.5)\n# ✓ Docker socket accessible\n# ✓ Disk space OK (45GB free)\n# ✓ Network connectivity OK\n# All checks passed.",
+      code: "tld version\n# tld v1.0.0 (linux/amd64)\n\ntld doctor\n# Checking environment...\n# ✓ Docker is running (24.0.5)\n# ✓ Docker socket accessible\n# ✓ Disk space OK (45GB free)\n# ✓ Network connectivity OK\n# All checks passed.",
     },
     {
       type: "callout",

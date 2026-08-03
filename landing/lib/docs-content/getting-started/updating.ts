@@ -34,8 +34,8 @@ const page: DocPage = {
     {
       type: "callout",
       variant: "info",
-      title: "npm users",
-      text: "If you installed via npm, you can also run `npm update -g @tld/cli` to update.",
+      title: "Re-run installer script",
+      text: "You can also upgrade to the latest version anytime by re-running: `curl -fsSL https://install.thelastdeploy.com | sh`",
     },
     {
       type: "heading2",

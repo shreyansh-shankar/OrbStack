@@ -27,7 +27,7 @@ const page: DocPage = {
     {
       type: "code",
       lang: "bash",
-      code: "npm install -g @tld/cli",
+      code: "curl -fsSL https://install.thelastdeploy.com | sh",
     },
     {
       type: "heading2",
