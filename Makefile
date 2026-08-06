@@ -1,46 +1,129 @@
-# Makefile — The Last Deploy agent
-.PHONY: build run sync start stop check status login logout clean install dist
+# ==========================================================
+# The Last Deploy - Build System
+# ==========================================================
+
+GO_DIR   := agent
+BIN_DIR  := bin
+DIST_DIR := dist
+CLI      := $(BIN_DIR)/tld
+
+.PHONY: \
+	build dist install clean \
+	fmt vet test verify \
+	sync start stop check status login logout doctor publish
+
+# ==========================================================
+# Verification
+# ==========================================================
+
+fmt:
+	@echo "==> Checking code formatting..."
+	@cd $(GO_DIR) && test -z "$$(gofmt -l .)"
+	@echo "✓ Formatting OK"
+
+vet:
+	@echo "==> Running go vet..."
+	@cd $(GO_DIR) && go vet ./...
+	@echo "✓ go vet passed"
+
+test:
+	@echo "==> Running unit tests..."
+	@cd $(GO_DIR) && go test ./...
+	@echo "✓ Tests passed"
+
+verify: fmt vet test
+	@echo ""
+	@echo "====================================="
+	@echo "Verification completed successfully."
+	@echo "====================================="
+
+# ==========================================================
+# Build
+# ==========================================================
 
 build:
-	cd agent && go get golang.org/x/term && go build -o ../bin/tld .
+	@echo "==> Building CLI..."
+	@mkdir -p $(BIN_DIR)
+	@cd $(GO_DIR) && go build -o ../$(CLI) .
+	@echo "✓ CLI built successfully"
 
-dist:
-	mkdir -p dist
-	rm -rf dist/*
-	cd agent && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o ../dist/tld-linux-amd64 .
-	cd agent && CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o ../dist/tld-linux-arm64 .
-	cd agent && CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o ../dist/tld-darwin-amd64 .
-	cd agent && CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o ../dist/tld-darwin-arm64 .
-	cd dist && sha256sum tld-* > checksums.txt
-	@echo "Build complete. Artifacts and checksums created in dist/"
+dist: verify
+	@echo "==> Creating release artifacts..."
 
-# Install to /usr/local/bin so `tld` works from anywhere.
-# Requires sudo on most systems.
+	@mkdir -p $(DIST_DIR)
+	@rm -rf $(DIST_DIR)/*
+
+	@cd $(GO_DIR) && \
+		CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
+		go build -ldflags="-s -w" \
+		-o ../$(DIST_DIR)/tld-linux-amd64 .
+
+	@cd $(GO_DIR) && \
+		CGO_ENABLED=0 GOOS=linux GOARCH=arm64 \
+		go build -ldflags="-s -w" \
+		-o ../$(DIST_DIR)/tld-linux-arm64 .
+
+	@cd $(GO_DIR) && \
+		CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 \
+		go build -ldflags="-s -w" \
+		-o ../$(DIST_DIR)/tld-darwin-amd64 .
+
+	@cd $(GO_DIR) && \
+		CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 \
+		go build -ldflags="-s -w" \
+		-o ../$(DIST_DIR)/tld-darwin-arm64 .
+
+	@cd $(DIST_DIR) && sha256sum tld-* > checksums.txt
+
+	@echo ""
+	@echo "====================================="
+	@echo "Release build completed successfully."
+	@echo "Artifacts available in ./$(DIST_DIR)"
+	@echo "====================================="
+
+# ==========================================================
+# Installation
+# ==========================================================
+
 install: build
-	cp bin/tld /usr/local/bin/tld
-	@echo "Installed: /usr/local/bin/tld"
+	cp $(CLI) /usr/local/bin/tld
+	@echo "Installed to /usr/local/bin/tld"
 
-# Quick dev targets — run from repo root
+# ==========================================================
+# Developer Commands
+# ==========================================================
+
 sync: build
-	./bin/tld sync
+	./$(CLI) sync
 
 start: build
-	./bin/tld start $(ID)
+	./$(CLI) start $(ID)
 
 stop: build
-	./bin/tld stop
+	./$(CLI) stop
 
 check: build
-	./bin/tld check
+	./$(CLI) check
 
 status: build
-	./bin/tld status
+	./$(CLI) status
 
 login: build
-	./bin/tld login
+	./$(CLI) login
 
 logout: build
-	./bin/tld logout
+	./$(CLI) logout
+
+doctor: build
+	./$(CLI) doctor
+
+publish: build
+	./$(CLI) publish
+
+# ==========================================================
+# Cleanup
+# ==========================================================
 
 clean:
-	rm -rf bin/ dist/
+	rm -rf $(BIN_DIR) $(DIST_DIR)
+	@echo "Cleaned build artifacts."

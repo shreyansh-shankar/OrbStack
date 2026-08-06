@@ -36,7 +36,7 @@ func runStart(args []string) error {
 		fmt.Println("   Unverified modules may run arbitrary validator or setup commands.")
 		fmt.Println("   Please only run if you trust the author.")
 		fmt.Print("\n   Do you want to proceed and start the lab? [y/N]: ")
-		
+
 		var response string
 		fmt.Scanln(&response)
 		response = strings.ToLower(strings.TrimSpace(response))

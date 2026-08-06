@@ -38,13 +38,13 @@ type BuilderSectionInput struct {
 }
 
 type BuilderModuleInput struct {
-	ID               string                 `json:"id"`
-	Title            string                 `json:"title"`
-	Description      *string                `json:"description"`
-	Topic            string                 `json:"topic"`
-	Difficulty       string                 `json:"difficulty"`
-	EstimatedMinutes *int                   `json:"estimated_minutes"`
-	Tags             []string               `json:"tags"`
+	ID               string                `json:"id"`
+	Title            string                `json:"title"`
+	Description      *string               `json:"description"`
+	Topic            string                `json:"topic"`
+	Difficulty       string                `json:"difficulty"`
+	EstimatedMinutes *int                  `json:"estimated_minutes"`
+	Tags             []string              `json:"tags"`
 	Sections         []BuilderSectionInput `json:"sections"`
 }
 

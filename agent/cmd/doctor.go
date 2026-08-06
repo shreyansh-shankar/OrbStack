@@ -319,7 +319,8 @@ func printSummary() {
 		} else {
 			fmt.Printf("%s⚠️  %d warning(s)%s", colorYellow, totalWarnings, colorReset)
 		}
-		fmt.Println(" found. Follow the hints above to fix them.\n")
+		fmt.Println(" found. Follow the hints above to fix them.")
+		fmt.Println()
 	}
 
 	// Reset so the function is safe to call multiple times (e.g. in tests)

@@ -130,7 +130,7 @@ func drainQueue(apiBaseURL, authToken, tldDir string) bool {
 			fmt.Printf("  ✓ %s (queued %s ago) — synced\n",
 				entry.LabID,
 				time.Since(entry.QueuedAt).Round(time.Second),
-				)
+			)
 		}
 	}
 	return reachable
