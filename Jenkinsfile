@@ -1,5 +1,7 @@
 pipeline {
-	agent jenkins-go-agent
+	agent {
+		label 'go-make-agent'
+	}
 
 	options {
 		timestamps()
