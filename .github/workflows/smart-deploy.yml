@@ -7,42 +7,42 @@ on:
 
 jobs:
   detect-components:
-    - name: Detect Changed Components
-      id: detect
-      run: |
-        python << 'EOF'
-        import yaml
-        import subprocess
-        from pathlib import PurePath
+    name: Detect Changed Components
+    id: detect
+    run: |
+      python << 'EOF'
+      import yaml
+      import subprocess
+      from pathlib import PurePath
 
-        with open(".ci/components.yaml") as f:
-            config = yaml.safe_load(f)
+      with open(".ci/components.yaml") as f:
+          config = yaml.safe_load(f)
 
-        changed = subprocess.check_output(
-            ["git", "diff", "--name-only", "HEAD~1", "HEAD"],
-            text=True
-        ).splitlines()
+      changed = subprocess.check_output(
+          ["git", "diff", "--name-only", "HEAD~1", "HEAD"],
+          text=True
+      ).splitlines()
 
-        print("\nChanged files:")
-        for f in changed:
-            print(" -", f)
+      print("\nChanged files:")
+      for f in changed:
+          print(" -", f)
 
-        print("\nComponent Analysis:")
+      print("\nComponent Analysis:")
 
-        outputs = []
+      outputs = []
 
-        for name, component in config["components"].items():
-            matched = False
+      for name, component in config["components"].items():
+          matched = False
 
-            for pattern in component["paths"]:
-                for file in changed:
-                    if PurePath(file).match(pattern):
-                        matched = True
+          for pattern in component["paths"]:
+              for file in changed:
+                  if PurePath(file).match(pattern):
+                      matched = True
 
-            print(f"{'✓' if matched else '✗'} {name}")
+          print(f"{'✓' if matched else '✗'} {name}")
 
-            outputs.append(f"{name}={'true' if matched else 'false'}")
+          outputs.append(f"{name}={'true' if matched else 'false'}")
 
-        with open("${GITHUB_OUTPUT}", "a") as out:
-            out.write("\n".join(outputs))
-        EOF
+      with open("${GITHUB_OUTPUT}", "a") as out:
+          out.write("\n".join(outputs))
+      EOF
