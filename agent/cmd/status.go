@@ -30,8 +30,15 @@ func runStatus(args []string) error {
 	fmt.Println("● Auth")
 	if cfg.AuthToken != "" {
 		fmt.Println("  Authenticated: yes")
-		if username := fetchUsername(cfg.APIBaseURL, cfg.AuthToken); username != "" {
-			fmt.Printf("  Logged in as:  %s\n", username)
+		username := fetchUsername(cfg.APIBaseURL, cfg.AuthToken)
+		if username != "" {
+			fmt.Printf("  User:          %s\n", username)
+			if cfg.Username != username {
+				cfg.Username = username
+				_ = config.Save(cfg)
+			}
+		} else if cfg.Username != "" {
+			fmt.Printf("  User:          %s\n", cfg.Username)
 		}
 		fmt.Println("  Run 'tld logout' to sign out.")
 	} else {
@@ -90,7 +97,7 @@ func runStatus(args []string) error {
 // Returns empty string silently if offline or on any error.
 func fetchUsername(apiBaseURL, token string) string {
 	client := &http.Client{Timeout: 4 * time.Second}
-	req, err := http.NewRequest(http.MethodGet, apiBaseURL+"/cli/me", nil)
+	req, err := http.NewRequest(http.MethodGet, apiBaseURL+"/me", nil)
 	if err != nil {
 		return ""
 	}

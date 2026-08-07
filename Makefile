@@ -41,10 +41,13 @@ verify: fmt vet test
 # Build
 # ==========================================================
 
+VERSION  ?= v1.1.0
+LDFLAGS  := -s -w -X github.com/thelastdeploy/agent/cmd.Version=$(VERSION)
+
 build:
 	@echo "==> Building CLI..."
 	@mkdir -p $(BIN_DIR)
-	@cd $(GO_DIR) && go build -o ../$(CLI) .
+	@cd $(GO_DIR) && go build -ldflags="$(LDFLAGS)" -o ../$(CLI) .
 	@echo "✓ CLI built successfully"
 
 dist: verify
@@ -55,22 +58,22 @@ dist: verify
 
 	@cd $(GO_DIR) && \
 		CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-		go build -ldflags="-s -w" \
+		go build -ldflags="$(LDFLAGS)" \
 		-o ../$(DIST_DIR)/tld-linux-amd64 .
 
 	@cd $(GO_DIR) && \
 		CGO_ENABLED=0 GOOS=linux GOARCH=arm64 \
-		go build -ldflags="-s -w" \
+		go build -ldflags="$(LDFLAGS)" \
 		-o ../$(DIST_DIR)/tld-linux-arm64 .
 
 	@cd $(GO_DIR) && \
 		CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 \
-		go build -ldflags="-s -w" \
+		go build -ldflags="$(LDFLAGS)" \
 		-o ../$(DIST_DIR)/tld-darwin-amd64 .
 
 	@cd $(GO_DIR) && \
 		CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 \
-		go build -ldflags="-s -w" \
+		go build -ldflags="$(LDFLAGS)" \
 		-o ../$(DIST_DIR)/tld-darwin-arm64 .
 
 	@cd $(DIST_DIR) && sha256sum tld-* > checksums.txt

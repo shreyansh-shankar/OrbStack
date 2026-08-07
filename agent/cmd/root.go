@@ -58,6 +58,11 @@ func Execute() {
 			fmt.Fprintln(os.Stderr, "doctor:", err)
 			os.Exit(1)
 		}
+	case "version", "-v", "--version":
+		if err := runVersion(os.Args[2:]); err != nil {
+			fmt.Fprintln(os.Stderr, "version:", err)
+			os.Exit(1)
+		}
 	case "help", "--help", "-h":
 		printUsage()
 	default:
@@ -94,5 +99,6 @@ Commands:
   logout                Remove saved credentials
   publish <folder-path> Publish a local module directory to the builder API
   doctor                Check if your system is ready to run TLD labs
+  version               Show CLI version information
   help                  Show this help message`)
 }

@@ -13,6 +13,7 @@ type Config struct {
 	DeviceKeyPath  string
 	ChallengesDir  string
 	AuthToken      string
+	Username       string
 	ChallengesRepo string
 }
 
@@ -107,6 +108,8 @@ func parse(raw string) *Config {
 			}
 		case "auth_token":
 			cfg.AuthToken = val
+		case "username":
+			cfg.Username = val
 		}
 	}
 	return cfg
@@ -115,10 +118,14 @@ func parse(raw string) *Config {
 func write(path string, cfg *Config) error {
 	authLine := ""
 	if cfg.AuthToken != "" {
-		authLine = fmt.Sprintf("auth_token: %s\n", cfg.AuthToken)
+		authLine = fmt.Sprintf("auth_token: %s\n", strings.TrimSpace(cfg.AuthToken))
 	}
-	content := fmt.Sprintf("# The Last Deploy — agent configuration\n# Generated automatically on first run. Safe to edit.\napi_base_url: %s\ndevice_key_path: %s\nchallenges_dir: %s\nchallenges_repo: %s\n%s",
-		cfg.APIBaseURL, cfg.DeviceKeyPath, cfg.ChallengesDir, cfg.ChallengesRepo, authLine)
+	userLine := ""
+	if cfg.Username != "" {
+		userLine = fmt.Sprintf("username: %s\n", strings.TrimSpace(cfg.Username))
+	}
+	content := fmt.Sprintf("# The Last Deploy — agent configuration\n# Generated automatically on first run. Safe to edit.\napi_base_url: %s\ndevice_key_path: %s\nchallenges_dir: %s\nchallenges_repo: %s\n%s%s",
+		cfg.APIBaseURL, cfg.DeviceKeyPath, cfg.ChallengesDir, cfg.ChallengesRepo, authLine, userLine)
 	return os.WriteFile(path, []byte(content), 0600)
 }
 
