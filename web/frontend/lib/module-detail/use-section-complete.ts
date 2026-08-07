@@ -3,7 +3,7 @@
 import { useCallback, useRef } from "react";
 import { patchCacheUser, readCache, patchDashboardCacheModuleSectionCompleted } from "@/lib/dashboard/use-dashboard-cache";
 import { patchModulesMemoryCache } from "@/hooks/use-modules";
-import { API_BASE } from "@/lib/api";
+import { getApiBaseUrl } from "@/lib/api";
 
 function getToken(): string | null {
   if (typeof window === "undefined") return null;
@@ -39,10 +39,12 @@ export function useSectionComplete({ onComplete }: Options) {
       patchModulesMemoryCache(moduleId, sectionId);
       patchDashboardCacheModuleSectionCompleted(moduleId, sectionId);
 
+      const apiBase = getApiBaseUrl();
+
       // 3. Background API call — confirms with backend's authoritative XP value
       try {
         const res = await fetch(
-          `${API_BASE}/modules/${moduleId}/sections/${sectionId}/complete`,
+          `${apiBase}/modules/${moduleId}/sections/${sectionId}/complete`,
           {
             method: "POST",
             headers: {
@@ -59,11 +61,9 @@ export function useSectionComplete({ onComplete }: Options) {
       } catch {
         // sendBeacon fallback for tab-close scenario
         if (typeof navigator !== "undefined" && navigator.sendBeacon) {
-          const blob = new Blob(
-            [JSON.stringify({ token, module_id: moduleId, section_id: sectionId })],
-            { type: "application/json" }
-          );
-          navigator.sendBeacon(`${API_BASE}/beacon/complete-section`, blob);
+          const payload = JSON.stringify({ token, module_id: moduleId, section_id: sectionId });
+          const blob = new Blob([payload], { type: "application/json" });
+          navigator.sendBeacon(`${apiBase}/beacon/complete-section`, blob);
         }
         firedRef.current.delete(sectionId);
       }

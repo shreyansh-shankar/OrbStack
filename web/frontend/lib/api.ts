@@ -4,13 +4,16 @@ import { Module, ModuleDetail, User, BuilderDraftListItem, BuilderModuleInput } 
 import { writeCache, clearDashboardCache } from "./dashboard/use-dashboard-cache";
 import { clearModulesMemoryCache } from "@/hooks/use-modules";
 
-function getApiBaseUrl(): string {
-  const envUrl = process.env.NEXT_PUBLIC_API_URL;
-  if (envUrl && !envUrl.includes("app.thelastdeploy.com") && envUrl !== "/") {
-    return envUrl.replace(/\/$/, "");
+export function getApiBaseUrl(): string {
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname;
+    if (host === "localhost" || host === "127.0.0.1") {
+      return "http://localhost:8742";
+    }
   }
-  if (typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
-    return "http://localhost:8742";
+  const envUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (envUrl && envUrl.startsWith("http") && !envUrl.includes("app.thelastdeploy.com")) {
+    return envUrl.replace(/\/$/, "");
   }
   return "https://api.thelastdeploy.com";
 }
@@ -30,7 +33,8 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+  const baseUrl = getApiBaseUrl();
+  const res = await fetch(`${baseUrl}${path}`, { ...options, headers });
   if (!res.ok) {
     const error = await res.json().catch(() => ({ detail: "Request failed" }));
     throw new Error(error.detail || "Request failed");
