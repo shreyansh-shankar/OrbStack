@@ -1,4 +1,5 @@
 // web/frontend/app/dashboard/page.tsx
+// v2026.08
 
 "use client";
 

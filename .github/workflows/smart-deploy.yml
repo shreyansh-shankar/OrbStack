@@ -28,7 +28,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install pyyaml
+          pip install pyyaml pathspec
 
       - name: Detect Changed Components
         id: detect
@@ -39,7 +39,7 @@ jobs:
           import json
           import os
           import subprocess
-          from pathlib import PurePath
+          import pathspec
 
           import yaml
 
@@ -67,7 +67,12 @@ jobs:
 
               for pattern in component["paths"]:
 
-                  if any(PurePath(file).match(pattern) for file in changed):
+                  spec = pathspec.PathSpec.from_lines(
+                      "gitwildmatch",
+                      [pattern]
+                  )
+
+                  if any(spec.match_file(file) for file in changed):
                       matched = True
                       break
 

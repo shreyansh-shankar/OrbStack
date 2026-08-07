@@ -40,6 +40,7 @@ export default function Footer() {
           {/* Logo */}
           <a
             href="/"
+            aria-label="The Last Deploy — home"
             style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}
           >
             <span style={{
