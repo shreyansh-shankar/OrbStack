@@ -7,60 +7,42 @@ on:
 
 jobs:
   detect-components:
-    name: Detect Changed Components
-    runs-on: ubuntu-latest
+    - name: Detect Changed Components
+      id: detect
+      run: |
+        python << 'EOF'
+        import yaml
+        import subprocess
+        from pathlib import PurePath
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
+        with open(".ci/components.yaml") as f:
+            config = yaml.safe_load(f)
 
-      - name: Install yq
-        run: |
-          sudo wget -qO /usr/local/bin/yq \
-            https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-          sudo chmod +x /usr/local/bin/yq
+        changed = subprocess.check_output(
+            ["git", "diff", "--name-only", "HEAD~1", "HEAD"],
+            text=True
+        ).splitlines()
 
-      - name: Determine Changed Files
-        id: changes
-        run: |
+        print("\nChanged files:")
+        for f in changed:
+            print(" -", f)
 
-          echo "================ Changed Files ================"
+        print("\nComponent Analysis:")
 
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+        outputs = []
 
-          echo "$CHANGED_FILES"
+        for name, component in config["components"].items():
+            matched = False
 
-          echo ""
-          echo "============== Component Analysis ============="
+            for pattern in component["paths"]:
+                for file in changed:
+                    if PurePath(file).match(pattern):
+                        matched = True
 
-          for COMPONENT in $(yq '.components | keys | .[]' .ci/components.yaml); do
+            print(f"{'✓' if matched else '✗'} {name}")
 
-            echo ""
-            echo "Checking ${COMPONENT}..."
+            outputs.append(f"{name}={'true' if matched else 'false'}")
 
-            MATCHED=false
-
-            while read -r PATTERN; do
-
-              PATTERN=${PATTERN//\"/}
-
-              REGEX=$(echo "$PATTERN" \
-                | sed 's/\./\\./g' \
-                | sed 's/\*\*/.*/g' \
-                | sed 's/\*/[^/]*/g')
-
-              while read -r FILE; do
-                if [[ "$FILE" =~ ^$REGEX$ ]]; then
-                  MATCHED=true
-                fi
-              done <<< "$CHANGED_FILES"
-
-            done < <(
-              yq ".components.\"${COMPONENT}\".paths[]" .ci/components.yaml
-            )
-
-            echo "${COMPONENT}=${MATCHED}"
-
-          done
+        with open("${GITHUB_OUTPUT}", "a") as out:
+            out.write("\n".join(outputs))
+        EOF
