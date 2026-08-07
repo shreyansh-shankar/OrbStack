@@ -102,7 +102,7 @@ async def check_and_track_module_completion(user_id: int, module_id: str, db: As
 
     if completed_sections_count >= sections_count and completed_labs_count >= labs_count:
         analytics.track(
-            user_id,
+            "anonymous",
             AnalyticsEvent.MODULE_COMPLETED,
             {
                 "module_id": module_id,

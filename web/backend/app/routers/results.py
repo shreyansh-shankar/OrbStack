@@ -127,7 +127,7 @@ async def submit_result(
     logger.info("Lab completed: user=%s lab=%s xp=%d", current_user.id, body.lab_id, lab.xp)
 
     analytics.track(
-        current_user.id,
+        "anonymous",
         AnalyticsEvent.LAB_COMPLETED,
         {
             "lab_id": body.lab_id,

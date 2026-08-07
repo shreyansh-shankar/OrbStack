@@ -71,7 +71,7 @@ async def register(
     send_verification_email(user.email, verification_token, background_tasks)
 
     analytics.track(
-        user.id,
+        "anonymous",
         AnalyticsEvent.USER_REGISTERED,
         {"auth_provider": "email"},
     )
@@ -131,7 +131,7 @@ async def verify_email(body: VerifyEmailRequest, db: AsyncSession = Depends(get_
     db.add(user)
     await db.commit()
 
-    analytics.track(user.id, AnalyticsEvent.USER_VERIFIED)
+    analytics.track("anonymous", AnalyticsEvent.USER_VERIFIED)
 
     return MessageResponse(detail="Email verified successfully. You can now log in.")
 
@@ -353,7 +353,7 @@ async def cli_token(body: CLITokenRequest, db: AsyncSession = Depends(get_db)):
         db.add(device_auth)
         await db.commit()
         
-        analytics.track(user.id, AnalyticsEvent.CLI_LOGIN)
+        analytics.track("anonymous", AnalyticsEvent.CLI_LOGIN)
 
         token = create_access_token(user.id)
         return {
@@ -467,12 +467,12 @@ async def github_auth(body: GitHubLoginRequest, db: AsyncSession = Depends(get_d
         await db.refresh(user)
 
         analytics.track(
-            user.id,
+            "anonymous",
             AnalyticsEvent.USER_REGISTERED,
             {"auth_provider": "github"},
         )
         analytics.track(
-            user.id,
+            "anonymous",
             AnalyticsEvent.USER_VERIFIED,
             {"auth_provider": "github"},
         )
@@ -485,7 +485,7 @@ async def github_auth(body: GitHubLoginRequest, db: AsyncSession = Depends(get_d
             await db.refresh(user)
 
             analytics.track(
-                user.id,
+                "anonymous",
                 AnalyticsEvent.USER_VERIFIED,
                 {"auth_provider": "github"},
             )

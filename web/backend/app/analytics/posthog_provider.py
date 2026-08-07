@@ -21,6 +21,7 @@ class PostHogAnalyticsProvider(BaseAnalyticsProvider):
                 project_api_key=api_key,
                 host=host,
                 disabled=False,
+                sync_mode=True,
             )
             self._initialized = True
             logger.info("PostHog analytics provider initialized successfully.")
@@ -49,6 +50,8 @@ class PostHogAnalyticsProvider(BaseAnalyticsProvider):
                 event=event,
                 properties=properties or {},
             )
+            self._client.flush()
+            logger.info("Captured analytics event '%s' for distinct_id '%s'", event, distinct_id_str)
         except Exception as e:
             logger.error("Error capturing PostHog analytics event '%s': %s", event, e)
 

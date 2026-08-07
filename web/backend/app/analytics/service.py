@@ -24,6 +24,11 @@ DISALLOWED_PROPERTY_KEYS = {
     "command",
     "shell_history",
     "logs",
+    "user_id",
+    "email",
+    "username",
+    "ip",
+    "user",
 }
 
 
@@ -58,22 +63,22 @@ class AnalyticsService:
 
     def track(
         self,
-        distinct_id: str | int,
-        event: AnalyticsEvent | str,
+        distinct_id: str | int = "anonymous",
+        event: AnalyticsEvent | str = "",
         properties: dict[str, Any] | None = None,
     ) -> None:
         """
-        Track an analytics event safely.
+        Track an analytics event safely and anonymously.
+        Enforces 100% anonymous tracking — never forwards user IDs or PII.
         Never raises exceptions to caller code.
         """
-        if not distinct_id:
-            return
-
         try:
+            # Enforce 100% anonymous distinct_id for all backend events
+            anonymous_distinct_id = "anonymous"
             event_name = event.value if isinstance(event, AnalyticsEvent) else str(event)
             clean_properties = self._sanitize_properties(properties)
             self._provider.track(
-                distinct_id=distinct_id,
+                distinct_id=anonymous_distinct_id,
                 event=event_name,
                 properties=clean_properties,
             )

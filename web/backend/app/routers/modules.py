@@ -287,18 +287,17 @@ async def get_module_full(
             version=s.version,
         ))
 
-    if current_user:
-        analytics.track(
-            current_user.id,
-            AnalyticsEvent.MODULE_STARTED,
-            {
-                "module_id": module.id,
-                "title": module.title,
-                "topic": module.topic,
-                "difficulty": module.difficulty,
-                "estimated_minutes": module.estimated_minutes,
-            },
-        )
+    analytics.track(
+        "anonymous",
+        AnalyticsEvent.MODULE_STARTED,
+        {
+            "module_id": module.id,
+            "title": module.title,
+            "topic": module.topic,
+            "difficulty": module.difficulty,
+            "estimated_minutes": module.estimated_minutes,
+        },
+    )
 
     return ModuleDetail(
         id=module.id,
@@ -602,7 +601,7 @@ async def complete_reading_section(
     await db.commit()
 
     analytics.track(
-        current_user.id,
+        "anonymous",
         AnalyticsEvent.SECTION_COMPLETED,
         {
             "module_id": module_id,
@@ -630,17 +629,16 @@ async def get_lab(
     if not lab:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Lab not found")
 
-    if current_user:
-        analytics.track(
-            current_user.id,
-            AnalyticsEvent.LAB_STARTED,
-            {
-                "lab_id": lab.id,
-                "module_id": lab.module_id,
-                "section_id": lab.section_id,
-                "title": lab.title,
-            },
-        )
+    analytics.track(
+        "anonymous",
+        AnalyticsEvent.LAB_STARTED,
+        {
+            "lab_id": lab.id,
+            "module_id": lab.module_id,
+            "section_id": lab.section_id,
+            "title": lab.title,
+        },
+    )
 
     return LabDetail(
         id=lab.id,
