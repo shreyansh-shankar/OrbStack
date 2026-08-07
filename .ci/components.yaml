@@ -1,0 +1,29 @@
+version: 1
+
+components:
+
+  cli:
+    description: "The Last Deploy CLI"
+    paths:
+      - "agent/**"
+      - "Makefile"
+
+  frontend:
+    description: "Frontend"
+    paths:
+      - "web/frontend/**"
+
+  backend:
+    description: "Backend"
+    paths:
+      - "web/backend/**"
+
+  landing:
+    description: "Landing Page"
+    paths:
+      - "web/landing/**"
+
+  challenges:
+    description: "Challenge Modules"
+    paths:
+      - "web/challenges/**"
