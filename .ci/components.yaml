@@ -7,23 +7,28 @@ components:
     paths:
       - "agent/**"
       - "Makefile"
+    deployment: "github-release"
 
   frontend:
     description: "Frontend"
     paths:
       - "web/frontend/**"
+    deployment: "vercel"
 
   backend:
     description: "Backend"
     paths:
       - "web/backend/**"
+    deployment: "vercel"
 
   landing:
     description: "Landing Page"
     paths:
       - "web/landing/**"
+    deployment: "vercel"
 
   challenges:
     description: "Challenge Modules"
     paths:
       - "web/challenges/**"
+    deployment: "none"

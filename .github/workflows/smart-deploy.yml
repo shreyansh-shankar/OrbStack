@@ -1,0 +1,66 @@
+name: Smart Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  detect-components:
+    name: Detect Changed Components
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Install yq
+        run: |
+          sudo wget -qO /usr/local/bin/yq \
+            https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Determine Changed Files
+        id: changes
+        run: |
+
+          echo "================ Changed Files ================"
+
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+
+          echo "$CHANGED_FILES"
+
+          echo ""
+          echo "============== Component Analysis ============="
+
+          for COMPONENT in $(yq '.components | keys | .[]' .ci/components.yaml); do
+
+            echo ""
+            echo "Checking ${COMPONENT}..."
+
+            MATCHED=false
+
+            while read -r PATTERN; do
+
+              PATTERN=${PATTERN//\"/}
+
+              REGEX=$(echo "$PATTERN" \
+                | sed 's/\./\\./g' \
+                | sed 's/\*\*/.*/g' \
+                | sed 's/\*/[^/]*/g')
+
+              while read -r FILE; do
+                if [[ "$FILE" =~ ^$REGEX$ ]]; then
+                  MATCHED=true
+                fi
+              done <<< "$CHANGED_FILES"
+
+            done < <(
+              yq ".components.\"${COMPONENT}\".paths[]" .ci/components.yaml
+            )
+
+            echo "${COMPONENT}=${MATCHED}"
+
+          done
