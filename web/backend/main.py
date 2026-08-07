@@ -21,8 +21,8 @@ openapi_url = "/openapi.json" if settings.ENVIRONMENT == "development" else None
 
 app = FastAPI(
     title="The Last Deploy API",
-    description="Backend for The Last Deploy DevOps practice platform",
-    version="0.3.0",
+    description="Backend for The Last Deploy DevOps practice platform (with privacy-first analytics)",
+    version="0.3.1",
     docs_url=docs_url,
     redoc_url=redoc_url,
     openapi_url=openapi_url,

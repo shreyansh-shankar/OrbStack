@@ -143,6 +143,10 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install uv (for Python Vercel backend build)
+        if: matrix.component.component == 'backend'
+        uses: astral-sh/setup-uv@v5
+
       - name: Install Vercel CLI
         if: matrix.component.deployment == 'vercel'
         run: npm install -g vercel
