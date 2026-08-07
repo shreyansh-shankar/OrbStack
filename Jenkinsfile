@@ -83,10 +83,6 @@ pipeline {
 			}
 		}
 
-		stage('')  {
-
-		}
-
 		stage('Build Release Artifacts') {
 			steps {
 				sh 'make dist'
