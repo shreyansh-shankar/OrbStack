@@ -191,3 +191,46 @@ jobs:
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ steps.project.outputs.project_id }}
+
+  deploy-cli:
+    name: Publish CLI (latest)
+    needs: detect-components
+    if: needs.detect-components.outputs.cli == 'true'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: agent/go.mod
+          cache-dependency-path: agent/go.sum
+
+      - name: Build Release Artifacts
+        run: make dist
+
+      - name: Delete existing latest release (if any)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete latest --yes --cleanup-tag 2>/dev/null || true
+
+      - name: Publish latest Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create latest \
+            dist/tld-* \
+            dist/checksums.txt \
+            --title "CLI: latest" \
+            --notes "Rolling latest build from \`main\`. Updated on every push that changes the CLI.
+
+          **Commit:** \`${{ github.sha }}\`
+          **Triggered by:** ${{ github.actor }}" \
+            --prerelease \
+            --target main

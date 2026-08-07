@@ -1,0 +1,56 @@
+name: Promote CLI to Stable
+
+on:
+  workflow_dispatch:
+
+jobs:
+  promote:
+    name: Promote latest → stable
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download latest release assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p dist
+          gh release download latest --dir dist
+          echo "Assets downloaded from latest:"
+          ls -lh dist/
+
+      - name: Delete existing stable release (if any)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete stable --yes --cleanup-tag 2>/dev/null || true
+
+      - name: Get latest release info
+        id: latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sha=$(gh release view latest --json tagName,body \
+            | jq -r '.body' \
+            | grep -oP '(?<=`)[0-9a-f]{40}(?=`)' \
+            || echo "unknown")
+          echo "sha=$sha" >> $GITHUB_OUTPUT
+
+      - name: Publish stable Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create stable \
+            dist/tld-* \
+            dist/checksums.txt \
+            --title "CLI: stable" \
+            --notes "Stable release promoted from \`latest\` by **${{ github.actor }}**.
+
+          **Source commit:** \`${{ steps.latest.outputs.sha }}\`
+          **Promoted at:** $(date -u '+%Y-%m-%d %H:%M UTC')" \
+            --latest
