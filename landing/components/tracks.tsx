@@ -52,6 +52,23 @@ const TRACK_ICONS: Record<string, React.ReactNode> = {
       <circle cx="12" cy="12" r="7"/>
     </svg>
   ),
+  Prometheus: (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+      <path d="M12 6v6l4 2"/>
+      <path d="M8 17.5c1.2.8 2.6 1.3 4 1.3s2.8-.5 4-1.3"/>
+    </svg>
+  ),
+  Grafana: (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+      <path d="M7 16l3-4 3 3 3-6"/>
+      <circle cx="7" cy="16" r="1" fill="currentColor"/>
+      <circle cx="10" cy="12" r="1" fill="currentColor"/>
+      <circle cx="13" cy="15" r="1" fill="currentColor"/>
+      <circle cx="16" cy="9" r="1" fill="currentColor"/>
+    </svg>
+  ),
 };
 
 const TRACK_ACCENT: Record<string, { icon: string; glow: string; text: string; border: string; bg: string }> = {

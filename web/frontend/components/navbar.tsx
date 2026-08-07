@@ -87,8 +87,8 @@ export function Navbar() {
         {/* Nav links */}
         <div className="hidden md:flex items-center gap-2">
           {navLink("/modules", "Modules")}
-          {user && navLink("/builder", "Module Builder")}
-          {user && (user.id === 2 || user.is_maintainer) && navLink("/maintainer", "Maintainer Panel")}
+          {user && navLink("/builder", "Builder")}
+          {user && (user.id === 2 || user.is_maintainer) && navLink("/maintainer", "Control")}
         </div>
 
         {/* Auth & Theme Toggler */}
@@ -129,12 +129,12 @@ export function Navbar() {
               <DropdownMenuContent align="end" className="w-52 bg-card border-border rounded-xl p-1.5 shadow-xl">
                 <DropdownMenuItem onClick={() => router.push("/builder")} className="cursor-pointer text-foreground hover:bg-muted flex items-center gap-2 font-bold rounded-lg py-2">
                   <Hammer className="h-4 w-4 text-[var(--accent-primary)]" />
-                  Module Builder
+                  Builder
                 </DropdownMenuItem>
                 {user && (user.id === 2 || user.is_maintainer) && (
                   <DropdownMenuItem onClick={() => router.push("/maintainer")} className="cursor-pointer text-foreground hover:bg-muted flex items-center gap-2 font-bold rounded-lg py-2">
                     <Shield className="h-4 w-4 text-[var(--accent-primary)]" />
-                    Maintainer Panel
+                    Control
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator className="bg-border my-1" />

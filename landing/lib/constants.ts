@@ -56,7 +56,19 @@ export const TRACKS: {
       description: "CI/CD pipelines, automation, and integration workflows.",
       color: "yellow",
       status: "coming-soon",
-    }
+    },
+    {
+      name: "Prometheus",
+      description: "Metrics collection, alerting rules, and monitoring infrastructure at scale.",
+      color: "orange",
+      status: "coming-soon",
+    },
+    {
+      name: "Grafana",
+      description: "Dashboards, data visualization, and observability across your entire stack.",
+      color: "purple",
+      status: "coming-soon",
+    },
   ];
 
 export const TRACK_COLORS: Record<string, { bg: string; border: string; text: string }> = {
