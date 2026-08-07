@@ -20,7 +20,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p dist
-          gh release download latest --dir dist
+          gh release download latest --dir dist --clobber
           echo "Assets downloaded from latest:"
           ls -lh dist/
 
