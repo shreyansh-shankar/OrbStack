@@ -6,43 +6,84 @@ on:
       - main
 
 jobs:
+
   detect-components:
+
     name: Detect Changed Components
-    id: detect
-    run: |
-      python << 'EOF'
-      import yaml
-      import subprocess
-      from pathlib import PurePath
 
-      with open(".ci/components.yaml") as f:
-          config = yaml.safe_load(f)
+    runs-on: ubuntu-latest
 
-      changed = subprocess.check_output(
-          ["git", "diff", "--name-only", "HEAD~1", "HEAD"],
-          text=True
-      ).splitlines()
+    outputs:
+      cli: ${{ steps.detect.outputs.cli }}
+      frontend: ${{ steps.detect.outputs.frontend }}
+      backend: ${{ steps.detect.outputs.backend }}
+      landing: ${{ steps.detect.outputs.landing }}
+      challenges: ${{ steps.detect.outputs.challenges }}
 
-      print("\nChanged files:")
-      for f in changed:
-          print(" -", f)
+    steps:
 
-      print("\nComponent Analysis:")
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      outputs = []
+      - name: Install Python dependencies
+        run: |
+          pip install pyyaml
 
-      for name, component in config["components"].items():
-          matched = False
+      - name: Detect Changed Components
+        id: detect
+        shell: bash
+        run: |
 
-          for pattern in component["paths"]:
-              for file in changed:
-                  if PurePath(file).match(pattern):
+          python <<'EOF'
+          import os
+          import yaml
+          import subprocess
+          from pathlib import PurePath
+
+          with open(".ci/components.yaml") as f:
+              config = yaml.safe_load(f)
+
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", "HEAD~1", "HEAD"],
+              text=True
+          ).splitlines()
+
+          print("\n================ Changed Files ================\n")
+
+          for file in changed:
+              print(file)
+
+          print("\n============= Component Analysis ==============\n")
+
+          outputs = []
+
+          for component_name, component in config["components"].items():
+
+              matched = False
+
+              for pattern in component["paths"]:
+
+                  if any(PurePath(file).match(pattern) for file in changed):
                       matched = True
+                      break
 
-          print(f"{'✓' if matched else '✗'} {name}")
+              print(f"{'✓' if matched else '✗'} {component_name}")
 
-          outputs.append(f"{name}={'true' if matched else 'false'}")
+              outputs.append(
+                  f"{component_name}={'true' if matched else 'false'}"
+              )
 
-      with open("${GITHUB_OUTPUT}", "a") as out:
-          out.write("\n".join(outputs))
-      EOF
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write("\n".join(outputs))
+
+          EOF
+
+      - name: Print Outputs
+        run: |
+          echo "CLI        : ${{ steps.detect.outputs.cli }}"
+          echo "Frontend  : ${{ steps.detect.outputs.frontend }}"
+          echo "Backend   : ${{ steps.detect.outputs.backend }}"
+          echo "Landing   : ${{ steps.detect.outputs.landing }}"
+          echo "Challenges: ${{ steps.detect.outputs.challenges }}"
