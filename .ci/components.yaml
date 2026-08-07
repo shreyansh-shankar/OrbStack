@@ -8,27 +8,37 @@ components:
       - "agent/**"
       - "Makefile"
     deployment: "github-release"
+    working_directory: "agent"
+    project_secret: "none"
 
   frontend:
     description: "Frontend"
     paths:
       - "web/frontend/**"
     deployment: "vercel"
+    working_directory: "web/frontend"
+    project_secret: "FRONTEND_PROJECT_ID"
 
   backend:
     description: "Backend"
     paths:
       - "web/backend/**"
     deployment: "vercel"
+    working_directory: "web/backend"
+    project_secret: "BACKEND_PROJECT_ID"
 
   landing:
     description: "Landing Page"
     paths:
-      - "web/landing/**"
+      - "landing/**"
     deployment: "vercel"
+    working_directory: "landing"
+    project_secret: "LANDING_PROJECT_ID"
 
   challenges:
     description: "Challenge Modules"
     paths:
       - "web/challenges/**"
     deployment: "none"
+    working_directory: "none"
+    project_secret: "none"

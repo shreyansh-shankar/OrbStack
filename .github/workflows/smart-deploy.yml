@@ -19,6 +19,7 @@ jobs:
       backend: ${{ steps.detect.outputs.backend }}
       landing: ${{ steps.detect.outputs.landing }}
       challenges: ${{ steps.detect.outputs.challenges }}
+      deployment_matrix: ${{ steps.detect.outputs.deployment_matrix }}
 
     steps:
 
@@ -37,10 +38,12 @@ jobs:
         run: |
 
           python <<'EOF'
+          import json
           import os
-          import yaml
           import subprocess
           from pathlib import PurePath
+
+          import yaml
 
           with open(".ci/components.yaml") as f:
               config = yaml.safe_load(f)
@@ -58,6 +61,7 @@ jobs:
           print("\n============= Component Analysis ==============\n")
 
           outputs = []
+          deployment_matrix = []
 
           for component_name, component in config["components"].items():
 
@@ -75,6 +79,22 @@ jobs:
                   f"{component_name}={'true' if matched else 'false'}"
               )
 
+              if matched and component["deployment"] != "none":
+
+                  deployment_matrix.append({
+                      "component": component_name,
+                      "description": component["description"],
+                      "deployment": component["deployment"],
+                      "working_directory": component["working_directory"]
+                  })
+
+          matrix_json = json.dumps(deployment_matrix)
+
+          print("\n================ Deployment Matrix ================\n")
+          print(matrix_json)
+
+          outputs.append(f"deployment_matrix={matrix_json}")
+
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write("\n".join(outputs))
 
@@ -82,8 +102,11 @@ jobs:
 
       - name: Print Outputs
         run: |
-          echo "CLI        : ${{ steps.detect.outputs.cli }}"
-          echo "Frontend  : ${{ steps.detect.outputs.frontend }}"
-          echo "Backend   : ${{ steps.detect.outputs.backend }}"
-          echo "Landing   : ${{ steps.detect.outputs.landing }}"
-          echo "Challenges: ${{ steps.detect.outputs.challenges }}"
+          echo "CLI         : ${{ steps.detect.outputs.cli }}"
+          echo "Frontend    : ${{ steps.detect.outputs.frontend }}"
+          echo "Backend     : ${{ steps.detect.outputs.backend }}"
+          echo "Landing     : ${{ steps.detect.outputs.landing }}"
+          echo "Challenges  : ${{ steps.detect.outputs.challenges }}"
+          echo ""
+          echo "Deployment Matrix:"
+          echo '${{ steps.detect.outputs.deployment_matrix }}'
