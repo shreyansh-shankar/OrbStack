@@ -169,7 +169,6 @@ jobs:
 
       - name: Deploy Vercel Project
         if: matrix.component.deployment == 'vercel'
-        working-directory: ${{ matrix.component.working_directory }}
 
         run: |
 
