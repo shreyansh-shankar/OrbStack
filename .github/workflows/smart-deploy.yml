@@ -17,7 +17,7 @@ jobs:
       backend: ${{ steps.detect.outputs.backend }}
       landing: ${{ steps.detect.outputs.landing }}
       challenges: ${{ steps.detect.outputs.challenges }}
-      deployment_matrix: ${{ steps.detect.outputs.deployment_matrix }}
+      vercel_matrix: ${{ steps.detect.outputs.vercel_matrix }}
 
     steps:
 
@@ -59,7 +59,7 @@ jobs:
           print("\n============= Component Analysis ==============\n")
 
           outputs = []
-          deployment_matrix = []
+          vercel_matrix = []
 
           for component_name, component in config["components"].items():
 
@@ -82,21 +82,21 @@ jobs:
                   f"{component_name}={'true' if matched else 'false'}"
               )
 
-              if matched and component["deployment"] != "none":
+              if matched and component["deployment"] == "vercel":
 
-                  deployment_matrix.append({
+                  vercel_matrix.append({
                       "component": component_name,
                       "description": component["description"],
                       "deployment": component["deployment"],
                       "working_directory": component["working_directory"]
                   })
 
-          matrix_json = json.dumps(deployment_matrix)
+          vercel_json = json.dumps(vercel_matrix)
 
-          print("\n================ Deployment Matrix ================\n")
-          print(matrix_json)
+          print("\n================ Vercel Deploy Matrix ================\n")
+          print(vercel_json)
 
-          outputs.append(f"deployment_matrix={matrix_json}")
+          outputs.append(f"vercel_matrix={vercel_json}")
 
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write("\n".join(outputs))
@@ -111,18 +111,18 @@ jobs:
           echo "Landing     : ${{ steps.detect.outputs.landing }}"
           echo "Challenges  : ${{ steps.detect.outputs.challenges }}"
           echo ""
-          echo "Deployment Matrix:"
-          echo '${{ steps.detect.outputs.deployment_matrix }}'
+          echo "Vercel Matrix:"
+          echo '${{ steps.detect.outputs.vercel_matrix }}'
 
   deploy-vercel:
     name: Deploy Vercel Component
     needs: detect-components
-    if: needs.detect-components.outputs.deployment_matrix != '[]'
+    if: needs.detect-components.outputs.vercel_matrix != '[]'
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        component: ${{ fromJson(needs.detect-components.outputs.deployment_matrix) }}
+        component: ${{ fromJson(needs.detect-components.outputs.vercel_matrix) }}
 
     steps:
       - name: Checkout Repository
