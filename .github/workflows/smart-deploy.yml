@@ -142,9 +142,30 @@ jobs:
         if: matrix.component.deployment == 'vercel'
         run: npm install -g vercel
 
+      - name: Select Vercel Project ID
+        id: project
+        shell: bash
+        run: |
+
+          if [ "${{ matrix.component.component }}" = "frontend" ]; then
+            echo "project_id=${{ secrets.FRONTEND_PROJECT_ID }}" >> $GITHUB_OUTPUT
+
+          elif [ "${{ matrix.component.component }}" = "backend" ]; then
+            echo "project_id=${{ secrets.BACKEND_PROJECT_ID }}" >> $GITHUB_OUTPUT
+
+          elif [ "${{ matrix.component.component }}" = "landing" ]; then
+            echo "project_id=${{ secrets.LANDING_PROJECT_ID }}" >> $GITHUB_OUTPUT
+
+          else
+            echo "Unknown component"
+            exit 1
+          fi
+
+
       - name: Deploy Vercel Project
         if: matrix.component.deployment == 'vercel'
         working-directory: ${{ matrix.component.working_directory }}
+
         run: |
 
           echo "Deploying ${{ matrix.component.component }}"
@@ -165,9 +186,4 @@ jobs:
 
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-
-          VERCEL_PROJECT_ID: ${{ 
-            matrix.component.component == 'frontend' && secrets.FRONTEND_PROJECT_ID ||
-            matrix.component.component == 'backend' && secrets.BACKEND_PROJECT_ID ||
-            matrix.component.component == 'landing' && secrets.LANDING_PROJECT_ID
-          }}
+          VERCEL_PROJECT_ID: ${{ steps.project.outputs.project_id }}
