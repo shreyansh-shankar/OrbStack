@@ -77,7 +77,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <p style={{ fontSize: "12px", color: "#3a3a5a" }}>
-            © {new Date().getFullYear()} The Last Deploy · Open Source
+            © {new Date().getFullYear()} The Last Deploy · Open Source · Built with ❤️
           </p>
         </div>
       </div>
