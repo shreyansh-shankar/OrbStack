@@ -179,6 +179,12 @@ jobs:
             --environment=production \
             --token=${{ secrets.VERCEL_TOKEN }}
 
+          if [ -f "${{ matrix.component.working_directory }}/.vercel/.env.production.local" ]; then
+            cp "${{ matrix.component.working_directory }}/.vercel/.env.production.local" "${{ matrix.component.working_directory }}/.env.production.local"
+          elif [ -f ".vercel/.env.production.local" ]; then
+            cp .vercel/.env.production.local "${{ matrix.component.working_directory }}/.env.production.local"
+          fi
+
           vercel build \
             --prod \
             --token=${{ secrets.VERCEL_TOKEN }}

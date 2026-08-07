@@ -4,7 +4,7 @@ import { useCallback, useRef } from "react";
 import { patchCacheUser, readCache, patchDashboardCacheModuleSectionCompleted } from "@/lib/dashboard/use-dashboard-cache";
 import { patchModulesMemoryCache } from "@/hooks/use-modules";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8742";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://api.thelastdeploy.com";
 
 function getToken(): string | null {
   if (typeof window === "undefined") return null;

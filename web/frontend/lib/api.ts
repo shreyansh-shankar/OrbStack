@@ -4,7 +4,7 @@ import { Module, ModuleDetail, User, BuilderDraftListItem, BuilderModuleInput } 
 import { writeCache, clearDashboardCache } from "./dashboard/use-dashboard-cache";
 import { clearModulesMemoryCache } from "@/hooks/use-modules";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8742";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://api.thelastdeploy.com";
 
 function getToken(): string | null {
   if (typeof window === "undefined") return null;
