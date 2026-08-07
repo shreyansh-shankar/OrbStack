@@ -14,7 +14,8 @@ from app.schemas import (
     ModuleDetail, ModuleSummary,
     SectionSchema,
 )
-from app.services import recalculate_and_update_user_xp
+from app.services import recalculate_and_update_user_xp, check_and_track_module_completion
+from app.analytics import analytics, AnalyticsEvent
 
 router = APIRouter()
 
@@ -285,6 +286,19 @@ async def get_module_full(
             section_completed=s.id in completed_section_ids,
             version=s.version,
         ))
+
+    if current_user:
+        analytics.track(
+            current_user.id,
+            AnalyticsEvent.MODULE_STARTED,
+            {
+                "module_id": module.id,
+                "title": module.title,
+                "topic": module.topic,
+                "difficulty": module.difficulty,
+                "estimated_minutes": module.estimated_minutes,
+            },
+        )
 
     return ModuleDetail(
         id=module.id,
@@ -586,6 +600,18 @@ async def complete_reading_section(
     await recalculate_and_update_user_xp(current_user, db)
 
     await db.commit()
+
+    analytics.track(
+        current_user.id,
+        AnalyticsEvent.SECTION_COMPLETED,
+        {
+            "module_id": module_id,
+            "section_id": section_id,
+            "xp": xp,
+        },
+    )
+    await check_and_track_module_completion(current_user.id, module_id, db)
+
     return CompleteSectionResponse(xp_awarded=xp, total_xp=current_user.xp)
 
 
@@ -597,11 +623,24 @@ async def complete_reading_section(
 async def get_lab(
     lab_id: str,
     db: AsyncSession = Depends(get_db),
+    current_user: User | None = Depends(get_optional_user),
 ):
     result = await db.execute(select(Lab).where(Lab.id == lab_id))
     lab = result.scalar_one_or_none()
     if not lab:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Lab not found")
+
+    if current_user:
+        analytics.track(
+            current_user.id,
+            AnalyticsEvent.LAB_STARTED,
+            {
+                "lab_id": lab.id,
+                "module_id": lab.module_id,
+                "section_id": lab.section_id,
+                "title": lab.title,
+            },
+        )
 
     return LabDetail(
         id=lab.id,

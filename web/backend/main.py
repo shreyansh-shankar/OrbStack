@@ -1,9 +1,18 @@
 # web/backend/main.py
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
+from app.analytics import analytics
 from app.routers import auth, modules, results, users, builder
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    analytics.shutdown()
+
 
 # Only enable docs in development environment
 docs_url = "/docs" if settings.ENVIRONMENT == "development" else None
@@ -17,6 +26,7 @@ app = FastAPI(
     docs_url=docs_url,
     redoc_url=redoc_url,
     openapi_url=openapi_url,
+    lifespan=lifespan,
 )
 
 app.add_middleware(

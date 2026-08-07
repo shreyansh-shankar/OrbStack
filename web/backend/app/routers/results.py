@@ -10,7 +10,8 @@ from sqlalchemy import select, func
 from app.dependencies import get_db, get_optional_user
 from app.models import Lab, LabProgress, User, SectionProgress, Module, Section
 from app.schemas import ResultRequest, ResultResponse
-from app.services import recalculate_and_update_user_xp
+from app.services import recalculate_and_update_user_xp, check_and_track_module_completion
+from app.analytics import analytics, AnalyticsEvent
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -124,4 +125,17 @@ async def submit_result(
 
     await db.commit()
     logger.info("Lab completed: user=%s lab=%s xp=%d", current_user.id, body.lab_id, lab.xp)
+
+    analytics.track(
+        current_user.id,
+        AnalyticsEvent.LAB_COMPLETED,
+        {
+            "lab_id": body.lab_id,
+            "module_id": lab.module_id,
+            "section_id": lab.section_id,
+            "xp": lab.xp,
+        },
+    )
+    await check_and_track_module_completion(current_user.id, lab.module_id, db)
+
     return ResultResponse(xp_awarded=lab.xp)

@@ -27,6 +27,7 @@ from app.schemas import (
     GitHubLoginRequest,
 )
 from app.email import send_verification_email, send_reset_password_email
+from app.analytics import analytics, AnalyticsEvent
 
 router = APIRouter()
 
@@ -68,6 +69,12 @@ async def register(
     await db.refresh(user)
 
     send_verification_email(user.email, verification_token, background_tasks)
+
+    analytics.track(
+        user.id,
+        AnalyticsEvent.USER_REGISTERED,
+        {"auth_provider": "email"},
+    )
 
     return MessageResponse(detail="Verification email sent. Please check your inbox.")
 
@@ -123,6 +130,8 @@ async def verify_email(body: VerifyEmailRequest, db: AsyncSession = Depends(get_
     user.verification_token = None
     db.add(user)
     await db.commit()
+
+    analytics.track(user.id, AnalyticsEvent.USER_VERIFIED)
 
     return MessageResponse(detail="Email verified successfully. You can now log in.")
 
@@ -344,6 +353,8 @@ async def cli_token(body: CLITokenRequest, db: AsyncSession = Depends(get_db)):
         db.add(device_auth)
         await db.commit()
         
+        analytics.track(user.id, AnalyticsEvent.CLI_LOGIN)
+
         token = create_access_token(user.id)
         return {
             "access_token": token,
@@ -454,6 +465,17 @@ async def github_auth(body: GitHubLoginRequest, db: AsyncSession = Depends(get_d
         db.add(user)
         await db.commit()
         await db.refresh(user)
+
+        analytics.track(
+            user.id,
+            AnalyticsEvent.USER_REGISTERED,
+            {"auth_provider": "github"},
+        )
+        analytics.track(
+            user.id,
+            AnalyticsEvent.USER_VERIFIED,
+            {"auth_provider": "github"},
+        )
     else:
         # If user existed but wasn't verified, mark verified since GitHub verified it
         if not user.is_verified:
@@ -461,6 +483,12 @@ async def github_auth(body: GitHubLoginRequest, db: AsyncSession = Depends(get_d
             db.add(user)
             await db.commit()
             await db.refresh(user)
+
+            analytics.track(
+                user.id,
+                AnalyticsEvent.USER_VERIFIED,
+                {"auth_provider": "github"},
+            )
 
     # Ensure device key exists
     _ensure_device_key(user)
