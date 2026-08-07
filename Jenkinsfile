@@ -78,18 +78,33 @@ pipeline {
 		}
 
 		stage('Verify the CLI') {
+			when {
+				expression {
+					env.CLI_CHANGED == "true"
+				}
+			}
 			steps {
 				sh 'make verify'
 			}
 		}
 
 		stage('Build Release Artifacts') {
+			when {
+				expression {
+					env.CLI_CHANGED == "true"
+				}
+			}
 			steps {
 				sh 'make dist'
 			}
 		}
 
 		stage('Archive Artifacts') {
+			when {
+				expression {
+					env.CLI_CHANGED == "true"
+				}
+			}
 			steps {
 				archiveArtifacts(
 					artifacts: 'dist/**',
