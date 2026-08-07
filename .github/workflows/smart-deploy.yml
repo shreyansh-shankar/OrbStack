@@ -8,9 +8,7 @@ on:
 jobs:
 
   detect-components:
-
     name: Detect Changed Components
-
     runs-on: ubuntu-latest
 
     outputs:
@@ -110,3 +108,66 @@ jobs:
           echo ""
           echo "Deployment Matrix:"
           echo '${{ steps.detect.outputs.deployment_matrix }}'
+
+  deploy-vercel:
+    name: Deploy Vercel Component
+    needs: detect-components
+    if: needs.detect-components.outputs.deployment_matrix != '[]'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        component: ${{ fromJson(needs.detect-components.outputs.deployment_matrix) }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Show Deployment Target
+        run: |
+          echo "================================"
+          echo "Component: ${{ matrix.component.component }}"
+          echo "Description: ${{ matrix.component.description }}"
+          echo "Deployment: ${{ matrix.component.deployment }}"
+          echo "Directory: ${{ matrix.component.working_directory }}"
+          echo "================================"
+
+      - name: Install Node.js
+        if: matrix.component.deployment == 'vercel'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Vercel CLI
+        if: matrix.component.deployment == 'vercel'
+        run: npm install -g vercel
+
+      - name: Deploy Vercel Project
+        if: matrix.component.deployment == 'vercel'
+        working-directory: ${{ matrix.component.working_directory }}
+        run: |
+
+          echo "Deploying ${{ matrix.component.component }}"
+
+          vercel pull \
+            --yes \
+            --environment=production \
+            --token=${{ secrets.VERCEL_TOKEN }}
+
+          vercel build \
+            --prod \
+            --token=${{ secrets.VERCEL_TOKEN }}
+
+          vercel deploy \
+            --prebuilt \
+            --prod \
+            --token=${{ secrets.VERCEL_TOKEN }}
+
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+          VERCEL_PROJECT_ID: ${{ 
+            matrix.component.component == 'frontend' && secrets.FRONTEND_PROJECT_ID ||
+            matrix.component.component == 'backend' && secrets.BACKEND_PROJECT_ID ||
+            matrix.component.component == 'landing' && secrets.LANDING_PROJECT_ID
+          }}
