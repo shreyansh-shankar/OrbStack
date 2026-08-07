@@ -61,7 +61,7 @@ jobs:
           gh release create ${{ inputs.version }} \
             dist/tld-* \
             dist/checksums.txt \
-            --title "CLI ${{ inputs.version }}" \
+            --title "tld cli ${{ inputs.version }}" \
             --notes "Release **${{ inputs.version }}** cut from \`latest\` by **${{ github.actor }}**.
 
           **Source commit:** \`${{ steps.latest.outputs.sha }}\`
@@ -79,7 +79,7 @@ jobs:
           gh release create stable \
             dist/tld-* \
             dist/checksums.txt \
-            --title "CLI: stable" \
+            --title "tld cli: stable" \
             --notes "Stable release pinned to **${{ inputs.version }}** by **${{ github.actor }}**.
 
           **Source commit:** \`${{ steps.latest.outputs.sha }}\`

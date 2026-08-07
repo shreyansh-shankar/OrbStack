@@ -48,7 +48,7 @@ jobs:
           gh release create stable \
             dist/tld-* \
             dist/checksums.txt \
-            --title "CLI: stable" \
+            --title "tld cli: stable" \
             --notes "Stable release promoted from \`latest\` by **${{ github.actor }}**.
 
           **Source commit:** \`${{ steps.latest.outputs.sha }}\`
