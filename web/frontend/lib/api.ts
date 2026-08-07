@@ -4,7 +4,18 @@ import { Module, ModuleDetail, User, BuilderDraftListItem, BuilderModuleInput } 
 import { writeCache, clearDashboardCache } from "./dashboard/use-dashboard-cache";
 import { clearModulesMemoryCache } from "@/hooks/use-modules";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://api.thelastdeploy.com";
+function getApiBaseUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (envUrl && !envUrl.includes("app.thelastdeploy.com") && envUrl !== "/") {
+    return envUrl.replace(/\/$/, "");
+  }
+  if (typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+    return "http://localhost:8742";
+  }
+  return "https://api.thelastdeploy.com";
+}
+
+export const API_BASE = getApiBaseUrl();
 
 function getToken(): string | null {
   if (typeof window === "undefined") return null;
