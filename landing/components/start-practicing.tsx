@@ -96,7 +96,7 @@ export default function StartPracticing() {
                 display: "inline-block",
                 boxShadow: "0 0 8px rgba(34,197,94,0.9)",
               }} />
-              Early Access · Free to Use
+              Now Live · Free to Use
             </span>
           </div>
 

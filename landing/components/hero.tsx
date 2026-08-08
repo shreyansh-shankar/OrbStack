@@ -1,7 +1,6 @@
 "use client";
 
 import { SOCIAL_LINKS } from "@/lib/constants";
-import CountdownTimer from "./countdown-timer";
 
 
 export default function Hero() {
@@ -105,7 +104,7 @@ export default function Hero() {
               display: "inline-block",
               boxShadow: "0 0 6px rgba(34,197,94,0.8)",
             }} />
-            Early Access Live for Testing
+            Now Live · Start Practicing Today
           </span>
         </div>
 
@@ -266,22 +265,21 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Countdown */}
+        {/* Live badge strip */}
         <div
           className="animate-fade-in-up-4"
-          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}
+          style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "24px", flexWrap: "wrap" }}
         >
-          <p style={{
-            fontSize: "10px",
-            fontFamily: "JetBrains Mono, monospace",
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "#4a4a6a",
-            fontWeight: 500,
-          }}>
-            Launching in
-          </p>
-          <CountdownTimer />
+          {[
+            { icon: "🚀", text: "Platform is live" },
+            { icon: "🔓", text: "No sign-up required" },
+            { icon: "🐋", text: "Just needs Docker" },
+          ].map(({ icon, text }) => (
+            <div key={text} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <span style={{ fontSize: "13px" }}>{icon}</span>
+              <span style={{ fontSize: "12px", color: "#5a5a7a", fontFamily: "JetBrains Mono, monospace", letterSpacing: "0.04em" }}>{text}</span>
+            </div>
+          ))}
         </div>
       </div>
 

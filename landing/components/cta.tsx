@@ -102,7 +102,7 @@ export default function CTA() {
           maxWidth: "480px",
           margin: "0 auto 40px",
         }}>
-          Ask questions, share your progress, help shape the platform, and be the first to know when we ship.
+          Ask questions, share your progress, help shape the platform, and stay on top of every new track and feature we ship.
         </p>
 
         {/* Discord CTA */}
