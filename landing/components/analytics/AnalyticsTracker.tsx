@@ -11,7 +11,12 @@ export function AnalyticsTracker() {
   useEffect(() => {
     if (pathname && lastPathRef.current !== pathname) {
       lastPathRef.current = pathname;
-      trackEvent("landing.page_view", { path: pathname });
+      trackEvent("$pageview", {
+        $current_url: typeof window !== "undefined" ? window.location.href : pathname,
+        $pathname: pathname,
+        $host: typeof window !== "undefined" ? window.location.host : "",
+        path: pathname,
+      });
     }
   }, [pathname]);
 

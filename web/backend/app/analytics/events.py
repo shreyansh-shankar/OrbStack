@@ -12,3 +12,5 @@ class AnalyticsEvent(str, Enum):
     SECTION_COMPLETED = "section.completed"
     LAB_STARTED = "lab.started"
     LAB_COMPLETED = "lab.completed"
+    PAGE_VIEW = "$pageview"
+
