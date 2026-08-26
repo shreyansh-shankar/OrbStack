@@ -4,7 +4,7 @@ export const SITE_URL = "https://thelastdeploy.dev";
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/thelastdeploy/thelastdeploy",
-  discord: "https://discord.gg/gyRPQkust",
+  discord: "https://discord.gg/tgShvdV8f",
   linkedin: "https://www.linkedin.com/company/thelastdeploy/",
   blog: "https://thelastdeploy.hashnode.dev/",
 } as const;

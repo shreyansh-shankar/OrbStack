@@ -7,7 +7,7 @@ const page: DocPage = {
   content: [
     { type: "heading2", text: "Join the server", id: "join" },
     { type: "paragraph", text: "Discord is where the TLD community lives. Ask questions, share solutions, discuss labs, and get notified about new releases." },
-    { type: "code", lang: "text", code: "discord.gg/gyRPQkust" },
+    { type: "code", lang: "text", code: "discord.gg/tgShvdV8f" },
     { type: "heading2", text: "Channels", id: "channels" },
     { type: "table", headers: ["Channel", "Purpose"], rows: [
       ["#general", "General conversation and introductions"],

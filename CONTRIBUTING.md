@@ -279,7 +279,7 @@ Open an issue using the **Feature Request** template. Please search existing iss
 
 ## Questions?
 
-- **Discord**: [Join the server](https://discord.gg/placeholder)
+- **Discord**: [Join the server](https://discord.gg/tgShvdV8f)
 - **GitHub Discussions**: For longer-form questions and ideas
 - **Issues**: For bugs and concrete feature requests
 

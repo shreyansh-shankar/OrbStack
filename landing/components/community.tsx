@@ -20,7 +20,7 @@ const socials = [
   {
     name: "Discord",
     href: SOCIAL_LINKS.discord,
-    handle: "discord.gg/gyRPQkust",
+    handle: "discord.gg/tgShvdV8f",
     description: "Ask questions, share progress, and help shape the platform with the community",
     accent: "#818cf8",
     bg: "rgba(88,101,242,0.05)",
